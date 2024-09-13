@@ -1,2 +1,11 @@
-package com.inovisoft.backend_miatraining.mailing.DTO;public record MailBody() {
+package com.inovisoft.backend_miatraining.mailing.DTO;
+
+import lombok.Builder;
+
+@Builder
+public record MailBody(
+    String to,
+    String subject,
+    String text
+) {
 }
