@@ -1,0 +1,56 @@
+.logo{
+    width: min(100%, 200px);
+}
+
+.btn{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    user-select: none;
+    border-radius: var(--btn-border-radius);
+    cursor: pointer;
+    width: 100%;
+    padding: var(--btn-padding);
+    background-color: var(--color-primary);
+    color: var(--color-primary-contrast);
+    font-size: 20px;
+    transition: opacity 0.5s ease;
+}
+.btn.compact{
+    width: fit-content;
+}
+.btn.small{
+    padding: min(8px, (var(--btn-padding) - 5px));
+}
+.btn.secondary{
+    background-color: var(--color-secondary);
+    color: var(--color-secondary-contrast);
+}
+
+.btn.tertiary{
+    background-color: var(--color-tertiary);
+    color: var(--color-tertiary-contrast);
+}
+.btn.disabled{
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+.btn:hover{
+    opacity: var(--btn-hover-opacity);
+}
+
+.card{
+    border-radius: var(--card-border-radius);
+    background-color: var(--color-light);
+    padding: min(8%, 40px);
+}
+@media (min-width: 993px){
+    .btn:hover{
+        opacity: 0.8;
+        transform:  scale(0.9);
+        transition: all 0.5s ease;
+        box-shadow: var(--box-shadow);
+    }
+}

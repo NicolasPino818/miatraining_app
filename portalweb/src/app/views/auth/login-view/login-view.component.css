@@ -1,0 +1,39 @@
+.view-content{
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+}
+.header{
+    z-index: 2;
+}
+.background-gradient{
+    background: linear-gradient(180deg, var(--color-light), #E3E7FF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    z-index: 1;
+    flex-grow: 1;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    width: min(100dvw, 500px);
+}
+
+.password-input-container{
+    position: relative;
+}
+#toogleBtn{
+    cursor: pointer;
+    position: absolute;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    right: 0;
+    font-size: 25px;
+    user-select: none;
+}

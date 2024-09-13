@@ -1,0 +1,27 @@
+app-header{
+    z-index: 2;
+}
+app-side-menu{
+    z-index: 1;
+}
+
+.dashboard-view{
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+}
+
+.dashboard-content{
+    display: flex;
+    height: 100%;
+    flex: 1;
+    overflow: hidden;
+}
+
+.content{
+    flex-grow: 1;
+    max-height: 100%;
+    padding: 10px;
+    min-width: 220px;
+    overflow-y: auto;
+}

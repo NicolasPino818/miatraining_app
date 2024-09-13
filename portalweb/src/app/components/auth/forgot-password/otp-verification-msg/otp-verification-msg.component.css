@@ -1,0 +1,21 @@
+.verification-success{
+    background-color: var(--color-success-tint);
+}
+
+.verification-failure{
+    background-color: var(--color-danger-tint);
+}
+
+.msg-container p{
+    color: #ffffff;
+}
+
+.msg-container{
+    width: 1005;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    border-radius: 10px;
+    padding: 10px;
+}
