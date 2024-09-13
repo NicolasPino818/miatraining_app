@@ -92,7 +92,7 @@ export const routes: Routes = [
             },
             {
                 path: '',
-                pathMatch: 'prefix',
+                pathMatch: 'full',
                 redirectTo: '/auth/login'
             }
         ]
