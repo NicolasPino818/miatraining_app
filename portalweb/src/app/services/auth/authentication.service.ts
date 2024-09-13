@@ -55,7 +55,7 @@ export class AuthenticationService {
 
   fpGetVerificationCode(email:string): Observable<any> {
     return this.http.post(
-      apiEndpoints.forgotPassword + email, //RUTA DE LA API
+      apiEndpoints.forgotPassword+'/'+ email, //RUTA DE LA API
       {
         headers: new HttpHeaders({
           'content-Type': 'application/json'
