@@ -90,6 +90,11 @@ export const routes: Routes = [
                     }
                 ]
             },
+            {
+                path: '',
+                pathMatch: 'prefix',
+                redirectTo: '/auth/login'
+            }
         ]
     },
 ];
