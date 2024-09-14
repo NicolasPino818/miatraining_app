@@ -24,16 +24,13 @@ public class ExerciseModel {
     @Column(length = 150, nullable = false)
     private String exerciseName;
 
-    @Lob
+    @Column(length = 5000)
     private String tutorialLink;
 
-    @Lob
+    @Column(length = 5000, nullable = false)
     private String imageLink;
 
-    @Lob
+    @Column(length = 500, nullable = false)
     private String description;
 
-    //@ManyToOne
-    //@JoinColumn(name = "trainingType_trainingTypeID", nullable = false)
-    //private TrainingTypeModel trainingType;
 }

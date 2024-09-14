@@ -28,9 +28,9 @@ public class TrainingPlanModel {
     private Long planID;
 
     @Column(nullable = false)
-    private LocalDate fechaCreacion;
+    private LocalDate creationDate;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_usuarioID", nullable = false)
+    @JoinColumn(name = "userID", nullable = false)
     private UserModel user;
 }

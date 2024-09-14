@@ -22,19 +22,19 @@ public class ExerciseRoutineModel {
     private Long routineID;
 
     @Column(nullable = false)
-    private int series;
+    private Integer series;
 
     @Column(nullable = false)
-    private int repetitions;
+    private Integer repetitions;
 
     @Column(nullable = false)
-    private int restMinutes;
+    private Integer restMinutes;
 
     @ManyToOne
-    @JoinColumn(name = "trainingDay_dayID", nullable = false)
+    @JoinColumn(name = "dayID", nullable = false)
     private TrainingDayModel trainingDayModel;
 
     @ManyToOne
-    @JoinColumn(name = "exercise_exerciseID", nullable = false)
+    @JoinColumn(name = "exerciseID", nullable = false)
     private ExerciseModel exercise;
 }

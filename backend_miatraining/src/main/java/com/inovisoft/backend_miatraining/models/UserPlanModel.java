@@ -1,6 +1,7 @@
 package com.inovisoft.backend_miatraining.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.inovisoft.backend_miatraining.repositories.compositeKeys.UsuarioPlanId;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,13 +29,13 @@ public class UserPlanModel{
     private LocalDate assignmentDate;  // Campo para la fecha de asignación
 
     @ManyToOne
-    @MapsId("usuarioID")
-    @JoinColumn(name = "user_userID", nullable = false)
+    @MapsId("userID")
+    @JoinColumn(name = "userID", nullable = false)
     private UserModel user;  // Relación con la tabla de usuarios
 
     @ManyToOne
     @MapsId("planID")
-    @JoinColumn(name = "trainingPlan_planID", nullable = false)
+    @JoinColumn(name = "planID", nullable = false)
     private TrainingPlanModel trainingPlan;  // Relación con la tabla de planes de entrenamiento
 }
 

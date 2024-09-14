@@ -27,9 +27,9 @@ public class TrainingDayModel {
     private Long dayID;
 
     @Column(nullable = false)
-    private int dayNumber;
+    private Integer dayNumber;
 
     @ManyToOne
-    @JoinColumn(name = "trainingPlan_planID", nullable = false)
+    @JoinColumn(name = "planID", nullable = false)
     private TrainingPlanModel trainingPlan;
 }
