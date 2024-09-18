@@ -3,6 +3,10 @@ import { LoginViewComponent } from './views/auth/login-view/login-view.component
 import { ForgotPasswordViewComponent } from './views/auth/forgot-password-view/forgot-password-view.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ClientTrainingPlanViewComponent } from './views/client/client-training-plan-view/client-training-plan-view.component';
+import { ClientNutritionPlanViewComponent } from './views/client/client-nutrition-plan-view/client-nutrition-plan-view.component';
+import { ExerciseGuideViewComponent } from './views/client/exercise-guide-view/exercise-guide-view.component';
+import { ProgressTrackingViewComponent } from './views/client/progress-tracking-view/progress-tracking-view.component';
+import { AccountSettingsViewComponent } from './views/client/account-settings-view/account-settings-view.component';
 
 export const routes: Routes = [
     {
@@ -11,7 +15,6 @@ export const routes: Routes = [
         redirectTo: 'auth'
     },
     {
-        //Todasl as rutas hijas quedan dentro de: auth/**
         path: 'auth',
         children: [
             {
@@ -37,14 +40,33 @@ export const routes: Routes = [
         title: 'Dashboard',
         children: [
             {
-                //Todasl as rutas hijas quedan dentro de: cliente/**
                 path: 'cliente',
-                title: 'Plan de entrenamiento',
-                children:[
+                title: 'Cliente',
+                children: [
                     {
                         path: 'plan-entrenamiento',
                         title: 'Plan de entrenamiento',
                         component: ClientTrainingPlanViewComponent
+                    },
+                    {
+                        path: 'alimentacion',
+                        title: 'Alimentación',
+                        component: ClientNutritionPlanViewComponent
+                    },
+                    {
+                        path: 'guia-ejercicios',
+                        title: 'Guía de ejercicios',
+                        component: ExerciseGuideViewComponent
+                    },
+                    {
+                        path: 'avances-progreso',
+                        title: 'Avances y progreso',
+                        component: ProgressTrackingViewComponent
+                    },
+                    {
+                        path: 'mi-cuenta',
+                        title: 'Mi cuenta',
+                        component: AccountSettingsViewComponent
                     },
                     {
                         path: '',
@@ -53,16 +75,13 @@ export const routes: Routes = [
                     }
                 ]
             },
-            
             {
-                //Todasl as rutas hijas quedan dentro de: admin/**
                 path: 'admin',
                 title: 'Administración',
-                children:[
+                children: [
                     {
                         path: 'clientes',
                         title: 'Vista Clientes',
-                        //Cambiar este componente por el correspondiente despues
                         component: ClientTrainingPlanViewComponent
                     },
                     {
@@ -71,30 +90,12 @@ export const routes: Routes = [
                         redirectTo: 'clientes'
                     }
                 ]
-            },
-            {
-                //Todasl as rutas hijas quedan dentro de: coach/**
-                path: 'coach',
-                title: 'Administración',
-                children:[
-                    {
-                        path: 'clientes',
-                        title: 'Vista Clientes',
-                        //Cambiar este componente por el correspondiente despues
-                        component: ClientTrainingPlanViewComponent
-                    },
-                    {
-                        path: '',
-                        pathMatch: 'prefix',
-                        redirectTo: 'clientes'
-                    }
-                ]
-            },
-            {
-                path: '',
-                pathMatch: 'full',
-                redirectTo: '/auth/login'
             }
         ]
     },
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '/auth/login'
+    }
 ];
