@@ -1,0 +1,7 @@
+<div class="msg-container" [class]="isSuccess() ? 'verification-success':'verification-failure'">
+    <p>
+        {{getFinalMessage()}}
+    </p>
+</div>
+<span class="spacer"></span>
+<a class="btn" [routerLink]="['/auth/login']">Volver al Login</a>

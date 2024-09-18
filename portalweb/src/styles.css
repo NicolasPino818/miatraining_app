@@ -1,0 +1,246 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('./css/colors.css');
+@import url('./css/layout.css');
+@import url('./css/font.css');
+@import url('./css/elements.css');
+
+:root{
+    --color-primary: #1E90FF;
+    --color-primary-rgb: 30,144,255;
+    --color-primary-contrast: #fff;
+    --color-primary-contrast-rgb: 255,255,255;
+    --color-primary-shade: #1a7fe0;
+    --color-primary-tint: #359bff;
+
+    --color-secondary: #9aa5e3;
+    --color-secondary-rgb: 154,165,227;
+    --color-secondary-contrast: #000000;
+    --color-secondary-contrast-rgb: 0,0,0;
+    --color-secondary-shade: #8891c8;
+    --color-secondary-tint: #a4aee6;
+
+	--color-tertiary: #ff3d6a;
+	--color-tertiary-rgb: 255,61,106;
+	--color-tertiary-contrast: #ffff;
+	--color-tertiary-contrast-rgb: 255,255,255;
+	--color-tertiary-shade: #e0365d;
+	--color-tertiary-tint: #ff5079;
+
+    --color-success: #2dd55b;
+    --color-success-rgb: 45,213,91;
+    --color-success-contrast: #000000;
+    --color-success-contrast-rgb: 0,0,0;
+    --color-success-shade: #28bb50;
+    --color-success-tint: #42d96b;
+
+    --color-warning: #F7D060;
+    --color-warning-rgb: 247,208,96;
+    --color-warning-contrast: #000000;
+    --color-warning-contrast-rgb: 0,0,0;
+    --color-warning-shade: #d9b754;
+    --color-warning-tint: #f8d570;
+
+    --color-danger: #c5000f;
+    --color-danger-rgb: 197,0,15;
+    --color-danger-contrast: #ffffff;
+    --color-danger-contrast-rgb: 255,255,255;
+    --color-danger-shade: #ad000d;
+    --color-danger-tint: #cb1a27;
+
+    --color-light: #ffffff;
+    --color-light-rgb: 255,255,255;
+    --color-light-contrast: #000000;
+    --color-light-contrast-rgb: 0,0,0;
+    --color-light-shade: #e0e0e0;
+    --color-light-tint: #ffffff;
+
+    --color-medium: #677483;
+    --color-medium-rgb: 103,116,131;
+    --color-medium-contrast: #ffffff;
+    --color-medium-contrast-rgb: 255,255,255;
+    --color-medium-shade: #5b6673;
+    --color-medium-tint: #76828f;
+
+    --color-dark: #363949;
+    --color-dark-rgb: 54,57,73;
+    --color-dark-contrast: #ffffff;
+    --color-dark-contrast-rgb: 255,255,255;
+    --color-dark-shade: #303240;
+    --color-dark-tint: #4a4d5b;
+
+    --color-background: #f6f6f9;
+    --color-whatsapp: #25d366;
+    --color-boxshadow: rgba(132, 139, 200, 0.20);
+
+    --font-size-grow: 4dvw;
+    --card-border-radius: 10px;
+    --btn-border-radius: 10px;
+    --btn-padding: 15px;
+    --btn-hover-opacity: 0.8;
+
+    --box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.2);
+
+    --h1-font-size: clamp(35px, var(--font-size-grow), 48px);
+    --h2-font-size: clamp(33px, var(--font-size-grow), 35px);
+    --h3-font-size: clamp(28px, var(--font-size-grow), 33px);
+    --h4-font-size: clamp(23px, var(--font-size-grow), 28px);
+    --h5-font-size: clamp(19px, var(--font-size-grow), 25px);
+    --h6-font-size: clamp(16px, var(--font-size-grow), 21px);
+    --normal-font-size: clamp(16px, var(--font-size-grow), 18px);
+    --small-font-size: clamp(8px, var(--font-size-grow), 13px);
+}
+
+
+/*DARK MODE*/
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-primary: #0070e0;
+        --color-primary-rgb: 0,112,224;
+        --color-primary-contrast: #ffffff;
+        --color-primary-contrast-rgb: 255,255,255;
+        --color-primary-shade: #0063c5;
+        --color-primary-tint: #1a7ee3;
+    
+        --color-secondary: #1b2664;
+        --color-secondary-rgb: 27,38,100;
+        --color-secondary-contrast: #ffffff;
+        --color-secondary-contrast-rgb: 255,255,255;
+        --color-secondary-shade: #182158;
+        --color-secondary-tint: #323c74;
+
+        --color-tertiary: #ff3d6a;
+        --color-tertiary-rgb: 255,61,106;
+        --color-tertiary-contrast: #ffffff;
+        --color-tertiary-contrast-rgb: 255,255,255;
+        --color-tertiary-shade: #e0365d;
+        --color-tertiary-tint: #ff5079;
+    
+        --color-success: #2dd55b;
+        --color-success-rgb: 45,213,91;
+        --color-success-contrast: #000000;
+        --color-success-contrast-rgb: 0,0,0;
+        --color-success-shade: #28bb50;
+        --color-success-tint: #42d96b;
+    
+        --color-warning: #F7D060;
+        --color-warning-rgb: 247,208,96;
+        --color-warning-contrast: #000000;
+        --color-warning-contrast-rgb: 0,0,0;
+        --color-warning-shade: #d9b754;
+        --color-warning-tint: #f8d570;
+    
+        --color-danger: #f54755;
+        --color-danger-rgb: 245,71,85;
+        --color-danger-contrast: #000000;
+        --color-danger-contrast-rgb: 0,0,0;
+        --color-danger-shade: #d83e4b;
+        --color-danger-tint: #f65966;
+    
+        --color-light: #363949;
+        --color-light-rgb: 54,57,73;
+        --color-light-contrast: #ffffff;
+        --color-light-contrast-rgb: 255,255,255;
+        --color-light-shade: #303240;
+        --color-light-tint: #4a4d5b;
+    
+        --color-medium: #677483;
+        --color-medium-rgb: 103,116,131;
+        --color-medium-contrast: #ffffff;
+        --color-medium-contrast-rgb: 255,255,255;
+        --color-medium-shade: #5b6673;
+        --color-medium-tint: #76828f;
+    
+        --color-dark: #ffffff;
+        --color-dark-rgb: 255,255,255;
+        --color-dark-contrast: #000000;
+        --color-dark-contrast-rgb: 0,0,0;
+        --color-dark-shade: #e0e0e0;
+        --color-dark-tint: #ffffff;
+    
+        --color-background: #090d1f;
+        --color-whatsapp: #25d366;
+        --color-boxshadow: rgba(132, 139, 200, 0.20);
+    }
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 0;
+    appearance: 0;
+    border: 0;
+    text-decoration: none;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-dark);
+    background-color: var(--color-background);
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+form .input-group{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+form .input-group input, select{
+    padding: 5px;
+    border-bottom: 3px solid var(--color-primary);
+    width: 100%;
+    color: inherit;
+}
+
+form .input-group label span{
+    color: var(--color-danger);
+}
+
+.loader {
+    user-select: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--color-primary-contrast);
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+} 
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    appearance: textfield;
+}
+
+.header{
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background-color: var(--color-light);
+    --box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow);
+    gap: 15px;
+}

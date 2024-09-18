@@ -1,0 +1,46 @@
+h1,h2,h3,h4,h5,h6,p,a,small{
+    line-height: 125%;
+    color: var(--color-dark);
+}
+
+h1, .h1-fsize{
+    /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
+    font-size: clamp(35px, var(--font-size-grow), 48px);
+}
+h2, .h2-fsize{
+    /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
+    font-size: clamp(33px, var(--font-size-grow), 40px);
+}
+h3, .h3-fsize{
+    /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
+    font-size: clamp(28px, var(--font-size-grow), 33px);
+}
+h4, .h4-fsize{
+    /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
+    font-size: clamp(23px, var(--font-size-grow), 28px);
+}
+h5, .h5-fsize{
+    /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
+    font-size: clamp(19px, var(--font-size-grow), 25px);
+}
+h6, .h6-fsize{
+    /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
+    font-size: clamp(16px, var(--font-size-grow), 21px);
+}
+p, a, label, input, select{
+    /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
+    font-size: clamp(14px, var(--font-size-grow), 18px);
+}
+
+small{
+    /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
+    font-size: clamp(8px, var(--font-size-grow), 13px);
+}
+
+.text-center{
+    text-align: center;
+}
+
+.text-justify{
+    text-align: justify;
+}

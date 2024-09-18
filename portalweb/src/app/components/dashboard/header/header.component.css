@@ -1,0 +1,31 @@
+.header-container{
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--color-light);
+    --box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow);
+    gap: 15px;
+}
+    
+.header-container .logo{
+    display: block;
+    max-width: 180px;
+}
+
+.header-container .divider{
+    width: 3px;
+    height: 80px;
+    margin: 0 10px;
+    background-color: var(--color-light-contrast);
+}
+.header-container p{
+    --normal-font-size: clamp(14px, var(--font-size-grow), 18px);
+    color: var(--color-light-contrast);
+}
+
+.header-container > h1{
+    color: var(--color-accent-contrast);
+}

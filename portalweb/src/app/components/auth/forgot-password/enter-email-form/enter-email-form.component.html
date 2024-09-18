@@ -1,0 +1,28 @@
+<div class="form-container">
+    <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+            <label class="h6-fsize" for="email">Ingresa tu correo electrónico</label>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                placeholder="ejemplo@email.com" 
+                [class.is-invalid]="(isSubmitted() || this.emailForm.get('email')?.touched) && this.emailForm.get('email')?.invalid"
+                formControlName="email">
+    
+            <span *ngIf="(isSubmitted() || this.emailForm.get('email')?.touched) && this.emailForm.get('email')?.invalid" 
+                class="danger">
+                Ingrese un correo electrónico válido.
+            </span>
+    
+            <span *ngIf="!isSuccess() && getMessage() != null" class="danger">{{getMessage()}}</span>
+    
+        </div>
+        <button class="btn" [class.disabled]="isBtnDisabled()" [disabled]="isBtnDisabled()">
+            Enviar 
+            <span *ngIf="getShowLoader()" class="loader align-self-center"></span>
+        </button>
+    </form>
+    <p>Si el correo existe en nuestro sistema recibirás un código de verificación</p>
+    <a [routerLink]="['','auth','login']" class="text-center btn small compact">Volver al login</a>
+</div>

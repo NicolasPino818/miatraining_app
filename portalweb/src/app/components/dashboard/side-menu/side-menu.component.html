@@ -1,0 +1,25 @@
+<aside class="side-menu " [class.collapsed]="!navOpen">
+    <div class="menu-secction1">
+        <ul class="menu-list">
+            <li *ngFor="let link of navLinks.clientNavLinks" class="menu-item">
+                <a class="menu-item-link" (click)="closeNav()" [routerLink]="link.link">
+                    <i [class]='link.icon'></i>
+                    <p>{{link.linkName}}</p>
+                </a>
+            </li>
+            
+        </ul>
+        <div class="toggler-container">
+            <a class="menu-toggler" (click)="toggleNav()">
+                <i class='bx bx-chevrons-right'></i>
+                <p>Alternar Menú</p>
+            </a>
+        </div>
+    </div>
+    <div class="menu-secction2">
+        <a [routerLink]="['']">
+            <i class='bx bx-log-out'></i>
+            <p>Cerrar Sesión</p>
+        </a>
+    </div>
+</aside>
