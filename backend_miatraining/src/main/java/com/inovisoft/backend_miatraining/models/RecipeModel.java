@@ -9,32 +9,20 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@Table(name = "forgot_password")
+@Table(name = "recipe")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExerciseModel {
-
+public class RecipeModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "exerciseID")
-    private Long exerciseID;
-
-    @Column(length = 150, nullable = false)
-    private String exerciseName;
+    @Column(name = "recipeID")
+    private Long recipeID;
 
     @Column(length = 5000)
-    private String tutorialLink;
-
-    @Column(length = 5000, nullable = false)
-    private String imageLink;
+    private String imageRecipeLink;
 
     @Column(length = 500, nullable = false)
     private String description;
-
-    @ManyToOne
-    @JoinColumn(name = "trainingTypeID", nullable = false)
-    private TrainingTypeModel trainingType;
-
 }

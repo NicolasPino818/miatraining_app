@@ -9,32 +9,32 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@Table(name = "exerciseRoutine")
+@Table(name = "saleDetail")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ExerciseRoutineModel {
+public class SaleDetailModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "routineID")
-    private Long routineID;
+    @Column(name = "saleDetailID")
+    private Long saleDetailID;
 
     @Column(nullable = false)
-    private Integer series;
+    private Integer unitPrice;
 
     @Column(nullable = false)
-    private Integer repetitions;
+    private Integer quantity;
 
     @Column(nullable = false)
-    private Integer restMinutes;
+    private Integer subtotal;
 
     @ManyToOne
-    @JoinColumn(name = "dayID", nullable = false)
-    private TrainingDayModel trainingDay;
+    @JoinColumn(name = "saleID", nullable = false)
+    private SaleModel sale;
 
     @ManyToOne
-    @JoinColumn(name = "exerciseID", nullable = false)
-    private ExerciseModel exercise;
+    @JoinColumn(name = "membershipID", nullable = false)
+    private MembershipModel membership;
 }
