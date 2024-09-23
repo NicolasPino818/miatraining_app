@@ -72,6 +72,26 @@ export const routes: Routes = [
                         path: '',
                         pathMatch: 'prefix',
                         redirectTo: 'plan-entrenamiento'
+                    },
+                    {
+                        path: '',
+                        pathMatch: 'prefix',
+                        redirectTo: 'alimentacion'
+                    },
+                    {
+                        path: '',
+                        pathMatch: 'prefix',
+                        redirectTo: 'guia-ejercicios'
+                    },
+                    {
+                        path: '',
+                        pathMatch: 'prefix',
+                        redirectTo: 'avances-progreso'
+                    },
+                    {
+                        path: '',
+                        pathMatch: 'prefix',
+                        redirectTo: 'mi-cuenta'
                     }
                 ]
             },
