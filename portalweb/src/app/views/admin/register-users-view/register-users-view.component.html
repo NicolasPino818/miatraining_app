@@ -1,1 +1,42 @@
-<p>register-users-view works!</p>
+
+<div class="view-content">
+
+    <main class="background-gradient">
+
+        <div class="form-container card box-shadow">
+
+            <form action="">
+            
+                <h1 class="text-center">Registrar Usuario</h1>
+                <div class="input-group">
+                    <label for="email">Nombre<span>*</span></label>
+                    <input placeholder="Primer Nombre">
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Apellido<span>*</span></label>
+                    <input placeholder="Primer apellido">
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Correo electronico<span>*</span></label>
+                    <input placeholder="Email">
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Contraseña<span>*</span></label>
+                    <input placeholder="Contraseña">
+                </div>
+
+                <button type="submit" class="btn" [class.disabled]="btnDisabled" [disabled]="btnDisabled">
+                    Registrar
+                    <span *ngIf="showLoader" class="loader align-self-center"></span>
+                </button>
+    
+            </form>
+
+        </div>
+
+    </main>
+
+</div>

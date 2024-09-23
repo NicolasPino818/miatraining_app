@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "userPlanModel")  // Nombre de la tabla en la base de datos
+@Table(name = "userPlan")  // Nombre de la tabla en la base de datos
 @Data
 @Builder
 @NoArgsConstructor
