@@ -7,6 +7,10 @@ import { ClientNutritionPlanViewComponent } from './views/client/client-nutritio
 import { ExerciseGuideViewComponent } from './views/client/exercise-guide-view/exercise-guide-view.component';
 import { ProgressTrackingViewComponent } from './views/client/progress-tracking-view/progress-tracking-view.component';
 import { AccountSettingsViewComponent } from './views/client/account-settings-view/account-settings-view.component';
+import { ClientListViewComponent } from './views/admin/client-list-view/client-list-view.component';
+import { RegisterUsersViewComponent } from './views/admin/register-users-view/register-users-view.component';
+import { NotFoudViewComponent } from './views/not-foud-view/not-foud-view.component';
+
 
 export const routes: Routes = [
     {
@@ -82,7 +86,12 @@ export const routes: Routes = [
                     {
                         path: 'clientes',
                         title: 'Vista Clientes',
-                        component: ClientTrainingPlanViewComponent
+                        component: ClientListViewComponent
+                    },
+                    {
+                        path: 'registro',
+                        title: 'Registro Usuarios',
+                        component: RegisterUsersViewComponent
                     },
                     {
                         path: '',
@@ -97,5 +106,11 @@ export const routes: Routes = [
         path: '',
         pathMatch: 'full',
         redirectTo: '/auth/login'
-    }
+    },
+    {
+        path: '**',
+        pathMatch: 'prefix',
+        component: NotFoudViewComponent
+    },
+    
 ];
