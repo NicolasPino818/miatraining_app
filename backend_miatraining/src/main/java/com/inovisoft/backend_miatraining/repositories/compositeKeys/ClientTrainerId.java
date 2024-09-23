@@ -12,29 +12,30 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class UsuarioPlanId implements Serializable {
+public class ClientTrainerId implements Serializable {
 
-    @Column(name = "userID")
-    private Long userID;
+    @Column(name = "clientUserID")
+    private Long clientUserID;
 
-    @Column(name = "planID")
-    private Long planID;
+    @Column(name = "trainerUserID")
+    private Long trainerUserID;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UsuarioPlanId that = (UsuarioPlanId) o;
+        ClientTrainerId that = (ClientTrainerId) o;
 
-        if (!userID.equals(that.userID)) return false;
-        return planID.equals(that.planID);
+        if (!clientUserID.equals(that.clientUserID)) return false;
+        return trainerUserID.equals(that.trainerUserID);
     }
 
     @Override
     public int hashCode() {
-        int result = userID.hashCode();
-        result = 31 * result + planID.hashCode();
+        int result = clientUserID.hashCode();
+        result = 31 * result + trainerUserID.hashCode();
         return result;
     }
+
 }

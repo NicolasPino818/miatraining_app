@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@Table(name = "forgot_password")
+@Table(name = "exercise")
 @Data
 @Builder
 @NoArgsConstructor

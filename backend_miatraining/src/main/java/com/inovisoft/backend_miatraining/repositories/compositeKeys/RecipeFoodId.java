@@ -12,29 +12,29 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class UsuarioPlanId implements Serializable {
+public class RecipeFoodId implements Serializable {
 
-    @Column(name = "userID")
-    private Long userID;
+    @Column(name = "foodID")
+    private Long foodID;
 
-    @Column(name = "planID")
-    private Long planID;
+    @Column(name = "recipeID")
+    private Long recipeID;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UsuarioPlanId that = (UsuarioPlanId) o;
+        RecipeFoodId that = (RecipeFoodId) o;
 
-        if (!userID.equals(that.userID)) return false;
-        return planID.equals(that.planID);
+        if (!foodID.equals(that.foodID)) return false;
+        return recipeID.equals(that.recipeID);
     }
 
     @Override
     public int hashCode() {
-        int result = userID.hashCode();
-        result = 31 * result + planID.hashCode();
+        int result = foodID.hashCode();
+        result = 31 * result + recipeID.hashCode();
         return result;
     }
 }

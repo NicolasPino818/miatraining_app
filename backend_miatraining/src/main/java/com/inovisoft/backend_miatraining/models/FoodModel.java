@@ -6,20 +6,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Entity
-@Table(name = "ingredient")
+@Table(name = "food")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ingredientModel {
+public class FoodModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ingredientID")
-    private Long ingredientID;
+    @Column(name = "foodID")
+    private Long foodID;
 
     @Column(length = 100, nullable = false)
     private String ingredientName;
@@ -42,14 +40,5 @@ public class ingredientModel {
     @ManyToOne
     @JoinColumn(name = "measurementUnitID", nullable = false)
     private MeasurementUnitModel measurementUnit;
-
-
-
-
-
-
-
-
-
 
 }

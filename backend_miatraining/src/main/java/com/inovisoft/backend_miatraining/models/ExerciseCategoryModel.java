@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Entity
-@Table(name = "forgot_password")
+@Table(name = "exerciseCategory")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExerciseCategory {
+public class ExerciseCategoryModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
