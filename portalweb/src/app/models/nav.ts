@@ -39,6 +39,16 @@ export const navLinks = {
             //Podriamos añadir google icons o svg y hacer un ngIf en el nav para cargarlo correctamente segun el tipo
             iconType: 'BOXICON', 
             link: 'cliente/mi-cuenta'
+        },
+    ],
+    adminNavLinks: [
+        {
+            linkName: 'PLAN DE ENTRENAMIENTO 2',
+            //Para boxicons guardariamos la clase correspondiente al icono
+            icon: 'bx bx-bowl-rice',
+            //Podriamos añadir google icons o svg y hacer un ngIf en el nav para cargarlo correctamente segun el tipo
+            iconType: 'BOXICON', 
+            link: 'cliente/plan-entrenamiento'
         }
     ]
 }
