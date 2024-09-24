@@ -1,0 +1,64 @@
+.account-container {
+    padding: 20px;
+  }
+  
+  .account-card {
+    background-color: #1a7ee3; /* Fondo para Configuración de la cuenta */
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+  
+  .account-card h1,
+  .account-card p {
+    color: white; /* Color del texto para Configuración de la cuenta */
+  }
+  
+  .options-header {
+    background-color: #1a7ee3; /* Fondo distinto para Opciones */
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .options-header h2 {
+    color: white; /* Color del texto para Opciones */
+  }
+  
+  .options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .option-card {
+    background-color: #ff3d6a; /* Fondo de las tarjetas individuales */
+    color: white;
+    padding: 20px;
+    width: calc((100% / 3) - 20px); /* Tres columnas con espacio entre ellas */
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .option-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .option-card i {
+    font-size: 60px; /* Tamaño del icono */
+    margin-bottom: 12px;
+  }
+  
+  .option-card p {
+    font-size: 18px; /* Tamaño del texto */
+    margin: 0;
+    color: white; /* Color del texto en las tarjetas de opciones */
+  }
+  

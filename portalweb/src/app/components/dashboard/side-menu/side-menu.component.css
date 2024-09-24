@@ -47,7 +47,7 @@
 }
 
 .menu-secction2 a > *, .menu-secction1 .menu-list .menu-item a > *, .menu-secction1 .toggler-container .menu-toggler > *{
-    color: var(--color-tertiary-contrast);
+    color: black;
 }
 
 .side-menu.collapsed .menu-secction2 a p, 
