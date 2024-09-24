@@ -46,7 +46,8 @@ export const accountOptions = {
         { name: 'Notificaciones', icon: 'bx bx-envelope' },
         { name: 'Cambiar Contraseña', icon: 'bx bx-lock-open-alt' },
         { name: 'Información del Perfil', icon: 'bx bx-user-circle' },
-        { name: 'Formulariddo', icon: 'bx bx-file' },
+        { name: 'Formulario', icon: 'bx bx-file' },
         { name: 'Contacto Coach', icon: 'bx bx-id-card' }
     ]
 };
+

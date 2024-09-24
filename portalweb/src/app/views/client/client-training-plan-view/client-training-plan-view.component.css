@@ -1,0 +1,105 @@
+/* Contenedor principal de la vista */
+.training-plan-container {
+    padding: 20px;
+}
+
+/* Configuración del encabezado */
+.header {
+    text-align: left; /* Alineación a la izquierda */
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: var(--h1-font-size); /* Tamaño del texto del título principal */
+    color: var(--color-dark);        /* Color del texto del título */
+}
+
+.header p {
+    font-size: var(--normal-font-size); /* Tamaño del texto de la descripción */
+    color: var(--color-medium);          /* Color del texto de la descripción */
+    margin-bottom: 20px;
+}
+
+/* Botones de selección de días de entrenamiento */
+.days-container {
+    display: flex;
+    gap: 10px;       /* Espaciado entre los botones */
+    margin-bottom: 20px;
+}
+
+.day-card button {
+    background-color: var(--color-tertiary); /* Color de fondo de los botones */
+    color: var(--color-primary-contrast);     /* Color del texto de los botones */
+    padding: 40px 40px;                       /* Espaciado */
+    border-radius: var(--btn-border-radius);  /* Bordes redondeados */
+    border: none;                              /* Sin borde */
+    cursor: pointer;                           /* Cambia el cursor al pasar el puntero */
+    font-size: var(--normal-font-size);       /* Tamaño de la fuente */
+    font-family: 'Poppins', sans-serif;       /* Tipo de fuente */
+    font-weight: bold;                         /* Grosor de la fuente */
+    transition: transform 0.2s;               /* Efecto de transición para animaciones */
+}
+
+.day-card button:hover {
+    transform: translateY(-5px); /* Movimiento al pasar el cursor */
+}
+
+/* Sección de ejercicios */
+.exercises-section {
+    margin-top: 20px;
+}
+
+.exercises-section h2 {
+    font-size: var(--h2-font-size); /* Tamaño del texto del título de la sección */
+    color: var(--color-dark);        /* Color del texto del título de la sección */
+    margin-bottom: 20px;
+}
+
+/* Contenedor de tarjetas de ejercicios */
+.exercises-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;       /* Espaciado entre las tarjetas */
+}
+
+/* Tarjetas individuales de cada ejercicio */
+.exercise-card {
+    background-color: var(--color-light); /* Color de fondo de las tarjetas */
+    border-radius: var(--card-border-radius); /* Bordes redondeados */
+    box-shadow: var(--box-shadow); /* Sombra de las tarjetas */
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+    transition: transform 0.2s; /* Efecto de transición para las tarjetas */
+}
+
+.exercise-card:hover {
+    transform: translateY(-5px); /* Movimiento al pasar el cursor */
+}
+
+.exercise-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 10px;
+}
+
+.exercise-card h3 {
+    font-size: var(--normal-font-size); /* Tamaño del texto del nombre del ejercicio */
+    margin: 10px 0;
+    color: var(--color-dark); /* Color del texto del nombre del ejercicio */
+}
+
+.exercise-card button {
+    background-color: var(--color-primary); /* Color de fondo del botón "Ver Detalles" */
+    color: var(--color-primary-contrast);    /* Color del texto del botón */
+    border: none;
+    padding: 10px;
+    border-radius: var(--btn-border-radius); /* Bordes redondeados */
+    cursor: pointer;
+    transition: background-color 0.2s; /* Efecto de transición */
+}
+
+.exercise-card button:hover {
+    background-color: var(--color-primary-shade); /* Efecto de fondo al pasar el cursor */
+}
