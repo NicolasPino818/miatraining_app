@@ -1,27 +1,29 @@
 <div class="training-plan-container">
-    <!-- Sección de Encabezado -->
-    <div class="header">
-      <h1>Mi Plan de Entrenamiento</h1>
-      <p>
-        Accede a tu plan de entrenamiento y realiza tu rutina según lo indicado por tu profesor. También puedes complementar con la guía de ejercicios en línea.
+    <div class="header-card">
+      <h1 class="header-title">Mi Plan de Entrenamiento</h1>
+      <p class="header-description">
+        Accede a tu plan de entrenamiento y realiza tu rutina según lo indicado por tu profesor.
+        También puedes complementar con la guía de ejercicios en línea.
       </p>
     </div>
-  
-    <!-- Botones de Selección de Días -->
+    
     <div class="days-container">
       <div class="day-card" *ngFor="let day of days">
         <button>{{ day }}</button>
       </div>
     </div>
-    
-    <!-- Sección de Ejercicios con su propio fondo -->
-    <div class="exercises-card">
-      <h2>Ejercicios</h2>
-      <div class="exercises-container">
-        <div class="exercise-card" *ngFor="let exercise of exercises">
-          <img [src]="exercise.image" alt="{{ exercise.name }}">
-          <h3>{{ exercise.name }}</h3>
-          <button>Ver Detalles</button>
+  
+    <div class="exercises-section">
+      <div class="exercises-header">
+        <h2>Ejercicios</h2>
+      </div>
+      <div class="exercises-card">
+        <div class="exercises-container">
+          <div class="exercise-card" *ngFor="let exercise of exercises">
+            <img [src]="exercise.image">
+            <h3>{{ exercise.name }}</h3>
+            <button>Ver Detalles</button>
+          </div>
         </div>
       </div>
     </div>
