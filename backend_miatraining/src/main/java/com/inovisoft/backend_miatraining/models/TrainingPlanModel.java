@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
-@Entity
+@Entity(name = "TrainingPlan")
 @Table(name = "TrainingPlan")
 @Data
 @Builder
