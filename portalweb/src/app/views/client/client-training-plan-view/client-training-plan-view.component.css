@@ -4,21 +4,32 @@
 }
 
 /* Configuración del encabezado */
-.header {
-    text-align: left; /* Alineación a la izquierda */
+.header-card {
+    background-color: var(--color-primary); /* Color de fondo deseado */
+    border-radius: 10px; /* Ajusta según sea necesario */
+    padding: 20px;
     margin-bottom: 20px;
+    text-align: left;
 }
 
-.header h1 {
-    font-size: var(--h1-font-size); /* Tamaño del texto del título principal */
-    color: var(--color-dark);        /* Color del texto del título */
+.header-title {
+    font-size: var(--h2-font-size);
+    color:var(--color-light);
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
-.header p {
-    font-size: var(--normal-font-size); /* Tamaño del texto de la descripción */
-    color: var(--color-medium);          /* Color del texto de la descripción */
-    margin-bottom: 20px;
+.header-description {
+    font-size: 16px;
+    color: var(--color-light);
+    font-size: var(--normal-font-size);       /* Tamaño de la fuente */
+    font-family: 'Poppins', sans-serif;       /* Tipo de fuente */
+    margin-top: 0;
+    opacity: 0.85;
 }
+
+
+
 
 /* Botones de selección de días de entrenamiento */
 .days-container {
@@ -57,8 +68,8 @@
 
 /* Contenedor de tarjetas de ejercicios */
 .exercises-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas por fila */
     gap: 20px;       /* Espaciado entre las tarjetas */
 }
 
@@ -67,7 +78,6 @@
     background-color: var(--color-light); /* Color de fondo de las tarjetas */
     border-radius: var(--card-border-radius); /* Bordes redondeados */
     box-shadow: var(--box-shadow); /* Sombra de las tarjetas */
-    width: 200px;
     text-align: center;
     padding: 10px;
     transition: transform 0.2s; /* Efecto de transición para las tarjetas */
@@ -85,21 +95,45 @@
 }
 
 .exercise-card h3 {
-    font-size: var(--normal-font-size); /* Tamaño del texto del nombre del ejercicio */
+    font-size: var(--normal-font-size);
     margin: 10px 0;
-    color: var(--color-dark); /* Color del texto del nombre del ejercicio */
+    color: var(--color-dark);
 }
 
 .exercise-card button {
-    background-color: var(--color-primary); /* Color de fondo del botón "Ver Detalles" */
-    color: var(--color-primary-contrast);    /* Color del texto del botón */
+    background-color: var(--color-tertiary);
+    color: var(--color-primary-contrast);
     border: none;
     padding: 10px;
-    border-radius: var(--btn-border-radius); /* Bordes redondeados */
+    border-radius: var(--btn-border-radius);
     cursor: pointer;
-    transition: background-color 0.2s; /* Efecto de transición */
+    transition: background-color 0.2s;
 }
 
 .exercise-card button:hover {
-    background-color: var(--color-primary-shade); /* Efecto de fondo al pasar el cursor */
+    background-color: var(--color-tertiary-shade);
+}
+
+.exercises-section {
+    margin-top: 20px;
+}
+
+.exercises-header {
+    background-color: var(--color-primary); /* Cambia este valor por el color deseado */
+    padding: 10px;
+    border-radius: var(--card-border-radius);
+    margin-bottom: 20px;
+}
+
+.exercises-header h2 {
+    font-size: var(--h2-font-size);
+    color: var(--color-light); /* Cambia este valor por el color del texto deseado */
+    margin: 0;
+    text-align: left;
+}
+
+.exercises-card {
+    background-color: var(--card-background-color); /* Color del fondo de las tarjetas */
+    border-radius: var(--card-border-radius);
+    padding: 20px;
 }
