@@ -1,2 +1,18 @@
-<p>account-settings-view works!</p>
-hola
+<div class="account-container">
+    <div class="account-card">
+      <h1>Configuración de la cuenta</h1>
+      <p>Puedes realizar modificaciones a las configuraciones básicas de la cuenta.</p>
+    </div>
+  
+    <div class="options-header">
+      <h2>Opciones</h2>
+    </div>
+  
+    <div class="options">
+      <div class="option-card" *ngFor="let option of accountOptions">
+        <i [class]="option.icon"></i>
+        <p>{{ option.name }}</p>
+      </div>
+    </div>
+  </div>
+  

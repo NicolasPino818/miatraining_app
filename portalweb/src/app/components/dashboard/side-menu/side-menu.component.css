@@ -1,77 +1,87 @@
-.side-menu{
+.side-menu {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 100%;
     max-height: 100%;
     width: 200px;
-    box-shadow: var(--box-shadow);
-    background-color: var(--color-light);
+    box-shadow: var(--box-shadow); /* Sombra definida en el root */
+    background-color: var(--color-light); /* Color de fondo del menú */
     padding: 10px 0;
     transition: width 0.2s ease;
     overflow-y: auto;
 }
 
-.side-menu a i{
-    font-size: 20px;
+.side-menu a i {
+    font-size: 20px; /* Tamaño del icono */
 }
 
-.side-menu.collapsed{
-    width: 50px;
+.side-menu.collapsed {
+    width: 50px; /* Ancho del menú colapsado */
 }
 
-.menu-secction1{
+/* Sección del menú */
+.menu-secction1 {
     width: 100%;
     flex-grow: 1;
 }
 
-.menu-secction1 .toggler-container,.menu-secction2, .menu-secction1 .menu-list .menu-item{
+/* Estilo del contenedor del menú y cada ítem */
+.menu-secction1 .toggler-container,
+.menu-secction2,
+.menu-secction1 .menu-list .menu-item {
     display: flex;
     width: 100%;
-    min-height: 50px;
+    min-height: 50px; /* Altura mínima de los ítems del menú */
     padding: 5px;
     cursor: pointer;
 }
-.menu-secction2:hover, .menu-secction1 .menu-list .menu-item:hover{
-    opacity: var(--btn-hover-opacity);
+
+.menu-secction2:hover,
+.menu-secction1 .menu-list .menu-item:hover {
+    opacity: var(--btn-hover-opacity); /* Opacidad en hover */
 }
 
-.menu-secction1 .toggler-container .menu-toggler, .menu-secction2 a, .menu-secction1 .menu-list .menu-item a{
-    background-color: var(--color-background);
+/* Estilo del botón y los ítems del menú */
+.menu-secction1 .toggler-container .menu-toggler,
+.menu-secction2 a,
+.menu-secction1 .menu-list .menu-item a {
+    background-color: var(--color-background); /* Color de fondo de los ítems */
     display: flex;
     gap: 5px;
-    align-items: center;
+    align-items: center; /* Alineación vertical */
     width: 100%;
-    border-radius: var(--btn-border-radius);
+    border-radius: var(--btn-border-radius); /* Bordes redondeados */
     padding: 10px;
+    color: var(--color-dark); /* Color de texto de los ítems */
 }
 
-.menu-secction2 a > *, .menu-secction1 .menu-list .menu-item a > *, .menu-secction1 .toggler-container .menu-toggler > *{
-    color: var(--color-tertiary-contrast);
+/* Estilo de los elementos anidados */
+.menu-secction2 a > *,
+.menu-secction1 .menu-list .menu-item a > *,
+.menu-secction1 .toggler-container .menu-toggler > * {
+    color: var(--color-dark); /* Color de los elementos anidados */
 }
 
-.side-menu.collapsed .menu-secction2 a p, 
-.side-menu.collapsed .menu-secction1 
-.menu-list .menu-item .menu-item-link p,
-.side-menu.collapsed .menu-secction1 
-.toggler-container .menu-toggler p{
-    display: none;
+/* Control de visibilidad en el menú colapsado */
+.side-menu.collapsed .menu-secction2 a p,
+.side-menu.collapsed .menu-secction1 .menu-list .menu-item .menu-item-link p,
+.side-menu.collapsed .menu-secction1 .toggler-container .menu-toggler p {
+    display: none; /* Ocultar texto al colapsar */
 }
 
-/* Desde tablet hacia arriba el menu siempre estará abierto */
+/* Estilos para pantallas mayores a tablet */
 @media (min-width: 768px) {
     .side-menu.collapsed {
-        width: 200px;
+        width: 200px; /* Ancho en tamaño completo */
     }
-    .side-menu.collapsed .menu-secction2 a p, 
-    .side-menu.collapsed .menu-secction1 
-    .menu-list .menu-item .menu-item-link p,
-    .side-menu.collapsed .menu-secction1 
-    .toggler-container .menu-toggler p{
-        display: block;
+    .side-menu.collapsed .menu-secction2 a p,
+    .side-menu.collapsed .menu-secction1 .menu-list .menu-item .menu-item-link p,
+    .side-menu.collapsed .menu-secction1 .toggler-container .menu-toggler p {
+        display: block; /* Mostrar texto en tamaño completo */
     }
 
-    .menu-secction1 .toggler-container{
-        display: none;
+    .menu-secction1 .toggler-container {
+        display: none; /* Esconder el contenedor del toggler */
     }
 }
