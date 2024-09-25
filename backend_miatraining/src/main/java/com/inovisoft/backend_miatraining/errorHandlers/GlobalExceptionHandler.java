@@ -204,6 +204,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Object> handleMailAuthenticationException(ResourceNotFoundException ex, HttpServletRequest request) {
+
+        ErrorResponse response = new ErrorResponse(request.getRequestURI(),request.getMethod(),ex.getMessage(),ex.getCode());
+        return new ResponseEntity<>(response, ex.getStatus());
+    }
+
     //DEFAULT EXCEPTION HANDLER
 //    @ExceptionHandler(Exception.class)
 //    public ResponseEntity<Object> handleGeneralException(Exception ex, HttpServletRequest request) {

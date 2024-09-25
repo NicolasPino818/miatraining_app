@@ -1,8 +1,10 @@
 package com.inovisoft.backend_miatraining.logic.trainingPlan.controller;
 
+import com.inovisoft.backend_miatraining.logic.trainingPlan.DTO.SaveTrainingPlanDTO;
 import com.inovisoft.backend_miatraining.logic.trainingPlan.services.TrainingPlanService;
 import com.inovisoft.backend_miatraining.models.TrainingPlanModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +19,7 @@ public class TrainingPlanController {
     // Obtener un TrainingPlan por ID
     @GetMapping("/{id}")
     public ResponseEntity<TrainingPlanModel> getTrainingPlanById(@PathVariable Long id) {
-        Optional<TrainingPlanModel> trainingPlan = trainingPlanService.getTrainingPlanById(id);
-        return trainingPlan.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(trainingPlanService.getTrainingPlanById(id));
     }
 
     // Obtener todos los TrainingPlans
@@ -30,13 +30,13 @@ public class TrainingPlanController {
 
     // Crear un nuevo TrainingPlan
     @PostMapping
-    public ResponseEntity<TrainingPlanModel> createTrainingPlan(@RequestBody TrainingPlanModel trainingPlan) {
-        TrainingPlanModel newTrainingPlan = trainingPlanService.saveTrainingPlan(trainingPlan);
-        return ResponseEntity.status(201).body(newTrainingPlan);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createTrainingPlan(@RequestBody SaveTrainingPlanDTO trainingPlan) {
+        trainingPlanService.saveTrainingPlan(trainingPlan);
     }
 
     // Actualizar un TrainingPlan existente
-    @PutMapping("/{id}")
+    /*@PutMapping("/{id}")
     public ResponseEntity<TrainingPlanModel> updateTrainingPlan(@PathVariable Long id, @RequestBody TrainingPlanModel updatedTrainingPlan) {
         Optional<TrainingPlanModel> existingPlan = trainingPlanService.getTrainingPlanById(id);
 
@@ -47,19 +47,12 @@ public class TrainingPlanController {
         } else {
             return ResponseEntity.notFound().build();
         }
-    }
-
+    }*/
 
     // Eliminar un TrainingPlan por ID
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTrainingPlan(@PathVariable Long id) {
-        Optional<TrainingPlanModel> trainingPlan = trainingPlanService.getTrainingPlanById(id);
-
-        if (trainingPlan.isPresent()) {
-            trainingPlanService.deleteTrainingPlanById(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @DeleteMapping("/{planId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteTrainingPlan(@PathVariable("planId") Long planId) {
+        trainingPlanService.deleteTrainingPlanById(planId);
     }
 }
