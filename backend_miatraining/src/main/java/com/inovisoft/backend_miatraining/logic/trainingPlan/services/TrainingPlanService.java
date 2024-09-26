@@ -5,14 +5,12 @@ import com.inovisoft.backend_miatraining.logic.trainingPlan.DTO.SaveTrainingPlan
 import com.inovisoft.backend_miatraining.logic.user.services.UserService;
 import com.inovisoft.backend_miatraining.models.TrainingDayModel;
 import com.inovisoft.backend_miatraining.models.TrainingPlanModel;
-import com.inovisoft.backend_miatraining.repositories.IRoleRepo;
 import com.inovisoft.backend_miatraining.repositories.ITrainingDayRepo;
 import com.inovisoft.backend_miatraining.repositories.ITrainingPlanRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Service
 public class TrainingPlanService {

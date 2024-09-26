@@ -2,6 +2,7 @@ package com.inovisoft.backend_miatraining.repositories;
 
 import com.inovisoft.backend_miatraining.models.UserModel;
 import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -11,10 +12,10 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Repository
-public interface IUserRepo extends CrudRepository<UserModel, Long> {
+public interface IUserRepo extends JpaRepository<UserModel, Long> {
     Optional<UserModel> findByEmailIgnoreCase(String email);
 
-    @Query("SELECT u from UserModel u")
+    @Query("SELECT u FROM UserModel u")
     ArrayList<UserModel> findAllUsers();
 
     @Transactional
