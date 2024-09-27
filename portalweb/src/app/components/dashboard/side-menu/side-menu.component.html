@@ -2,7 +2,7 @@
     <div class="menu-secction1">
         <ul class="menu-list">
             <li *ngFor="let link of navLinks" class="menu-item">
-                <a class="menu-item-link" (click)="closeNav()" [routerLink]="link.link">
+                <a class="menu-item-link" (click)="closeNav()" [routerLink]="link.link" [routerLinkActive]="['active']">
                     <i [class]='link.icon'></i>
                     <p>{{link.linkName}}</p>
                 </a>

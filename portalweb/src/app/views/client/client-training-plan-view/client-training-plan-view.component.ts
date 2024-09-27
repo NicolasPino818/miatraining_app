@@ -1,57 +1,65 @@
 import { Component } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
+import { ExerciseComponent } from '../../../components/training-plan/exercise/exercise.component';
+import { IExercise } from '../../../models/interfaces';
+import { ExerciseInfoModalComponent } from '../../../components/training-plan/exercise-info-modal/exercise-info-modal.component';
 
 @Component({
   selector: 'app-client-training-plan-view',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor,NgIf, ExerciseComponent, ExerciseInfoModalComponent],
   templateUrl: './client-training-plan-view.component.html',
   styleUrls: ['./client-training-plan-view.component.css']
 })
 export class ClientTrainingPlanViewComponent {
-  days = [
-    'Ejercicios Lunes',
-    'Ejercicios Martes',
-    'Ejercicios Miércoles',
-    'Ejercicios Jueves',
-    'Ejercicios Viernes',
-    'Ejercicios Sábado',
-    'Ejercicios Domingo'
-  ];
-  
-  exercises = [
+
+  showExerciseModal:boolean = false;
+
+  selectedExercise!: IExercise | null;
+
+  exercises:IExercise[] = [
     {
+      id: 1,
       name: 'Press de Pecho Sentado en maquina',
-      image: 'ruta/a/la/imagen1.jpg'
     },
     {
+      id: 2,
       name: 'Press de pecho con cables',
-      image: 'ruta/a/la/imagen2.jpg'
     },
-    // Asegúrate de no tener ejercicios duplicados
     {
+      id: 3,
       name: 'Vuelos con mancuerna inclinado',
-      image: 'ruta/a/la/imagen3.jpg'
     },
     {
+      id: 4,
       name: 'Vuelos sentado en máquina',
-      image: 'ruta/a/la/imagen4.jpg'
     },
     {
+      id: 5,
       name: 'Elevaciones laterales',
-      image: 'ruta/a/la/imagen5.jpg'
     },
     {
+      id: 6,
       name: 'Press de hombro con mancuernas',
-      image: 'ruta/a/la/imagen6.jpg'
     },
     {
+      id: 7,
       name: 'Press de pecho inclinado con cables',
-      image: 'ruta/a/la/imagen7.jpg'
     }
   ];
 
-  constructor() {
-    console.log(this.exercises);
+  selectExercise(id:number){
+    const found:IExercise | undefined = this.exercises.find((element:IExercise) => {
+      return element.id === id
+    });
+    if(found) {
+      this.selectedExercise = found;
+      this.showExerciseModal = true;
+    }
   }
+
+  closeModal(){
+    this.showExerciseModal = false;
+  }
+
 }

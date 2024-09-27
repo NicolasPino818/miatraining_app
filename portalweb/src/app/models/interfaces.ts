@@ -32,3 +32,20 @@ export interface INavModel{
     iconType: string, 
     link: string
 }
+
+export interface ITrainingPlanExercise{
+    exercise: IExercise,
+    series: number,
+    repetitions: number,
+    restMins: number
+}
+export interface IExercise{
+    id?: number
+    name: string,
+    tutorialSrc?: string
+    imageSrc?: string
+    categories?: IExerciseCategory[]
+}
+export interface IExerciseCategory{
+    category: string
+}

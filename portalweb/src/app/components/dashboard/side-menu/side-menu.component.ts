@@ -1,12 +1,12 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { navLinks } from '../../../models/nav';
 
 @Component({
   selector: 'app-side-menu',
   standalone: true,
-  imports: [RouterLink, NgIf, NgFor],
+  imports: [RouterLink, NgIf, NgFor,RouterLinkActive],
   templateUrl: './side-menu.component.html',
   styleUrl: './side-menu.component.css'
 })

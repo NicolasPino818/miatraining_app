@@ -28,7 +28,6 @@
     background-color: var(--color-secondary);
     color: var(--color-secondary-contrast);
 }
-
 .btn.tertiary{
     background-color: var(--color-tertiary);
     color: var(--color-tertiary-contrast);
@@ -46,11 +45,37 @@
     background-color: var(--color-light);
     padding: min(8%, 40px);
 }
+.backdrop{
+    z-index: 999999998;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
+.modal-container{
+    position: fixed;
+    z-index: 999999999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: var(--color-light);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: min(95dvw, 650px);
+    border-radius: var(--card-border-radius);
+    max-height: 90dvh;
+    box-shadow: var(--box-shadow);
+    overflow: auto;
+}
 @media (min-width: 993px){
     .btn:hover{
         opacity: 0.8;
-        transform:  scale(0.9);
-        transition: all 0.5s ease;
         box-shadow: var(--box-shadow);
+    }
+}
+@media (max-width: 425px){
+    .logo{
+        width: min(100%, 120px);
     }
 }

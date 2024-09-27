@@ -3,38 +3,42 @@ h1,h2,h3,h4,h5,h6,p,a,small{
     color: var(--color-dark);
 }
 
+h1,h2,h3,h4,h5,h6,p,a,small{
+    color: var(--color-dark);
+}
+
 h1, .h1-fsize{
     /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
-    font-size: clamp(35px, var(--font-size-grow), 48px);
+    font-size: var(--h1-font-size);
 }
 h2, .h2-fsize{
     /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
-    font-size: clamp(33px, var(--font-size-grow), 40px);
+    font-size: var(--h2-font-size);
 }
 h3, .h3-fsize{
     /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
-    font-size: clamp(28px, var(--font-size-grow), 33px);
+    font-size: var(--h3-font-size);
 }
 h4, .h4-fsize{
     /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
-    font-size: clamp(23px, var(--font-size-grow), 28px);
+    font-size: var(--h4-font-size);
 }
 h5, .h5-fsize{
     /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
-    font-size: clamp(19px, var(--font-size-grow), 25px);
+    font-size: var(--h5-font-size);
 }
 h6, .h6-fsize{
     /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
-    font-size: clamp(16px, var(--font-size-grow), 21px);
+    font-size: var(--h6-font-size);
 }
-p, a, label, input, select{
+p, a, label, input, select, span, textarea{
     /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
-    font-size: clamp(14px, var(--font-size-grow), 18px);
+    font-size: var(--normal-font-size);
 }
 
-small{
+small, .font-small{
     /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
-    font-size: clamp(8px, var(--font-size-grow), 13px);
+    font-size: var(--small-font-size);
 }
 
 .text-center{

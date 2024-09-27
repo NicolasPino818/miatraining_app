@@ -1,7 +1,7 @@
-.account-container {
-  padding: 20px;
+.account-container{
+  display: flex;
+  flex-direction: column;
 }
-
 .account-card {
   background-color: var(--color-primary); /* Usar la variable de color */
   border-radius: 8px;
@@ -18,11 +18,16 @@
 
 .options-header {
   background-color: var(--color-primary); /* Usar la misma variable de color */
-  border-radius: 8px;
+  border-top-left-radius: var(--card-border-radius);
+  border-top-right-radius: var(--card-border-radius);
   padding: 20px;
   margin-bottom: 20px;
-  text-align: left;
   box-shadow: var(--box-shadow); /* Usar la variable de sombra */
+}
+
+.options-container{
+  border-radius: var(--card-border-radius);
+  background-color: var(--color-light);
 }
 
 .options-header h2 {
@@ -30,16 +35,16 @@
 }
 
 .options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); /* 4 columnas por fila */
+  gap: 20px;   
+  padding: 10px;
 }
 
 .option-card {
   background-color: var(--color-tertiary); /* Usar la variable de color terciario */
   color: var(--color-primary-contrast); /* Color de texto en tarjetas */
   padding: 20px;
-  width: calc((100% / 3) - 20px); /* Tres columnas con espacio entre ellas */
   text-align: center;
   border-radius: 8px;
   cursor: pointer;

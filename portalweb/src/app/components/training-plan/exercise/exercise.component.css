@@ -1,0 +1,45 @@
+/* Tarjetas individuales de cada ejercicio */
+.exercise-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-light); /* Color de fondo de las tarjetas */
+    border-radius: var(--card-border-radius); /* Bordes redondeados */
+    box-shadow: var(--box-shadow); /* Sombra de las tarjetas */
+    text-align: center;
+    height: 100%;
+    padding: 10px;
+    transition: transform 0.2s; /* Efecto de transición para las tarjetas */
+}
+
+.exercise-card:hover {
+    transform: translateY(-5px); /* Movimiento al pasar el cursor */
+}
+
+.exercise-card img {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 10px;
+}
+
+.exercise-card h3 {
+    font-size: var(--normal-font-size);
+    margin: 10px 0;
+    color: var(--color-dark);
+}
+
+.exercise-card button {
+    background-color: var(--color-tertiary);
+    color: var(--color-tertiary-contrast);
+    border: none;
+    padding: 10px;
+    border-radius: var(--btn-border-radius);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.exercise-card button:hover {
+    background-color: var(--color-tertiary-shade);
+}

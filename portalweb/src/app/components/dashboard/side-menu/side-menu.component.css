@@ -17,7 +17,7 @@
 }
 
 .side-menu.collapsed {
-    width: 50px; /* Ancho del menú colapsado */
+    width: 40px; /* Ancho del menú colapsado */
 }
 
 /* Sección del menú */
@@ -32,28 +32,36 @@
 .menu-secction1 .menu-list .menu-item {
     display: flex;
     width: 100%;
-    min-height: 50px; /* Altura mínima de los ítems del menú */
-    padding: 5px;
+    min-height: 60px; /* Altura mínima de los ítems del menú */
+    padding: 5px 0;
     cursor: pointer;
-}
-
-.menu-secction2:hover,
-.menu-secction1 .menu-list .menu-item:hover {
-    opacity: var(--btn-hover-opacity); /* Opacidad en hover */
 }
 
 /* Estilo del botón y los ítems del menú */
 .menu-secction1 .toggler-container .menu-toggler,
 .menu-secction2 a,
 .menu-secction1 .menu-list .menu-item a {
-    background-color: var(--color-background); /* Color de fondo de los ítems */
+    
+    font-size: var(--small-font-size);
     display: flex;
     gap: 5px;
     align-items: center; /* Alineación vertical */
     width: 100%;
-    border-radius: var(--btn-border-radius); /* Bordes redondeados */
     padding: 10px;
     color: var(--color-dark); /* Color de texto de los ítems */
+}
+
+.menu-secction1 .menu-list .menu-item a.active,
+.menu-secction1 .toggler-container .menu-toggler:hover,
+.menu-secction1 .menu-list .menu-item a:hover{
+    border-bottom: 3px solid var(--color-tertiary);
+    background-color: var(--color-background);
+}
+
+.menu-secction1 .menu-list .menu-item a.active > *,
+.menu-secction1 .menu-list .menu-item a:hover > *,
+.menu-secction1 .toggler-container .menu-toggler:hover > * {
+    color: var(--color-tertiary); /* Color de los elementos anidados */
 }
 
 /* Estilo de los elementos anidados */

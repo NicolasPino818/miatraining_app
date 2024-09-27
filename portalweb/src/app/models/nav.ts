@@ -7,7 +7,7 @@ export const navLinks = {
             link: 'cliente/plan-entrenamiento'
         },
         {
-            linkName: 'ALIMENTACIÓN',
+            linkName: 'REGISTRO DE ALIMENTACIÓN',
             icon: 'bx bx-bowl-rice',
             iconType: 'BOXICON', 
             link: 'cliente/alimentacion'

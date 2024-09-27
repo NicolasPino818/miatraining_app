@@ -90,12 +90,11 @@ export class LoginViewComponent {
           this.storage.storeToken(result.data.access_token);
           this.storage.storeRefreshToken(result.data.refresh_token);
 
-          console.log(result.data); //Muestra los token por consola
 
           //deben usar esta variable para dirigir al usuario a su respectivo dashboard usando el Router de angular
           //this.router.navigate(['dashboard','cliente']); por ejemplo si es que el rol es el del cliente
           //Pueden crear una funcion que maneje la redireccion o pueden usar if, else if o switch
-          console.log(token.authorization);
+          this.handleRedirect(token.authorization);
 
         } else { //SI EL LOGIN ES INCORRECTO INGRESA AQUI
 
@@ -107,4 +106,12 @@ export class LoginViewComponent {
       });
     }
   }
+
+  handleRedirect(userRole: string){
+    if(userRole === 'ADMIN') this.router.navigate(['/dashboard','admin']);
+    else if(userRole === 'COACH'){}
+    else if(userRole === 'MANAGER'){}
+    else if(userRole === 'CLIENT') this.router.navigate(['/dashboard','cliente']);
+  }
+
 }
