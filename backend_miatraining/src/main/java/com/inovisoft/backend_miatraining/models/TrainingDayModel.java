@@ -1,5 +1,6 @@
 package com.inovisoft.backend_miatraining.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,5 +24,6 @@ public class TrainingDayModel {
 
     @ManyToOne
     @JoinColumn(name = "planID", nullable = false)
+    @JsonBackReference
     private TrainingPlanModel trainingPlan;
 }

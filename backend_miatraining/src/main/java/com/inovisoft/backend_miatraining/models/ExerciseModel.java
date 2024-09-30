@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "exercise")
@@ -24,14 +26,22 @@ public class ExerciseModel {
     @Column(length = 150, nullable = false)
     private String exerciseName;
 
-    @Column(length = 5000)
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String tutorialLink;
 
-    @Column(length = 5000, nullable = false)
+    @Column(columnDefinition = "MEDIUMTEXT", nullable = false)
     private String imageLink;
 
     @Column(length = 500, nullable = false)
     private String description;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "category_exercise",
+            joinColumns = @JoinColumn(name = "exerciseID", referencedColumnName = "exerciseID"),
+            inverseJoinColumns = @JoinColumn(name = "exerciseCategoryID", referencedColumnName = "exerciseCategoryID")
+    )
+    private List<ExerciseCategoryModel> categories;
 
     @ManyToOne
     @JoinColumn(name = "trainingTypeID", nullable = false)

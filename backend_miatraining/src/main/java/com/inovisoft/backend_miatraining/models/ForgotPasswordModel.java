@@ -23,7 +23,8 @@ public class ForgotPasswordModel {
     @Column(nullable = false)
     private Integer otp;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "DATETIME")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date exp;
 
     @OneToOne()

@@ -1,6 +1,6 @@
 package com.inovisoft.backend_miatraining.errorHandlers.exceptions;
 
-import com.inovisoft.backend_miatraining.logic.auth.DTO.OtpVerificationStatusResponseDTO;
+import com.inovisoft.backend_miatraining.logic.DTOs.authDTO.OtpVerificationStatusResponseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

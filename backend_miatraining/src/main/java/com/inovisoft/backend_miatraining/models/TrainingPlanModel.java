@@ -1,17 +1,13 @@
 package com.inovisoft.backend_miatraining.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 
 @Entity(name = "TrainingPlan")
@@ -33,4 +29,9 @@ public class TrainingPlanModel {
     @ManyToOne
     @JoinColumn(name = "userID", nullable = false)
     private UserModel user;
+
+    @OneToMany(mappedBy = "trainingPlan", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<TrainingDayModel> days;
+
 }
