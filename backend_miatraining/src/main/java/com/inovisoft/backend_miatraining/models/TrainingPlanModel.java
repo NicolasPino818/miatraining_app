@@ -34,4 +34,8 @@ public class TrainingPlanModel {
     @JsonManagedReference
     private List<TrainingDayModel> days;
 
+    @OneToMany(mappedBy = "trainingPlan")
+    @JsonManagedReference
+    private List<UserPlanModel> userPlan;
+
 }

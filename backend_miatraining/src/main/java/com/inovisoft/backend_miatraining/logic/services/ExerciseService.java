@@ -1,23 +1,22 @@
 package com.inovisoft.backend_miatraining.logic.services;
 
 import com.inovisoft.backend_miatraining.errorHandlers.exceptions.ResourceNotFoundException;
-import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.ExerciseCategoryDTO;
-import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.ExerciseCategoryPageResponseDTO;
-import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.ExerciseDTO;
-import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.ExercisePageResponseDTO;
-import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.mappers.ExerciseCategoryDTOMapper;
-import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.mappers.ExerciseCategoryPageResponseDTOMapper;
-import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.mappers.ExerciseDTOMapper;
-import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.mappers.ExercisePageResponseDTOMapper;
+import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.*;
+import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.mappers.*;
 import com.inovisoft.backend_miatraining.models.ExerciseCategoryModel;
 import com.inovisoft.backend_miatraining.models.ExerciseModel;
+import com.inovisoft.backend_miatraining.models.TrainingTypeModel;
 import com.inovisoft.backend_miatraining.repositories.IExerciseCategoryRepo;
 import com.inovisoft.backend_miatraining.repositories.IExerciseRepo;
+import com.inovisoft.backend_miatraining.repositories.ITrainingTypeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ExerciseService {
@@ -25,7 +24,11 @@ public class ExerciseService {
     @Autowired
     IExerciseRepo exerciseRepo;
     @Autowired
+    ITrainingTypeRepo trainingTypeRepo;
+    @Autowired
     IExerciseCategoryRepo exerciseCategoryRepo;
+    @Autowired
+    TrainingTypeDTOMapper trainingTypeDTOMapper;
     @Autowired
     ExerciseDTOMapper exerciseDTOMapper;
     @Autowired
@@ -46,8 +49,51 @@ public class ExerciseService {
         return exerciseDTOMapper.apply(model);
     }
 
-    public void saveExercise(){
+    public void saveExercise(ExerciseDTO exerciseDTO){
+        ExerciseModel model = ExerciseModel
+                .builder()
+                .exerciseID(null)
+                .exerciseName(exerciseDTO.getName())
+                .imageLink(exerciseDTO.getImageSrc())
+                .tutorialLink(exerciseDTO.getTutorialSrc())
+                .trainingType(trainingTypeRepo.findByTrainingTypeName(
+                        exerciseDTO.getTrainingType())
+                        .orElseThrow(ResourceNotFoundException::new))
+                .description(exerciseDTO.getDescription())
+                .build();
+        if(exerciseDTO.getExerciseCategories() != null && !exerciseDTO.getExerciseCategories().isEmpty()){
+            model.setCategories(exerciseDTO.getExerciseCategories()
+                    .stream().map((dto)-> ExerciseCategoryModel
+                            .builder()
+                            .exerciseCategoryID(dto.getId())
+                            .categoryName(dto.getCategoryName())
+                            .build()).toList());
+        }
+        exerciseRepo.save(model);
+    }
 
+    public void updateExercise(Long id, ExerciseDTO exerciseDTO){
+        ExerciseModel model = exerciseRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
+        model.setExerciseName(exerciseDTO.getName());
+        model.setImageLink(exerciseDTO.getImageSrc());
+        model.setTutorialLink(exerciseDTO.getTutorialSrc());
+        model.setTrainingType(trainingTypeRepo.findByTrainingTypeName(
+                                exerciseDTO.getTrainingType())
+                        .orElseThrow(ResourceNotFoundException::new));
+        model.setDescription(exerciseDTO.getDescription());
+        if(exerciseDTO.getExerciseCategories() != null && !exerciseDTO.getExerciseCategories().isEmpty()){
+            model.setCategories(exerciseDTO.getExerciseCategories()
+                    .stream().map((dto)-> ExerciseCategoryModel
+                            .builder()
+                            .exerciseCategoryID(dto.getId())
+                            .categoryName(dto.getCategoryName())
+                            .build()).toList());
+        }
+        exerciseRepo.save(model);
+    }
+
+    public void deleteExercise(Long exerciseID) {
+        exerciseRepo.deleteById(exerciseID);
     }
 
     public ExerciseCategoryPageResponseDTO getExerciseCategoriesByPage(int page) {
@@ -61,8 +107,25 @@ public class ExerciseService {
         return exerciseCategoryDTOMapper.apply(model);
     }
 
-    public void saveExerciseCategory(){
-
+    public void saveExerciseCategory(ExerciseCategoryDTO categoryDTO){
+        ExerciseCategoryModel categoryModel =
+                ExerciseCategoryModel
+                        .builder()
+                        .exerciseCategoryID(null)
+                        .categoryName(categoryDTO.getCategoryName())
+                        .build();
+        exerciseCategoryRepo.save(categoryModel);
     }
+
+    public void updateExerciseCategory(Long id, ExerciseCategoryDTO categoryDTO){
+        ExerciseCategoryModel categoryModel = exerciseCategoryRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
+        categoryModel.setCategoryName(categoryDTO.getCategoryName());
+        exerciseCategoryRepo.save(categoryModel);
+    }
+
+    public List<TrainingTypeDTO> getTrainingTypes() {
+        return trainingTypeRepo.findAll().stream().map(trainingTypeDTOMapper).toList();
+    }
+
 
 }

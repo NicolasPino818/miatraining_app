@@ -17,5 +17,6 @@ public class ExerciseDTO {
     private String tutorialSrc;
     private String imageSrc;
     private String description;
+    private String trainingType;
     private List<ExerciseCategoryDTO> exerciseCategories;
 }

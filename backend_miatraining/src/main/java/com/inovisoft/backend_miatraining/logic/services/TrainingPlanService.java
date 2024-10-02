@@ -3,16 +3,17 @@ package com.inovisoft.backend_miatraining.logic.services;
 import com.inovisoft.backend_miatraining.errorHandlers.exceptions.ResourceNotFoundException;
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.SaveExerciseToDayRoutineDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.SaveTrainingPlanDTO;
-import com.inovisoft.backend_miatraining.logic.controllers.UserService;
-import com.inovisoft.backend_miatraining.models.TrainingDayModel;
-import com.inovisoft.backend_miatraining.models.TrainingPlanModel;
-import com.inovisoft.backend_miatraining.repositories.ITrainingDayRepo;
-import com.inovisoft.backend_miatraining.repositories.ITrainingPlanRepo;
+import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.SaveUsersToPlanDTO;
+import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.mappers.TrainingPlanResponseDTOMapper;
+import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.response.TrainingPlanResponseDTO;
+import com.inovisoft.backend_miatraining.models.*;
+import com.inovisoft.backend_miatraining.repositories.*;
+import com.inovisoft.backend_miatraining.repositories.compositeKeys.UsuarioPlanId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class TrainingPlanService {
@@ -20,19 +21,35 @@ public class TrainingPlanService {
     @Autowired
     ITrainingPlanRepo trainingPlanRepo;
     @Autowired
-    ITrainingDayRepo trainingPlanDayRepo;
+    ITrainingDayRepo trainingDayRepo;
+    @Autowired
+    IUserRepo userRepo;
+    @Autowired
+    IUserPlanRepo userPlanRepo;
+    @Autowired
+    IExerciseRepo exerciseRepo;
+    @Autowired
+    IExerciseRoutineRepo exerciseRoutineRepo;
     @Autowired
     UserService userService;
+    @Autowired
+    TrainingPlanResponseDTOMapper trainingPlanResponseDTOMapper;
 
     // Obtener un TrainingPlan por ID
-    public TrainingPlanModel getTrainingPlanById(Long id) {
-        return trainingPlanRepo.findById(id)
+    public TrainingPlanResponseDTO getTrainingPlanById(Long id) {
+        TrainingPlanModel planModel = trainingPlanRepo.findById(id)
                 .orElseThrow(ResourceNotFoundException::new);
+        return trainingPlanResponseDTOMapper.apply(planModel);
     }
 
     // Obtener todos los TrainingPlans
-    public Iterable<TrainingPlanModel> getAllTrainingPlans() {
-        return trainingPlanRepo.findAll();
+    public ArrayList<TrainingPlanResponseDTO> getAllTrainingPlans() {
+        Iterable<TrainingPlanModel> planModels = trainingPlanRepo.findAll();
+        ArrayList<TrainingPlanResponseDTO> planResponseDTOS = new ArrayList<>();
+        planModels.forEach(model->{
+            planResponseDTOS.add(trainingPlanResponseDTOMapper.apply(model));
+        });
+        return planResponseDTOS;
     }
 
     // Crear o actualizar un TrainingPlan
@@ -51,6 +68,7 @@ public class TrainingPlanService {
 
     // Eliminar un TrainingPlan por ID
     public void deleteTrainingPlanById(Long id) {
+        deleteUserPlansByPlanID(id);
         deleteDays(id);
         trainingPlanRepo.deleteById(id);
     }
@@ -63,17 +81,72 @@ public class TrainingPlanService {
                             .dayNumber(i)
                             .trainingPlan(trainingPlanModel)
                             .build();
-            trainingPlanDayRepo.save(trainingDayModel);
+            trainingDayRepo.save(trainingDayModel);
         }
     }
 
     private void deleteDays(Long planID){
-        trainingPlanDayRepo.deleteAll(trainingPlanDayRepo.findAllDaysByPlanId(planID));
+        trainingDayRepo.deleteAll(trainingDayRepo.findAllDaysByPlanId(planID));
     }
 
-    public List<TrainingDayModel> addExerciseToPlan(Long planId, SaveExerciseToDayRoutineDTO exercise) {
-        TrainingPlanModel planModel = trainingPlanRepo.findById(planId).orElseThrow(ResourceNotFoundException::new);
+    public void addUsersToPlan(Long planID,SaveUsersToPlanDTO dto){
+        //Obtener el plan model de la db
+        TrainingPlanModel planModel = trainingPlanRepo.findById(planID).orElseThrow(ResourceNotFoundException::new);
+        //Obtener la lista de userModels de la db
+        ArrayList<UserModel> userModels = new ArrayList<>(userRepo.findAllById(dto.getUserID()));
+        //Por cada usuario añadido al plan se crea una instancia de UserPlanModel y ser guarda en la db
+        userModels.forEach(userModel -> {
+            //Si la lista de training plan para ese usuario está vacía
+            if(userModel.getUserPlan().isEmpty()){
+                //Se crea un nuevo id para el UserPlanModel
+                UsuarioPlanId usuarioPlanId = new UsuarioPlanId(userModel.getUserID(), planModel.getPlanID());
+                //Se crea el nuevo UserPlanModel
+                UserPlanModel userPlanModel = new UserPlanModel(usuarioPlanId, LocalDate.now(), userModel, planModel);
+                //Se guarda el plan del usuario
+                userPlanRepo.save(userPlanModel);
+            }
+        });
+    }
 
-        return planModel.getDays();
+    public void deleteUserPlansByPlanID(Long planID){
+        userPlanRepo.deleteAll(userPlanRepo.findAllUserPlansByPlanId(planID));
+    }
+
+    public void deleteUsersFromPlan(Long planID,SaveUsersToPlanDTO dto){
+        //Obtener el plan model de la db
+        TrainingPlanModel planModel = trainingPlanRepo.findById(planID).orElseThrow(ResourceNotFoundException::new);
+        //Obtener la lista de userModels de la db
+        ArrayList<UserModel> userModels = new ArrayList<>(userRepo.findAllById(dto.getUserID()));
+        //Por cada usuario añadido al plan se crea una instancia de UserPlanModel y ser guarda en la db
+        userModels.forEach(userModel -> {
+            //Si el usuario tiene un plan se elimina
+            if(!userModel.getUserPlan().isEmpty()){
+                //Se guarda el plan del usuario
+                userPlanRepo.deleteById(new UsuarioPlanId(userModel.getUserID(), planModel.getPlanID()));
+            }
+        });
+    }
+
+    public void addRoutineToPlan(Long planId, SaveExerciseToDayRoutineDTO exerciseRoutine) {
+        ExerciseModel exerciseModel = exerciseRepo.findById(exerciseRoutine.getExerciseID())
+                .orElseThrow(ResourceNotFoundException::new);
+        TrainingDayModel dayModel = trainingDayRepo.findByDayNumberAndPlanId(exerciseRoutine.getDayNumber(),planId)
+                .orElseThrow(ResourceNotFoundException::new);
+
+        ExerciseRoutineModel routineModel =
+                ExerciseRoutineModel
+                        .builder()
+                        .exercise(exerciseModel)
+                        .trainingDay(dayModel)
+                        .repetitions(exerciseRoutine.getRepetitions())
+                        .series(exerciseRoutine.getSeries())
+                        .restMinutes(exerciseRoutine.getRestMinutes())
+                        .build();
+
+        exerciseRoutineRepo.save(routineModel);
+    }
+
+    public void deleteRoutine(Long routineID){
+        exerciseRoutineRepo.deleteById(routineID);
     }
 }

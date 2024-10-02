@@ -1,4 +1,4 @@
-package com.inovisoft.backend_miatraining.security;
+package com.inovisoft.backend_miatraining.security.config.data;
 
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.inovisoft.backend_miatraining.logic.controllers;
+package com.inovisoft.backend_miatraining.logic.services;
 
 import com.inovisoft.backend_miatraining.errorHandlers.exceptions.UserNotFoundException;
 import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.UserDTO;

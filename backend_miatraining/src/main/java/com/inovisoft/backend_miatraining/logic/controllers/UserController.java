@@ -2,6 +2,7 @@ package com.inovisoft.backend_miatraining.logic.controllers;
 
 import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.UserDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.UserPageResponseDTO;
+import com.inovisoft.backend_miatraining.logic.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

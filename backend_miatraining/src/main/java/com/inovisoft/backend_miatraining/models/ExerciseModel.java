@@ -1,5 +1,6 @@
 package com.inovisoft.backend_miatraining.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,5 +47,9 @@ public class ExerciseModel {
     @ManyToOne
     @JoinColumn(name = "trainingTypeID", nullable = false)
     private TrainingTypeModel trainingType;
+
+    @OneToMany(mappedBy = "exercise")
+    @JsonManagedReference
+    private List<ExerciseRoutineModel> exerciseRoutines;
 
 }

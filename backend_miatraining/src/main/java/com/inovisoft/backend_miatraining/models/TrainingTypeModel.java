@@ -24,6 +24,4 @@ public class TrainingTypeModel {
     @Column(nullable = false, length = 150)
     private String trainingTypeName;
 
-    @Column(length = 250, nullable = false)
-    private String description;
 }

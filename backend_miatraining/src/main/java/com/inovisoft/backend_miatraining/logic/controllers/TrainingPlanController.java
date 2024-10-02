@@ -2,6 +2,8 @@ package com.inovisoft.backend_miatraining.logic.controllers;
 
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.SaveExerciseToDayRoutineDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.SaveTrainingPlanDTO;
+import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.SaveUsersToPlanDTO;
+import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.response.TrainingPlanResponseDTO;
 import com.inovisoft.backend_miatraining.logic.services.TrainingPlanService;
 import com.inovisoft.backend_miatraining.models.TrainingDayModel;
 import com.inovisoft.backend_miatraining.models.TrainingPlanModel;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,14 +24,14 @@ public class TrainingPlanController {
 
     // Obtener un TrainingPlan por ID
     @GetMapping("/{id}")
-    public ResponseEntity<TrainingPlanModel> getTrainingPlanById(@PathVariable Long id) {
+    public ResponseEntity<TrainingPlanResponseDTO> getTrainingPlanById(@PathVariable Long id) {
         return ResponseEntity.ok(trainingPlanService.getTrainingPlanById(id));
     }
 
     // Obtener todos los TrainingPlans
     @GetMapping
-    public Iterable<TrainingPlanModel> getAllTrainingPlans() {
-        return trainingPlanService.getAllTrainingPlans();
+    public ResponseEntity<ArrayList<TrainingPlanResponseDTO>> getAllTrainingPlans() {
+        return ResponseEntity.ok(trainingPlanService.getAllTrainingPlans());
     }
 
     // Crear un nuevo TrainingPlan
@@ -38,26 +41,32 @@ public class TrainingPlanController {
         trainingPlanService.saveTrainingPlan(trainingPlan);
     }
 
-    @PostMapping("/{planId}/exercise")
-    @ResponseStatus(HttpStatus.OK)
-    public List<TrainingDayModel> addExerciseToPlan(@PathVariable("planId") Long planId,
-                                                    @RequestBody SaveExerciseToDayRoutineDTO exercise) {
-        return trainingPlanService.addExerciseToPlan(planId, exercise);
+    @PostMapping("/{planId}/routine")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addExerciseToPlan(@PathVariable("planId") Long planId,
+                                  @RequestBody SaveExerciseToDayRoutineDTO exercise) {
+        trainingPlanService.addRoutineToPlan(planId, exercise);
     }
 
-    // Actualizar un TrainingPlan existente
-    /*@PutMapping("/{id}")
-    public ResponseEntity<TrainingPlanModel> updateTrainingPlan(@PathVariable Long id, @RequestBody TrainingPlanModel updatedTrainingPlan) {
-        Optional<TrainingPlanModel> existingPlan = trainingPlanService.getTrainingPlanById(id);
+    @DeleteMapping("/routine/{routineID}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteRoutine(@PathVariable("routineID") Long routineID) {
+        trainingPlanService.deleteRoutine(routineID);
+    }
 
-        if (existingPlan.isPresent()) {
-            // No necesitas establecer manualmente el ID, ya viene con el objeto existente
-            TrainingPlanModel savedPlan = trainingPlanService.saveTrainingPlan(updatedTrainingPlan);
-            return ResponseEntity.ok(savedPlan);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }*/
+    @PostMapping("/{planID}/users")
+    @ResponseStatus(HttpStatus.OK)
+    public void addUsersToPlan(@PathVariable("planID") Long planID,
+                               @RequestBody SaveUsersToPlanDTO dto){
+        trainingPlanService.addUsersToPlan(planID,dto);
+    }
+
+    @PutMapping("/{planID}/users/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteUsersFromPlan(@PathVariable("planID") Long planID,
+                               @RequestBody SaveUsersToPlanDTO dto){
+        trainingPlanService.deleteUsersFromPlan(planID,dto);
+    }
 
     // Eliminar un TrainingPlan por ID
     @DeleteMapping("/{planId}")

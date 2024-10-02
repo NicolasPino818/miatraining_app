@@ -5,14 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SaveExerciseToDayRoutineDTO {
-    private Long exerciseID;
-    private Integer dayNumber;
-    private Integer series;
-    private Integer repetitions;
-    private Integer restMinutes;
+public class SaveUsersToPlanDTO {
+    Set<Long> userID;
 }

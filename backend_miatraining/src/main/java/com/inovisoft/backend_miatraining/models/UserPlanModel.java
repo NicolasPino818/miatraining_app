@@ -23,18 +23,20 @@ import java.util.List;
 @AllArgsConstructor
 public class UserPlanModel{
     @EmbeddedId
-    private UsuarioPlanId id;  // Clave compuesta (usuarioID + planID)
+    private UsuarioPlanId id;  // Clave compuesta (userID + planID)
 
     @Column(nullable = false)
     private LocalDate assignmentDate;  // Campo para la fecha de asignación
 
     @ManyToOne
     @MapsId("userID")
+    @JsonBackReference
     @JoinColumn(name = "userID", nullable = false)
     private UserModel user;  // Relación con la tabla de usuarios
 
     @ManyToOne
     @MapsId("planID")
+    @JsonBackReference
     @JoinColumn(name = "planID", nullable = false)
     private TrainingPlanModel trainingPlan;  // Relación con la tabla de planes de entrenamiento
 }

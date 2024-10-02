@@ -1,6 +1,7 @@
 package com.inovisoft.backend_miatraining.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -53,6 +54,10 @@ public class UserModel implements UserDetails {
 
     @OneToOne(mappedBy = "user")
     private ForgotPasswordModel forgotPassword;
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private List<UserPlanModel> userPlan;
 
     @ManyToOne()
     @JoinColumn(name="roleID", nullable=false)
