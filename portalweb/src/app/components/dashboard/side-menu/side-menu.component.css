@@ -41,27 +41,12 @@
 .menu-secction1 .toggler-container .menu-toggler,
 .menu-secction2 a,
 .menu-secction1 .menu-list .menu-item a {
-    
     font-size: var(--small-font-size);
     display: flex;
     gap: 5px;
     align-items: center; /* Alineación vertical */
     width: 100%;
     padding: 10px;
-    color: var(--color-dark); /* Color de texto de los ítems */
-}
-
-.menu-secction1 .menu-list .menu-item a.active,
-.menu-secction1 .toggler-container .menu-toggler:hover,
-.menu-secction1 .menu-list .menu-item a:hover{
-    border-bottom: 3px solid var(--color-tertiary);
-    background-color: var(--color-background);
-}
-
-.menu-secction1 .menu-list .menu-item a.active > *,
-.menu-secction1 .menu-list .menu-item a:hover > *,
-.menu-secction1 .toggler-container .menu-toggler:hover > * {
-    color: var(--color-tertiary); /* Color de los elementos anidados */
 }
 
 /* Estilo de los elementos anidados */
@@ -70,6 +55,29 @@
 .menu-secction1 .toggler-container .menu-toggler > * {
     color: var(--color-dark); /* Color de los elementos anidados */
 }
+
+.menu-secction1 .menu-list .menu-item a.active,
+.menu-secction1 .menu-list .menu-item a:hover{
+    border-bottom: 3px solid var(--color-tertiary);
+    background-color: var(--color-background);
+}
+
+.menu-secction1 .toggler-container .menu-toggler{
+    background-color: var(--color-primary);
+}
+.menu-secction1 .toggler-container .menu-toggler > *{
+    color: var(--color-primary-contrast) !important;
+}
+
+.menu-secction2 a{
+    border-top: 3px solid var(--color-primary);
+}
+
+.menu-secction1 .menu-list .menu-item a.active > *,
+.menu-secction1 .menu-list .menu-item a:hover > * {
+    color: var(--color-tertiary); /* Color de los elementos anidados */
+}
+
 
 /* Control de visibilidad en el menú colapsado */
 .side-menu.collapsed .menu-secction2 a p,
