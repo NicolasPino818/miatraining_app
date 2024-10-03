@@ -52,7 +52,9 @@ export class ClientTrainingPlanViewComponent {
     const found:IExercise | undefined = this.exercises.find((element:IExercise) => {
       return element.id === id
     });
+    
     if(found) {
+      console.log(found)
       this.selectedExercise = found;
       this.showExerciseModal = true;
     }

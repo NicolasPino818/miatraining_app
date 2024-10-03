@@ -5,7 +5,7 @@ describe('AccountSettingsComponent', () => {
   let component: AccountSettingsViewComponent;
   let fixture: ComponentFixture<AccountSettingsViewComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async () => { 
     await TestBed.configureTestingModule({
       declarations: [ AccountSettingsViewComponent ]
     })
@@ -14,7 +14,7 @@ describe('AccountSettingsComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AccountSettingsViewComponent);
-    component = fixture.componentInstance;
+    component = fixture.componentInstance; 
     fixture.detectChanges();
   });
 
