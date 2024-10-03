@@ -104,8 +104,8 @@ export const routes: Routes = [
                 title: 'Administración',
                 children: [
                     {
-                        path: 'clientes',
-                        title: 'Vista Clientes',
+                        path: 'usuarios',
+                        title: 'Vista Usuarios',
                         component: ClientListViewComponent
                     },
                     {
@@ -116,7 +116,7 @@ export const routes: Routes = [
                     {
                         path: '',
                         pathMatch: 'prefix',
-                        redirectTo: 'clientes'
+                        redirectTo: 'usuarios'
                     }
                 ]
             }

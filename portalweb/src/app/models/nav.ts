@@ -33,11 +33,17 @@ export const navLinks = {
     ],
     adminNavLinks: [
         {
-            linkName: 'PLAN DE ENTRENAMIENTO 2',
-            icon: 'bx bx-bowl-rice',
+            linkName: 'USUARIOS',
+            icon: 'bx bxs-user-circle',
+            iconType: 'BOXICON',
+            link: 'admin/usuarios',
+        },
+        {
+            linkName: 'PLANES DE ENTRENAMIENTO',
+            icon: 'bx bx-dumbbell',
             iconType: 'BOXICON', 
-            link: 'cliente/plan-entrenamiento'
-        }
+            link: 'admin/plan-entrenamiento'
+        },
     ]
 };
 
