@@ -1,18 +1,18 @@
-<div class="account-container">
-    <div class="account-card">
-      <h1>Configuración de la cuenta</h1>
-      <p>Puedes realizar modificaciones a las configuraciones básicas de la cuenta.</p>
+<div class="h-100 flex flex-column g-20">
+    <div class="flex flex-column g-5 bg-primary b-radius p-20">
+      <h1 class="primary-contrast">Configuración de la cuenta</h1>
+      <p class="primary-contrast">Puedes realizar modificaciones a las configuraciones básicas de la cuenta.</p>
     </div>
   
-    <div class="options-container">
-      <div class="options-header">
-        <h2>Opciones</h2>
+    <div class="flex-1 b-radius bg-light">
+      <div class="bg-primary b-tf-radius b-tr-radius p-10">
+        <h2 class="primary-contrast">Opciones</h2>
       </div>
     
-      <div class="options">
-        <div class="option-card" *ngFor="let option of accountOptions">
-          <i [class]="option.icon"></i>
-          <p>{{ option.name }}</p>
+      <div  class="grid grid-3 g-10 p-10">
+        <div class="option-card bg-tertiary box-shadow pointer btn-b-radius p-20 text-center effect pt-40 pb-40" *ngFor="let option of accountOptions">
+          <i [class]="option.icon + ' tertiary-contrast icon-size-60'"></i>
+          <p class="tertiary-contrast">{{ option.name }}</p>
         </div>
       </div>
     </div>

@@ -1,6 +1,9 @@
 .g-none{
     gap: 0px;
 }
+.g-5{
+    gap: 5px;
+}
 .g-10{
     gap: 10px;
 }
@@ -21,15 +24,31 @@
 .p-none{
     padding: 0;
 }
+.p-5{
+    padding: 5px;
+}
 .p-10{
     padding: 10px;
 }
-
+.p-20{
+    padding: 20px;
+}
+.p-40{
+    padding: 40px;
+}
 .w-100v{
     width: 100dvw;
 }
 .h-100v{
     min-height: 100dvh;
+}
+
+.h-100{
+    min-height: 100%;
+}
+
+.w-100{
+    width: 100%;
 }
 
 .w-50{
@@ -85,4 +104,106 @@
 }
 .justify-self-end{
     justify-self: end;
+}
+
+.b-radius{
+    border-radius: var(--card-border-radius);
+}
+.b-tf-radius{
+    border-top-left-radius: var(--card-border-radius);
+}
+.b-tr-radius{
+    border-top-right-radius: var(--card-border-radius);
+}
+.b-br-radius{
+    border-bottom-right-radius: var(--card-border-radius);
+}
+.b-bl-radius{
+    border-bottom-left-radius: var(--card-border-radius);
+}
+.border-none{
+    border: none;
+}
+.pointer{
+    cursor: pointer;
+}
+.btn-b-radius{
+    border-radius: var(--btn-border-radius);
+}
+.btn-b-tf-radius{
+    border-top-left-radius: var(--btn-border-radius);
+}
+.btn-b-tr-radius{
+    border-top-right-radius: var(--btn-border-radius);
+}
+.btn-b-br-radius{
+    border-bottom-right-radius: var(--btn-border-radius);
+}
+.btn-b-bl-radius{
+    border-bottom-left-radius: var(--btn-border-radius);
+}
+.box-shadow{
+    box-shadow: var(--box-shadow);
+}
+.icon-size-60{
+    font-size: 60px;
+}
+.pt-40{
+    padding-top: 40px;
+}
+.pb-40{
+    padding-bottom: 40px;
+}
+.flex{
+    display: flex;
+}
+.flex-wrap{
+    flex-wrap: wrap;
+}
+.flex-column{
+    flex-direction: column;
+}
+.flex-container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.flex-1{
+    flex: 1;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+@media (min-width: 90rem) { /* 6 columnas para pantallas grandes (1440px o más) */
+    .grid-6{
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+@media (min-width: 80rem) {
+    .grid-5{
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+@media (min-width: 64rem) {
+    .grid-4{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+@media (min-width: 48rem) { /* 3 columnas para pantallas medianas (768px - 1439px) */
+    .grid-3{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (min-width: 47.99rem) { /* 2 columnas para pantallas pequeñas (menos de 768px) */
+    .grid-2{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.fit-content{
+    width: fit-content;
 }

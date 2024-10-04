@@ -1,16 +1,18 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IExercise } from '../../../models/interfaces';
+import { ITrainingPlanExercise } from '../../../models/interfaces';
+import { NgFor, NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-exercise-info-modal',
   standalone: true,
-  imports: [],
+  imports: [NgFor,NgIf,RouterLink],
   templateUrl: './exercise-info-modal.component.html',
   styleUrl: './exercise-info-modal.component.css'
 })
 export class ExerciseInfoModalComponent {
   @Input()
-  exercise!:IExercise|null;
+  exercise!:ITrainingPlanExercise|null;
   @Output()
   closeModal: EventEmitter<void> = new EventEmitter<void>();
 

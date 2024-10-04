@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IExercise } from '../../../models/interfaces';
+import { ITrainingPlanExercise } from '../../../models/interfaces';
 import { NgIf } from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ import { NgIf } from '@angular/common';
 export class ExerciseComponent {
 
   @Input()
-  exercise!: IExercise;
+  exercise!: ITrainingPlanExercise;
   @Output()
   loadExcersiceInfo: EventEmitter<number> = new EventEmitter<number>();
   

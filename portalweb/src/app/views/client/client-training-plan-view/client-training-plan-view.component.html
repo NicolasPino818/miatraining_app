@@ -1,46 +1,59 @@
-<app-exercise-info-modal *ngIf="showExerciseModal" [exercise]="selectedExercise" (closeModal)="closeModal()"></app-exercise-info-modal>
-<div class="training-plan-container">
-    <div class="header-card">
-      <h1 class="header-title">Mi Plan de Entrenamiento</h1>
-      <p class="header-description">
+<app-exercise-info-modal *ngIf="showExerciseModal" [exercise]="selectedExercise" (closeModal)="closeModal()"></app-exercise-info-modal> 
+<div class="h-100 flex flex-column g-20">
+    <div class="flex flex-column g-5 bg-primary b-radius p-20">
+      <h1 class="primary-contrast">Mi Plan de Entrenamiento</h1>
+      <p class="primary-contrast">
         Accede a tu plan de entrenamiento y realiza tu rutina según lo indicado por tu entrenador.
         <br/>
         También puedes complementar con la guía de ejercicios en línea.
       </p>
     </div>
     
-    <div class="days-container">
-      <div class="day-card">
-        <button>Ejercicios Lunes</button>
-      </div>
-      <div class="day-card">
-        <button>Ejercicios Martes</button>
-      </div>
-      <div class="day-card">
-        <button>Ejercicios Miércoles</button>
-      </div>
-      <div class="day-card">
-        <button>Ejercicios Jueves</button>
-      </div>
-      <div class="day-card">
-        <button>Ejercicios Viernes</button>
-      </div>
-      <div class="day-card">
-        <button>Ejercicios Sábado</button>
-      </div>
-      <div class="day-card">
-        <button>Ejercicios Domingo</button>
-      </div>
+    <div class="flex g-10 justify-content-between flex-wrap">
+      <button [disabled]="!trainingPlan" class="flex-1 bg-tertiary p-40 btn-b-radius bold border-none pointer tertiary-contrast" 
+        (click)="selectTrainingDay(1)">
+        Ejercicios Lunes
+      </button>
+      <button [disabled]="!trainingPlan" class="flex-1 bg-tertiary p-40 btn-b-radius bold border-none pointer tertiary-contrast" 
+        (click)="selectTrainingDay(2)">
+        Ejercicios Martes
+      </button>
+      <button [disabled]="!trainingPlan" class="flex-1 bg-tertiary p-40 btn-b-radius bold border-none pointer tertiary-contrast" 
+        (click)="selectTrainingDay(3)">
+        Ejercicios Miércoles
+      </button>
+      <button [disabled]="!trainingPlan" class="flex-1 bg-tertiary p-40 btn-b-radius bold border-none pointer tertiary-contrast" 
+        (click)="selectTrainingDay(4)">
+        Ejercicios Jueves
+      </button>
+      <button [disabled]="!trainingPlan" class="flex-1 bg-tertiary p-40 btn-b-radius bold border-none pointer tertiary-contrast" 
+        (click)="selectTrainingDay(5)">
+        Ejercicios Viernes
+      </button>
+      <button [disabled]="!trainingPlan" class="flex-1 bg-tertiary p-40 btn-b-radius bold border-none pointer tertiary-contrast" 
+        (click)="selectTrainingDay(6)">
+        Ejercicios Sábado
+      </button>
+      <button [disabled]="!trainingPlan" class="flex-1 bg-tertiary p-40 btn-b-radius bold border-none pointer tertiary-contrast" 
+        (click)="selectTrainingDay(7)">
+        Ejercicios Domingo
+      </button>
     </div>
   
-    <div class="exercises-section">
-      <div class="exercises-header">
-        <h2>Ejercicios</h2>
+    <div class="flex-1 b-radius bg-light">
+      <div class="bg-primary b-tf-radius b-tr-radius p-10">
+        <h2 class="primary-contrast">Ejercicios {{selectedDay}}</h2>
       </div>
-      <div class="exercises-container">
-        <div class="exercise-card" *ngFor="let exercise of exercises">
-          <app-exercise [exercise]="exercise" (loadExcersiceInfo)="selectExercise($event)"></app-exercise>
-      </div>
-    </div>
+      @if(exercises.length !== 0){
+        <div class="grid grid-4 g-10 p-10">
+          <app-exercise [exercise]="exercise" (loadExcersiceInfo)="selectExercise($event)" *ngFor="let exercise of exercises"></app-exercise>
+        </div>
+      }@else {
+        <p class="p-20">
+          No existen ejercicios para este día.
+        </p>
+      }
+      
   </div>
+</div>
   

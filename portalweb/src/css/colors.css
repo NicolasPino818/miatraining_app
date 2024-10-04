@@ -16,11 +16,17 @@
 .primary{
     color: var(--color-primary);
 }
+.primary-contrast{
+    color: var(--color-primary-contrast);
+}
 .secondary{
     color: var(--color-secondary);
 }
 .tertiary{
     color: var(--color-tertiary);
+}
+.tertiary-contrast{
+    color: var(--color-tertiary-contrast);
 }
 .success{
     color: var(--color-success);
@@ -39,14 +45,6 @@
 }
 .border-bottom-primary{
     border-bottom: 2px solid var(--color-primary);
-}
-
-.box-shadow-hover:hover{
-    box-shadow: var(--box-shadow);
-}
-
-.box-shadow{
-    box-shadow: var(--box-shadow);
 }
 .is-invalid {
     border-color: var(--color-danger) !important;

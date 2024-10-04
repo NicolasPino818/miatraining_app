@@ -1,9 +1,12 @@
 package com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.response;
 
+import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.ExerciseCategoryDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Data
 @Builder
@@ -19,4 +22,5 @@ public class DayExerciseDTO {
     private String tutorialLink;
     private String imageLink;
     private String description;
+    private Set<ExerciseCategoryDTO> categories;
 }

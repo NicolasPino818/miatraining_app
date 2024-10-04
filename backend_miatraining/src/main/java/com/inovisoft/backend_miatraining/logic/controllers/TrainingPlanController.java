@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/training_plan")
+@RequestMapping("/api/v1/training-plan")
 public class TrainingPlanController {
 
     @Autowired
@@ -26,6 +26,12 @@ public class TrainingPlanController {
     @GetMapping("/{id}")
     public ResponseEntity<TrainingPlanResponseDTO> getTrainingPlanById(@PathVariable Long id) {
         return ResponseEntity.ok(trainingPlanService.getTrainingPlanById(id));
+    }
+
+    // Obtener un TrainingPlan por ID
+    @GetMapping("/by-email/{email}")
+    public ResponseEntity<TrainingPlanResponseDTO> getTrainingPlanByEmail(@PathVariable("email") String email) {
+        return ResponseEntity.ok(trainingPlanService.getTrainingPlanByEmail(email));
     }
 
     // Obtener todos los TrainingPlans

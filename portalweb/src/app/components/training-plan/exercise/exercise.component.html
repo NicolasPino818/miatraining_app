@@ -1,7 +1,7 @@
 <div class="exercise-card">
     <div>
-      <img [src]="exercise.imageSrc || '/favicon.png'">
-      <h3>{{ exercise.name }}</h3>
+      <img [src]="exercise.imageLink || '/favicon.png'">
+      <h3>{{ exercise.exerciseName }}</h3>
     </div>
-    <button *ngIf="exercise.id" class="btn tertiary" (click)="emitLoadExcersiceInfo(exercise.id)">Ver Detalles</button>
+    <button *ngIf="exercise.exerciseID" class="btn tertiary" (click)="emitLoadExcersiceInfo(exercise.exerciseID)">Ver Detalles</button>
 </div>

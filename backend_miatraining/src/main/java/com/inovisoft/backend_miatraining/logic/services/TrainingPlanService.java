@@ -42,6 +42,12 @@ public class TrainingPlanService {
         return trainingPlanResponseDTOMapper.apply(planModel);
     }
 
+    public TrainingPlanResponseDTO getTrainingPlanByEmail(String email) {
+        TrainingPlanModel planModel = trainingPlanRepo.findByUserEmail(email)
+                .orElseThrow(ResourceNotFoundException::new);
+        return trainingPlanResponseDTOMapper.apply(planModel);
+    }
+
     // Obtener todos los TrainingPlans
     public ArrayList<TrainingPlanResponseDTO> getAllTrainingPlans() {
         Iterable<TrainingPlanModel> planModels = trainingPlanRepo.findAll();
@@ -149,4 +155,5 @@ public class TrainingPlanService {
     public void deleteRoutine(Long routineID){
         exerciseRoutineRepo.deleteById(routineID);
     }
+
 }

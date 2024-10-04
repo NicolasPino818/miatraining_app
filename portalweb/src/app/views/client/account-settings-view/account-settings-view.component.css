@@ -1,68 +1,7 @@
-.account-container{
-  display: flex;
-  flex-direction: column;
-}
-.account-card {
-  background-color: var(--color-primary); /* Usar la variable de color */
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: var(--box-shadow); /* Usar la variable de sombra */
-  text-align: left; /* Alineación a la izquierda */
-}
-
-.account-card h1,
-.account-card p {
-  color: var(--color-primary-contrast); /* Usar contraste de color */
-}
-
-.options-header {
-  background-color: var(--color-primary); /* Usar la misma variable de color */
-  border-top-left-radius: var(--card-border-radius);
-  border-top-right-radius: var(--card-border-radius);
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: var(--box-shadow); /* Usar la variable de sombra */
-}
-
-.options-container{
-  border-radius: var(--card-border-radius);
-  background-color: var(--color-light);
-}
-
-.options-header h2 {
-  color: var(--color-primary-contrast); /* Usar contraste de color */
-}
-
-.options {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); /* 4 columnas por fila */
-  gap: 20px;   
-  padding: 10px;
-}
-
-.option-card {
-  background-color: var(--color-tertiary); /* Usar la variable de color terciario */
-  color: var(--color-primary-contrast); /* Color de texto en tarjetas */
-  padding: 20px;
-  text-align: center;
-  border-radius: 8px;
-  cursor: pointer;
+.effect {
   transition: transform 0.2s;
-  box-shadow: var(--box-shadow); /* Usar la variable de sombra */
 }
 
-.option-card:hover {
+.effect:hover {
   transform: translateY(-5px);
-}
-
-.option-card i {
-  font-size: 60px; /* Tamaño del icono */
-  margin-bottom: 12px;
-}
-
-.option-card p {
-  font-size: 18px; /* Tamaño del texto */
-  margin: 0;
-  color: var(--color-primary-contrast); /* Color del texto en las tarjetas de opciones */
 }

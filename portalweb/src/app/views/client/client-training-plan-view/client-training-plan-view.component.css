@@ -1,99 +1,13 @@
-.training-plan-container{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* Configuración del encabezado */
-.header-card {
-    background-color: var(--color-primary); /* Color de fondo deseado */
-    border-radius: var(--card-border-radius); /* Ajusta según sea necesario */
-    padding: 20px;
-    text-align: left;
-}
-
-.header-title {
-    font-size: var(--h2-font-size);
-    color:var(--color-light);
-    font-weight: bold;
-}
-
-.header-description {
-    font-size: 16px;
-    color: var(--color-light);
-    font-size: var(--normal-font-size);       /* Tamaño de la fuente */
-    font-family: 'Poppins', sans-serif;       /* Tipo de fuente */
-    margin-top: 0;
-    opacity: 0.85;
-}
-
-/* Botones de selección de días de entrenamiento */
-.days-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 10px;       /* Espaciado entre los botones */
-}
-.day-card{
-    flex: 1;
-}
-.day-card button {
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-tertiary); /* Color de fondo de los botones */
-    color: var(--color-tertiary-contrast);     /* Color del texto de los botones */
-    padding: 40px;                       /* Espaciado */
-    border-radius: var(--btn-border-radius);  /* Bordes redondeados */
-    border: none;                              /* Sin borde */
-    cursor: pointer;                           /* Cambia el cursor al pasar el puntero */
-    font-size: var(--normal-font-size);       /* Tamaño de la fuente */
-    font-weight: bold;                         /* Grosor de la fuente */
+button {
     transition: transform 0.2s;               /* Efecto de transición para animaciones */
 }
 
-.day-card button:hover {
+button:hover {
     transform: translateY(-5px); /* Movimiento al pasar el cursor */
 }
 
-/* Sección de ejercicios */
-.exercises-section {
-    border-radius: var(--card-border-radius);
-    background-color: var(--color-light);
-}
-
-.exercises-section h2 {
-    color: var(--color-dark);        /* Color del texto del título de la sección */
-}
-
-/* Contenedor de tarjetas de ejercicios */
-.exercises-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); /* 4 columnas por fila */
-    gap: 20px;   
-    padding: 10px;
-}
-
-.exercises-header {
-    background-color: var(--color-primary); /* Cambia este valor por el color deseado */
-    padding: 10px;
-    border-top-left-radius: var(--card-border-radius);
-    border-top-right-radius: var(--card-border-radius);
-}
-
-.exercises-header h2 {
-    color: var(--color-light); /* Cambia este valor por el color del texto deseado */
-    margin: 0;
-    text-align: left;
-}
-
-.exercises-card {
-    background-color: var(--color-light); /* Color del fondo de las tarjetas */
-    border-radius: var(--card-border-radius);
-    padding: 20px;
-}
-
 @media (max-width: 392px) {
-    .day-card button{
-        padding: 20px;
+    button{
+        padding: 20px 10px;
     }
 }

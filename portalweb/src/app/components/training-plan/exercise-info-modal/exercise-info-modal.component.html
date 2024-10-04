@@ -1,42 +1,53 @@
 <div class="backdrop" (click)="closeModalEvent()"></div>
 <div class="modal-container">
-  <div class="tutorial-section">
-    <div class="text-section">
-      <h2 id="exercise-title">Título del Ejercicio</h2>
-      <p>Reproduce el video y aprende la técnica correcta para realizar este ejercicio.</p>
-      <button class="exercise-btn">Ver todos los ejercicios</button>
+  <div class="grid g-10" [class.grid-2]="exercise?.tutorialLink || true">
+    <div class="flex flex-column justify-content-end g-5 flex-1">
+      <h2 [class.text-center]="!exercise?.tutorialLink && false">{{exercise?.exerciseName}}</h2>
+      <p *ngIf="exercise?.tutorialLink || true">Reproduce el video y aprende la técnica correcta para realizar este ejercicio.</p>
+      <button class="btn tertiary" [routerLink]="['/dashboard/cliente/guia-ejercicios']">Ver todos los ejercicios</button>
     </div>
-    <div class="video-section">
-      <div class="video-placeholder">
-        <img src="path/to/video-thumbnail.png" alt="Video Thumbnail">
-      </div>
+    <div *ngIf="exercise?.tutorialLink || true" class="flex flex-column justify-content-end">
+      <iframe 
+        src="https://www.youtube.com/embed/u31qwQUeGuM?si=BEALLAjrQ6qgWHlc" 
+        frameborder="0" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allowfullscreen>
+      </iframe>
     </div>
   </div>
 
-  <div class="info-section">
-    <div class="exercise-info">
-      <div class="info-group card">
-        <div class="label">Grupo muscular</div>
-        <div class="value">Pecho</div>
-        <div class="value">Hombros</div>
+  <div class="flex flex-column g-10">
+    <div class="flex flex-wrap g-5">
+      <div class="flex flex-wrap justify-content-center flex-1 bg-primary p-10 b-radius g-5">
+        <div class="text-center bold primary-contrast">Grupo muscular</div>
+        @if(exercise && exercise.categories.length > 1){
+          <div class="bg-light dark btn-b-radius text-center fit-content p-5" *ngFor="let category of exercise?.categories">
+            {{category.categoryName}}
+          </div>
+        }@else {
+          <div class="bg-light dark btn-b-radius text-center w-100 p-5">
+            Sin información
+          </div>
+        }
+        
       </div>
-      <div class="info-group card">
-        <div class="label">N° de Series:</div>
-        <div class="value">5</div>
+      <div class="flex flex-column flex-1 bg-primary p-10 b-radius g-5">
+        <div class="text-center bold primary-contrast">N° de Series:</div>
+        <div class="bg-light dark btn-b-radius text-center p-5">{{exercise?.series}}</div>
       </div>
-      <div class="info-group card">
-        <div class="label">N° de Repeticiones:</div>
-        <div class="value">10</div>
+      <div class="flex flex-column flex-1 bg-primary p-10 b-radius g-5">
+        <div class="text-center bold primary-contrast">N° de Repeticiones:</div>
+        <div class="bg-light dark btn-b-radius text-center p-5">{{exercise?.reps}}</div>
       </div>
-      <div class="info-group card">
-        <div class="label">Descanso:</div>
-        <div class="value">5 Minutos</div>
+      <div class="flex flex-column flex-1 bg-primary p-10 b-radius g-5">
+        <div class="text-center bold primary-contrast">Descanso:</div>
+        <div class="bg-light dark btn-b-radius text-center p-5">{{exercise?.restMinutes}} Minutos</div>
       </div>
     </div>
 
-    <div class="exercise-description">
-      <h3>Descripción:</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua onsectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua </p>
+    <div class="box-shadow-inset p-10 b-radius">
+      <h3 class="dark">Descripción:</h3>
+      <p class="dark">{{exercise?.description}}</p>
     </div>
   </div>
 </div>

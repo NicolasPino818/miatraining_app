@@ -33,19 +33,34 @@ export interface INavModel{
     link: string
 }
 
+
+export interface ITrainingPlan{
+    planID: number,
+    planCreator: any,
+    creationDate: string,
+    planDays: any
+}
+
+export interface ITrainingPlanDay{
+    id: number,
+    dayNumber: number,
+    exercises: ITrainingPlanExercise[]
+}
+
 export interface ITrainingPlanExercise{
-    exercise: IExercise,
+    routineID: number,
+    exerciseID: number,
     series: number,
-    repetitions: number,
-    restMins: number
+    reps: number,
+    restMinutes: number,
+    exerciseName: string,
+    tutorialLink: string,
+    imageLink: string,
+    description: string,
+    categories: IExerciseCategory[]
 }
-export interface IExercise{
-    id?: number
-    name: string,
-    tutorialSrc?: string
-    imageSrc?: string
-    categories?: IExerciseCategory[]
-}
+
 export interface IExerciseCategory{
-    category: string
+    id: number,
+    categoryName: string,
 }

@@ -39,7 +39,15 @@
 .btn:hover{
     opacity: var(--btn-hover-opacity);
 }
-
+.box-shadow-hover:hover{
+    box-shadow: var(--box-shadow);
+}
+.box-shadow{
+    box-shadow: var(--box-shadow);
+}
+.box-shadow-inset{
+    box-shadow: var(--box-shadow) inset;
+}
 .card{
     border-radius: var(--card-border-radius);
     background-color: var(--color-light);
@@ -59,10 +67,11 @@
     left: 50%;
     transform: translate(-50%,-50%);
     background-color: var(--color-light);
-    padding: 10px;
+    padding: 30px 10px;
     display: flex;
     flex-direction: column;
-    width: min(95dvw, 650px);
+    gap: 10px;
+    width: min(95dvw, 750px);
     border-radius: var(--card-border-radius);
     max-height: 90dvh;
     box-shadow: var(--box-shadow);

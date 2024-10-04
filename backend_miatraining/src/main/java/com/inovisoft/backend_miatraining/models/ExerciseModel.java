@@ -30,7 +30,7 @@ public class ExerciseModel {
     @Column(columnDefinition = "MEDIUMTEXT")
     private String tutorialLink;
 
-    @Column(columnDefinition = "MEDIUMTEXT", nullable = false)
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String imageLink;
 
     @Column(length = 500, nullable = false)
