@@ -10,6 +10,7 @@ import { AccountSettingsViewComponent } from './views/client/account-settings-vi
 import { ClientListViewComponent } from './views/admin/client-list-view/client-list-view.component';
 import { RegisterUsersViewComponent } from './views/admin/register-users-view/register-users-view.component';
 import { NotFoudViewComponent } from './views/not-foud-view/not-foud-view.component';
+import { EditTrainingPlanViewComponent } from './views/admin/edit-training-plan-view/edit-training-plan-view.component';
 
 
 export const routes: Routes = [
@@ -89,6 +90,11 @@ export const routes: Routes = [
                         component: RegisterUsersViewComponent
                     },
                     {
+                      path: 'plan-entrenamiento',
+                      title: 'Editar Plan de Entrenamiento',
+                      component: EditTrainingPlanViewComponent
+                    },
+                    {
                         path: '',
                         pathMatch: 'prefix',
                         redirectTo: 'usuarios'
@@ -107,5 +113,5 @@ export const routes: Routes = [
         pathMatch: 'prefix',
         component: NotFoudViewComponent
     },
-    
+
 ];

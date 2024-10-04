@@ -29,7 +29,7 @@ export interface IForgotPasswordStepStatus{
 export interface INavModel{
     linkName: string,
     icon: string,
-    iconType: string, 
+    iconType: string,
     link: string
 }
 

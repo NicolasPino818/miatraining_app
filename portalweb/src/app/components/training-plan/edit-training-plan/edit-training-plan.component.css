@@ -1,0 +1,51 @@
+/* Ajuste de la grid para pantallas grandes */
+.exercises-container {
+  display: grid;
+  gap: 10px;
+}
+
+/* Para pantallas grandes */
+@media (min-width: 90rem) { /* 6 columnas para pantallas grandes (1440px o más) */
+  .exercises-container {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Para pantallas medianas */
+@media (min-width: 64rem) { /* 4 columnas para pantallas medianas */
+  .exercises-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Para pantallas pequeñas */
+@media (min-width: 48rem) { /* 3 columnas para pantallas pequeñas */
+  .exercises-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Para pantallas móviles */
+@media (min-width: 47.99rem) { /* 2 columnas para pantallas móviles */
+  .exercises-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) { /* 1 columna para pantallas muy pequeñas */
+  .exercises-container {
+    grid-template-columns: 1fr;
+  }
+
+  /* Para que las tarjetas ocupen todo el ancho en pantallas móviles */
+  .exercise-card, .student-card {
+    width: 100%;
+  }
+
+  /* Para centrar el botón en pantallas pequeñas */
+  .add-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

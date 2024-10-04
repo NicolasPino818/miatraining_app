@@ -1,0 +1,46 @@
+<div class="edit-training-plan-container flex-column g-20">
+  <!-- Encabezado -->
+  <div class="header p-20">
+    <h1 class="header-title">Editar plan de entrenamiento</h1>
+  </div>
+
+  <!-- Sección de Alumnos -->
+  <div class="students-section p-15 b-radius">
+    <div class="students-header justify-content-between align-items-center">
+      <h5>Alumnos asignados</h5>
+      <button class="add-btn">Añadir Alumno</button>
+    </div>
+    <div class="student-list flex flex-wrap g-10">
+      <div class="student-card p-15 b-radius flex-column">
+        <p><strong>Juan Carlos</strong></p>
+        <p>juanAemail.com</p>
+        <button class="remove-student-btn">X</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección de Ejercicios para cada día -->
+  <div class="exercises-section" *ngFor="let day of days; let i = index">
+    <div class="exercises-header justify-content-between align-items-center p-10">
+      <h2>Ejercicios {{ day }}</h2>
+      <button class="add-btn">Añadir ejercicio</button>
+    </div>
+
+    <!-- Usamos las clases grid para hacer el diseño responsive -->
+    <div class="exercises-container grid grid-4 g-10 p-10">
+      <div class="exercise-card flex-column justify-content-between p-20 b-radius" *ngFor="let exercise of exercises.slice(0, 4)">
+        <div class="card-header flex justify-content-center">
+          <img [src]="exercise.imageLink || '/favicon.png'" alt="Ejercicio" />
+          <button class="remove-exercise-btn pointer">🗑️</button>
+        </div>
+        <h6>{{ exercise.exerciseName }}</h6>
+        <div class="exercise-details flex justify-content-between w-100">
+          <div class="exercise-box p-5 b-radius">Series: {{ exercise.series }}</div>
+          <div class="exercise-box p-5 b-radius">Reps: {{ exercise.reps }}</div>
+          <div class="exercise-box p-5 b-radius">Descanso: {{ exercise.restMinutes }} min</div>
+        </div>
+        <button class="exercise-btn p-10">Modificar Entrenamiento</button>
+      </div>
+    </div>
+  </div>
+</div>
