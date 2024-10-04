@@ -43,3 +43,36 @@
     border-radius: 8px; /* Redondea las esquinas */
     padding: 5px;
 }
+
+.exercise-btn {
+    background-color: #ff4b5c;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--card-border-radius);
+    cursor: pointer;
+    font-size: 16px;
+    margin: 15px 0;
+    display: inline-block;
+    text-align: center;
+}
+
+.tutorial-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-section {
+    max-width: 60%; /* Ajusta según sea necesario */
+}
+
+.video-section {
+    max-width: 35%; /* Ajusta según sea necesario */
+}
+
+.video-placeholder {
+    width: 100%;
+    height: auto;
+}
+
