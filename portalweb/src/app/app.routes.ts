@@ -71,6 +71,11 @@ export const routes: Routes = [
                         path: 'mi-cuenta',
                         title: 'Mi cuenta',
                         component: AccountSettingsViewComponent
+                    },
+                    {
+                        path: '',
+                        pathMatch: 'prefix',
+                        redirectTo: 'plan-entrenamiento'
                     }
                 ]
             },
