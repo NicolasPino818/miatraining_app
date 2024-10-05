@@ -36,7 +36,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         // Make the login and forgot password endpoints public
                         .requestMatchers(baseUri + "/auth/login").permitAll()
-                        .requestMatchers(baseUri + "/auth/forgot-password/**").permitAll()
+                        .requestMatchers(baseUri + "/auth/forgot-password/verify/**").permitAll()
                         // Require authentication for the rest of the /api/v1 routes
                         .requestMatchers(baseUri + "/**").authenticated()
                         .anyRequest().authenticated())

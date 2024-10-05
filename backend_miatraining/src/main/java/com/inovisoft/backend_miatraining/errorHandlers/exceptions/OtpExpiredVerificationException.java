@@ -1,6 +1,6 @@
 package com.inovisoft.backend_miatraining.errorHandlers.exceptions;
 
-import com.inovisoft.backend_miatraining.logic.DTOs.authDTO.OtpVerificationStatusResponseDTO;
+import com.inovisoft.backend_miatraining.logic.DTOs.authDTO.ResetPasswordStatusResponseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -11,6 +11,6 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 public class OtpExpiredVerificationException extends RuntimeException {
     private HttpStatus status = HttpStatus.EXPECTATION_FAILED;
-    private OtpVerificationStatusResponseDTO verificationStatus = new OtpVerificationStatusResponseDTO(false);
+    private ResetPasswordStatusResponseDTO verificationStatus = new ResetPasswordStatusResponseDTO(false);
     private String code = "auth:otp-expired-verification-failure";
 }

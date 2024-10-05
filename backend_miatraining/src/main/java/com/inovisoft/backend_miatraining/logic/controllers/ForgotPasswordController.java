@@ -1,8 +1,9 @@
 package com.inovisoft.backend_miatraining.logic.controllers;
 
 import com.inovisoft.backend_miatraining.errorHandlers.exceptions.*;
-import com.inovisoft.backend_miatraining.logic.DTOs.authDTO.OtpVerificationStatusResponseDTO;
+import com.inovisoft.backend_miatraining.logic.DTOs.authDTO.ResetPasswordStatusResponseDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.authDTO.PasswordResetRequestDTO;
+import com.inovisoft.backend_miatraining.logic.DTOs.authDTO.ResetPasswordRequestDTO;
 import com.inovisoft.backend_miatraining.mailing.DTO.MailBody;
 import com.inovisoft.backend_miatraining.mailing.services.EmailService;
 import com.inovisoft.backend_miatraining.models.ForgotPasswordModel;
@@ -40,7 +41,7 @@ public class ForgotPasswordController {
      * */
     @PostMapping("/verify/{email}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<OtpVerificationStatusResponseDTO> forgotPassword(@Valid @PathVariable("email") String email){
+    public ResponseEntity<ResetPasswordStatusResponseDTO> forgotPassword(@Valid @PathVariable("email") String email){
 
         //FINDS THE USER BY EMAIL OR RETURNS A 404 RESPONSE
         UserModel user = userRepository.findByEmailIgnoreCase(email).orElseThrow(UserNotFoundException::new);
@@ -63,14 +64,14 @@ public class ForgotPasswordController {
         forgotPasswordRepository.deleteAll();
         forgotPasswordRepository.save(fp);
 
-        return ResponseEntity.ok(new OtpVerificationStatusResponseDTO(true));
+        return ResponseEntity.ok(new ResetPasswordStatusResponseDTO(true));
     }
 
     @PostMapping("/verify/{email}/{otp}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<OtpVerificationStatusResponseDTO> verifyOTP(@Valid @PathVariable("otp") Integer otp,
-                                                                      @Valid @PathVariable("email") String email,
-                                                                      @Valid @RequestBody PasswordResetRequestDTO passwordResetRequest){
+    public ResponseEntity<ResetPasswordStatusResponseDTO> verifyOTP(@Valid @PathVariable("otp") Integer otp,
+                                                                    @Valid @PathVariable("email") String email,
+                                                                    @Valid @RequestBody PasswordResetRequestDTO passwordResetRequest){
         //FINDS THE USER BY EMAIL OR RETURNS A 404 RESPONSE
         UserModel user = userRepository.findByEmailIgnoreCase(email).orElseThrow(UserNotFoundException::new);
 
@@ -92,7 +93,29 @@ public class ForgotPasswordController {
         String encodedPassword = passwordEncoder.encode(passwordResetRequest.getPassword());
         userRepository.updatePasswordByEmail(email, encodedPassword);
 
-        return ResponseEntity.ok(new OtpVerificationStatusResponseDTO(true));
+        return ResponseEntity.ok(new ResetPasswordStatusResponseDTO(true));
+    }
+
+    @PostMapping("/reset-password/{email}")
+    public ResponseEntity<ResetPasswordStatusResponseDTO> resetPassword(
+            @PathVariable("email") String email,
+            @RequestBody ResetPasswordRequestDTO resetPasswordDTO){
+        UserModel userModel = userRepository.findByEmailIgnoreCase(email).orElseThrow(UserNotFoundException::new);
+
+        if(!passwordEncoder.matches(resetPasswordDTO.getCurrentPassword(), userModel.getPassword())){
+            throw new PasswordsDoesNotMatchException();
+        }
+
+        if(!Objects.equals(
+                resetPasswordDTO.getNewPassword(),
+                resetPasswordDTO.getRepeatPassword())){
+            throw new PasswordsDoesNotMatchException();
+        }
+
+        String encodedPassword = passwordEncoder.encode(resetPasswordDTO.getNewPassword());
+        userRepository.updatePasswordByEmail(email, encodedPassword);
+
+        return ResponseEntity.ok(new ResetPasswordStatusResponseDTO(true));
     }
 
     private Integer otpGenerator(){
