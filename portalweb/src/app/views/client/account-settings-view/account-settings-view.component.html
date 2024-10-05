@@ -10,11 +10,10 @@
       </div>
     
       <div  class="grid grid-3 g-10 p-10">
-        <div class="option-card bg-tertiary box-shadow pointer btn-b-radius p-20 text-center effect pt-40 pb-40" *ngFor="let option of accountOptions">
+        <div [routerLink]="option.url" class="option-card bg-tertiary box-shadow pointer btn-b-radius p-20 text-center effect pt-40 pb-40" *ngFor="let option of accountOptions">
           <i [class]="option.icon + ' tertiary-contrast icon-size-60'"></i>
           <p class="tertiary-contrast">{{ option.name }}</p>
         </div>
       </div>
     </div>
   </div>
-  

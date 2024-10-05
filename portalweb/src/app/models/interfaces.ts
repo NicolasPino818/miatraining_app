@@ -64,3 +64,9 @@ export interface IExerciseCategory{
     id: number,
     categoryName: string,
 }
+
+export interface IResetPassword{
+    currentPassword: string,
+    newPassword: string,
+    repeatPassword: string
+}

@@ -44,9 +44,9 @@ const isPublicUrl = (req: HttpRequest<any>): boolean => {
   const publicUrls = [
     apiEndpoints.login,
     apiEndpoints.refreshToken,
-    apiEndpoints.forgotPassword,
+    apiEndpoints.forgotPassword+'/verify',
   ]
-  return publicUrls.some(url => req.url.match(url));
+  return publicUrls.some(url => req.url.includes(url));
 };
 
 // Función que añade el token a los headers

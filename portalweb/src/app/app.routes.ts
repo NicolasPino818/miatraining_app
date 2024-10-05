@@ -11,6 +11,12 @@ import { ClientListViewComponent } from './views/admin/client-list-view/client-l
 import { RegisterUsersViewComponent } from './views/admin/register-users-view/register-users-view.component';
 import { NotFoudViewComponent } from './views/not-foud-view/not-foud-view.component';
 import { EditTrainingPlanViewComponent } from './views/admin/edit-training-plan-view/edit-training-plan-view.component';
+import { userURLs } from './models/nav';
+import { ResetPasswordViewComponent } from './views/common/settings/reset-password-view/reset-password-view.component';
+import { ProfileInfoViewComponent } from './views/common/settings/profile-info-view/profile-info-view.component';
+import { NotificationOptionsViewComponent } from './views/common/settings/notification-options-view/notification-options-view.component';
+import { ContactCoachViewComponent } from './views/client/contact-coach-view/contact-coach-view.component';
+import { FormViewComponent } from './views/client/form-view/form-view.component';
 
 
 export const routes: Routes = [
@@ -45,7 +51,7 @@ export const routes: Routes = [
         title: 'Dashboard',
         children: [
             {
-                path: 'cliente',
+                path: userURLs.clientBaseUrl,
                 title: 'Cliente',
                 children: [
                     {
@@ -69,19 +75,44 @@ export const routes: Routes = [
                         component: ProgressTrackingViewComponent
                     },
                     {
-                        path: 'mi-cuenta',
+                        path: userURLs.settingsBaseUrl,
                         title: 'Mi cuenta',
                         component: AccountSettingsViewComponent
                     },
                     {
+                        path: userURLs.settingsBaseUrl+'/mi-perfil',
+                        title: 'información del Perfil',
+                        component: ProfileInfoViewComponent
+                    },
+                    {
+                        path: userURLs.settingsBaseUrl+'/cambiar-contrasena',
+                        title: 'Cambio de contraseña',
+                        component: ResetPasswordViewComponent
+                    },
+                    {
+                        path: userURLs.settingsBaseUrl+'/notificaciones',
+                        title: 'Notificaciones',
+                        component: NotificationOptionsViewComponent
+                    },
+                    {
+                        path: userURLs.settingsBaseUrl+'/formulario',
+                        title: 'Formulario',
+                        component: FormViewComponent
+                    },
+                    {
+                        path: userURLs.settingsBaseUrl+'/contacto-coach',
+                        title: 'Contacto Coach',
+                        component: ContactCoachViewComponent
+                    },
+                    {
                         path: '',
-                        pathMatch: 'prefix',
+                        pathMatch: 'full',
                         redirectTo: 'plan-entrenamiento'
                     }
                 ]
             },
             {
-                path: 'admin',
+                path: userURLs.adminBaseUrl,
                 title: 'Administración',
                 children: [
                     {
@@ -105,7 +136,12 @@ export const routes: Routes = [
                         redirectTo: 'usuarios'
                     }
                 ]
-            }
+            },
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: '/auth/login'
+            },
         ]
     },
     {
