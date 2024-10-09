@@ -15,6 +15,11 @@ import { ProfileInfoViewComponent } from './views/common/settings/profile-info-v
 import { NotificationOptionsViewComponent } from './views/common/settings/notification-options-view/notification-options-view.component';
 import { ContactCoachViewComponent } from './views/client/contact-coach-view/contact-coach-view.component';
 import { FormViewComponent } from './views/client/form-view/form-view.component';
+import { isUserLogedGuard } from './guards/login-guard/is-user-loged.guard';
+import { isClientGuard } from './guards/client-guard/is-client.guard';
+import { isAdminGuard } from './guards/admin-guard/is-admin.guard';
+import { UserListViewComponent } from './views/common/dashboard/user-list-view/user-list-view.component';
+import { EditExerciseLibraryViewComponent } from './views/common/dashboard/edit-exercise-library-view/edit-exercise-library-view.component';
 
 
 export const routes: Routes = [
