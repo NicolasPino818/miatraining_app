@@ -6,10 +6,8 @@ import { ClientTrainingPlanViewComponent } from './views/client/client-training-
 import { ClientNutritionPlanViewComponent } from './views/client/client-nutrition-plan-view/client-nutrition-plan-view.component';
 import { ExerciseGuideViewComponent } from './views/client/exercise-guide-view/exercise-guide-view.component';
 import { ProgressTrackingViewComponent } from './views/client/progress-tracking-view/progress-tracking-view.component';
-import { AccountSettingsViewComponent } from './views/client/account-settings-view/account-settings-view.component';
-import { ClientListViewComponent } from './views/admin/client-list-view/client-list-view.component';
-import { RegisterUsersViewComponent } from './views/admin/register-users-view/register-users-view.component';
-import { NotFoudViewComponent } from './views/not-foud-view/not-foud-view.component';
+import { AccountSettingsViewComponent } from './views/common/settings/account-settings-view/account-settings-view.component';
+import { NotFoundViewComponent } from './views/not-found-view/not-found-view.component';
 import { EditTrainingPlanViewComponent } from './views/admin/edit-training-plan-view/edit-training-plan-view.component';
 import { userURLs } from './models/nav';
 import { ResetPasswordViewComponent } from './views/common/settings/reset-password-view/reset-password-view.component';
@@ -17,6 +15,11 @@ import { ProfileInfoViewComponent } from './views/common/settings/profile-info-v
 import { NotificationOptionsViewComponent } from './views/common/settings/notification-options-view/notification-options-view.component';
 import { ContactCoachViewComponent } from './views/client/contact-coach-view/contact-coach-view.component';
 import { FormViewComponent } from './views/client/form-view/form-view.component';
+import { isUserLogedGuard } from './guards/login-guard/is-user-loged.guard';
+import { isClientGuard } from './guards/client-guard/is-client.guard';
+import { isAdminGuard } from './guards/admin-guard/is-admin.guard';
+import { UserListViewComponent } from './views/common/dashboard/user-list-view/user-list-view.component';
+import { EditExerciseLibraryViewComponent } from './views/common/dashboard/edit-exercise-library-view/edit-exercise-library-view.component';
 
 
 export const routes: Routes = [
@@ -49,10 +52,12 @@ export const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent,
         title: 'Dashboard',
+        canActivate: [isUserLogedGuard],
         children: [
             {
                 path: userURLs.clientBaseUrl,
                 title: 'Cliente',
+                canActivate: [isClientGuard],
                 children: [
                     {
                         path: 'plan-entrenamiento',
@@ -114,21 +119,42 @@ export const routes: Routes = [
             {
                 path: userURLs.adminBaseUrl,
                 title: 'Administración',
+                canActivate: [isAdminGuard],
                 children: [
+                    {
+                        path: 'plan-entrenamiento',
+                        title: 'Editar Plan de Entrenamiento',
+                        component: EditTrainingPlanViewComponent
+                    },
                     {
                         path: 'usuarios',
                         title: 'Vista Usuarios',
-                        component: ClientListViewComponent
+                        component: UserListViewComponent
                     },
                     {
-                        path: 'registro',
-                        title: 'Registro Usuarios',
-                        component: RegisterUsersViewComponent
+                        path: 'ejercicios',
+                        title: 'Biblioteca de ejercicios',
+                        component: EditExerciseLibraryViewComponent
                     },
                     {
-                      path: 'plan-entrenamiento',
-                      title: 'Editar Plan de Entrenamiento',
-                      component: EditTrainingPlanViewComponent
+                        path: userURLs.settingsBaseUrl,
+                        title: 'Mi cuenta',
+                        component: AccountSettingsViewComponent
+                    },
+                    {
+                        path: userURLs.settingsBaseUrl+'/mi-perfil',
+                        title: 'información del Perfil',
+                        component: ProfileInfoViewComponent
+                    },
+                    {
+                        path: userURLs.settingsBaseUrl+'/cambiar-contrasena',
+                        title: 'Cambio de contraseña',
+                        component: ResetPasswordViewComponent
+                    },
+                    {
+                        path: userURLs.settingsBaseUrl+'/notificaciones',
+                        title: 'Notificaciones',
+                        component: NotificationOptionsViewComponent
                     },
                     {
                         path: '',
@@ -152,7 +178,7 @@ export const routes: Routes = [
     {
         path: '**',
         pathMatch: 'prefix',
-        component: NotFoudViewComponent
+        component: NotFoundViewComponent
     },
 
 ];

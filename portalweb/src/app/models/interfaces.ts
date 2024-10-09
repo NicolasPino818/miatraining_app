@@ -70,3 +70,33 @@ export interface IResetPassword{
     newPassword: string,
     repeatPassword: string
 }
+
+export interface IProfileInfo{
+    name: string,
+    surname: string,
+    fullName: string,
+    email: string,
+    pictureUrlString: string,
+    registrationDate: string,
+}
+
+export interface IRole{
+    id: number,
+    role: string
+}
+
+export interface IUserPage{
+    users: IUser[],
+    pageNumber:number,
+    pageSize:number,
+}
+
+export interface IUser{
+    id: number,
+    fullName: string,
+    email: string,
+    enabled: boolean,
+    firstLogin: boolean,
+    registrationDate: string,
+    role: string,
+}

@@ -50,6 +50,18 @@ export const navLinks = {
             iconType: 'BOXICON', 
             link: userURLs.adminBaseUrl+'/plan-entrenamiento'
         },
+        {
+            linkName: 'BIBLIOTECA DE EJERCICIOS',
+            icon: 'bx bx-run',
+            iconType: 'BOXICON', 
+            link: userURLs.adminBaseUrl+'/ejercicios'
+        },
+        {
+            linkName: 'Mi cuenta',
+            icon: 'bx bx-user-circle',
+            iconType: 'BOXICON', 
+            link: userURLs.adminBaseUrl+'/mi-cuenta'
+        }
     ]
 };
 
@@ -60,6 +72,11 @@ export const accountOptions = {
         { name: 'Información del Perfil', icon: 'bx bx-user-circle', url: 'mi-perfil' },
         { name: 'Formulario', icon: 'bx bx-file', url: 'formulario' },
         { name: 'Contacto Coach', icon: 'bx bx-id-card', url: 'contacto-coach' }
+    ],
+    adminOptions: [
+        { name: 'Notificaciones', icon: 'bx bx-envelope', url: 'notificaciones' },
+        { name: 'Cambiar Contraseña', icon: 'bx bx-lock-open-alt', url: 'cambiar-contrasena' },
+        { name: 'Información del Perfil', icon: 'bx bx-user-circle', url: 'mi-perfil' },
     ]
 };
 

@@ -1,0 +1,19 @@
+import { isPlatformBrowser } from '@angular/common';
+import { inject, PLATFORM_ID } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { SessionStorageService } from '../../services/storage/session-storage.service';
+
+export const isUserLogedGuard: CanActivateFn = (route, state) => {
+
+  const platformId = inject(PLATFORM_ID); 
+  if (!isPlatformBrowser(platformId)) return false; //ESTO ES PORQUE ESTAMOS USANDO SERVER-SIDE-RENDERING
+
+  const router = inject(Router);
+  const storage = inject(SessionStorageService);
+  const token = storage.getToken();
+  if(token){
+    return true;
+  }
+  router.navigate(['/auth/login']);
+  return false;
+};
