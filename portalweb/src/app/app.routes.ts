@@ -9,17 +9,6 @@ import { ProgressTrackingViewComponent } from './views/client/progress-tracking-
 import { AccountSettingsViewComponent } from './views/common/settings/account-settings-view/account-settings-view.component';
 import { NotFoundViewComponent } from './views/not-found-view/not-found-view.component';
 import { EditTrainingPlanViewComponent } from './views/admin/edit-training-plan-view/edit-training-plan-view.component';
-import { userURLs } from './models/nav';
-import { ResetPasswordViewComponent } from './views/common/settings/reset-password-view/reset-password-view.component';
-import { ProfileInfoViewComponent } from './views/common/settings/profile-info-view/profile-info-view.component';
-import { NotificationOptionsViewComponent } from './views/common/settings/notification-options-view/notification-options-view.component';
-import { ContactCoachViewComponent } from './views/client/contact-coach-view/contact-coach-view.component';
-import { FormViewComponent } from './views/client/form-view/form-view.component';
-import { isUserLogedGuard } from './guards/login-guard/is-user-loged.guard';
-import { isClientGuard } from './guards/client-guard/is-client.guard';
-import { isAdminGuard } from './guards/admin-guard/is-admin.guard';
-import { UserListViewComponent } from './views/common/dashboard/user-list-view/user-list-view.component';
-import { EditExerciseLibraryViewComponent } from './views/common/dashboard/edit-exercise-library-view/edit-exercise-library-view.component';
 
 
 export const routes: Routes = [

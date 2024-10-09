@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
-import { IAuthenticationRequest, IAuthenticationResponse, IForgotPasswordStepStatus } from '../../models/interfaces';
+import { IAuthenticationRequest, IAuthenticationResponse, IForgotPasswordStepStatus, IResetPassword } from '../../models/interfaces';
 import { apiEndpoints } from '../../models/apiEndpoints';
 import { SessionStorageService } from '../storage/session-storage.service';
 import { Router } from '@angular/router';
@@ -55,7 +55,7 @@ export class AuthenticationService {
 
   fpGetVerificationCode(email:string): Observable<any> {
     return this.http.post(
-      apiEndpoints.forgotPassword+'/'+ email, //RUTA DE LA API
+      apiEndpoints.forgotPassword+'/verify/'+ email, //RUTA DE LA API
       {
         headers: new HttpHeaders({
           'content-Type': 'application/json'
@@ -66,7 +66,7 @@ export class AuthenticationService {
 
   fpChangePasswordWithVerificationCode(email:string, otp: number, newPassword:string, repeatPassword:string): Observable<IForgotPasswordStepStatus> {
     return this.http.post<IForgotPasswordStepStatus>(
-      apiEndpoints.forgotPassword+'/'+ email + '/' + otp, //RUTA DE LA API
+      apiEndpoints.forgotPassword+'/verify/'+ email.toLowerCase() + '/' + otp, //RUTA DE LA API
       { 
         'password' : newPassword,
         'repeat_password' : repeatPassword,
@@ -77,6 +77,10 @@ export class AuthenticationService {
         })
       }
     );
+  }
+
+  fpResetPassword(email:string, body: IResetPassword): Observable<IForgotPasswordStepStatus> {
+    return this.http.post<IForgotPasswordStepStatus>(apiEndpoints.forgotPassword+'/reset-password/'+ email.toLowerCase(), body);
   }
 
   logout() {

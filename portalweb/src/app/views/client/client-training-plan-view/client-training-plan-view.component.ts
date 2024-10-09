@@ -52,9 +52,7 @@ export class ClientTrainingPlanViewComponent implements OnInit{
     const found:ITrainingPlanExercise | undefined = this.exercises.find((element:ITrainingPlanExercise) => {
       return element.exerciseID === id
     });
-    
     if(found) {
-      console.log(found)
       this.selectedExercise = found;
       this.showExerciseModal = true;
     }

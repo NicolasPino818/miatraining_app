@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OtpVerificationStatusResponseDTO {
+public class ResetPasswordStatusResponseDTO {
     private Boolean success;
 }

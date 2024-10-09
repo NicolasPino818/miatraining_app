@@ -100,3 +100,9 @@ export interface IUser{
   registrationDate: string,
   role: string,
 }
+
+export interface IResetPassword{
+    currentPassword: string,
+    newPassword: string,
+    repeatPassword: string
+}

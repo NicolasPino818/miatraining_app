@@ -17,7 +17,7 @@ export class SideMenuComponent implements OnInit{
   public urlCurrentView!: string;
   constructor(private router: Router){ 
     this.urlObj = this.router.url.split('/');
-    this.urlCurrentView = this.urlObj[this.urlObj.length - 2]
+    this.urlCurrentView = this.urlObj[2]
   }
 
   ngOnInit(): void {
