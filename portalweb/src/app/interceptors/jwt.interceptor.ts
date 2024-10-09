@@ -17,7 +17,6 @@ export const jwtInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: H
   const token = storage.getToken(); // Obtenemos el token desde el almacenamiento
   if (token) {
     const headersReq = AddTokenHeader(req, token); // Añadimos el token a los headers de la solicitud
-
     return next(headersReq).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 403 && error.error.code === 'auth:expired-token') {
@@ -80,7 +79,7 @@ const handleTokenRefresh = (
         authService.logout();
         return EMPTY;
       }
-      
+
       return throwError(() => error); // Propagamos el error
     })
   );
