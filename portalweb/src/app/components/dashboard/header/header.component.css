@@ -1,5 +1,5 @@
 .header-container{
-    min-height: 50px;
+    min-height: 70px;
     display: flex;
     align-items: center;
     width: 100%;
@@ -8,6 +8,7 @@
     --box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.2);
     box-shadow: var(--box-shadow);
     gap: 15px;
+    justify-content: space-between;
 }
     
 .header-container .logo{
@@ -28,4 +29,31 @@
 
 .header-container > h1{
     color: var(--color-accent-contrast);
+}
+.info-section{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: var(--btn-border-radius);
+    transition: background-color 200ms linear;
+}
+.info-section .name{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: right;
+    transition: color 100ms linear;
+}
+.info-section .profile-pic{
+    display: block;
+    width: 10vw;
+    max-width: 40px;
+}
+.info-section:hover{
+    box-shadow: var(--box-shadow);
+    background-color: var(--color-tertiary-tint);
+}
+.info-section:hover .name{
+    color: var(--color-tertiary-contrast);
 }

@@ -5,6 +5,7 @@ import { SessionStorageService } from '../../../services/storage/session-storage
 import { JwtService } from '../../../services/jwt/jwt.service';
 import { isPlatformBrowser, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { userURLs } from '../../../models/nav';
 
 @Component({
   selector: 'app-login-view',
@@ -108,10 +109,10 @@ export class LoginViewComponent {
   }
 
   handleRedirect(userRole: string){
-    if(userRole === 'ADMIN') this.router.navigate(['/dashboard','admin']);
+    if(userRole === 'ADMIN') this.router.navigate(['/dashboard/'+userURLs.adminBaseUrl]);
     else if(userRole === 'COACH'){}
     else if(userRole === 'MANAGER'){}
-    else if(userRole === 'CLIENT') this.router.navigate(['/dashboard','cliente']);
+    else if(userRole === 'CLIENT') this.router.navigate(['/dashboard/'+userURLs.clientBaseUrl]);
   }
 
 }

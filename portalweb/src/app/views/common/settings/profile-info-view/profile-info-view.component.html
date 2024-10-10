@@ -1,1 +1,27 @@
-<p>profile-info-view works!</p>
+<div class="h-100 flex flex-column g-20">
+    <div class="flex flex-column g-5 bg-primary b-radius p-20">
+      <h1 class="primary-contrast">Información del perfil</h1>
+      <p class="primary-contrast">Puedes realizar modificaciones a la información de tu perfil.</p>
+    </div>
+  
+    <div class="flex flex-column flex-1 b-radius bg-light">
+      <div class="bg-primary b-tf-radius b-tr-radius p-10">
+        <h2 class="primary-contrast">Información de: {{profileInformation? profileInformation.fullName : ''}}</h2>
+      </div>
+      <div class="grid flex-1 grid-2 p-10">
+        <div class="flex">
+          @if (profileInformation) {
+            <img class="profile-pic" [src]="profileInformation.pictureUrlString ? profileInformation.pictureUrlString : '/userPic.png'" alt="Foto de perfil">
+          }
+        </div>
+        <div>
+          @if (profileInformation) {
+            <p>Nombre: {{profileInformation.name}}</p>
+            <p>Apellido: {{profileInformation.surname}}</p>
+            <p>Correo: {{profileInformation.email}}</p>
+            <p>Fecha de registro: {{profileInformation.registrationDate}}</p>
+          }
+        </div>
+      </div>
+    </div>
+  </div>

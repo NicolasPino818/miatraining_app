@@ -23,7 +23,7 @@ export class ClientTrainingPlanViewComponent implements OnInit{
   exercises: ITrainingPlanExercise[] = [];
   selectedDay!: string;
   currentUserEmail!: string;
-
+  loadingPlan: boolean = true;
   constructor(private jwtService: JwtService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private storage: SessionStorageService, 
@@ -32,7 +32,6 @@ export class ClientTrainingPlanViewComponent implements OnInit{
       let token = this.storage.getToken();
       this.currentUserEmail = this.jwtService.getDecodedAccessToken(token as string).sub;
     }
-    
   }
 
   ngOnInit(): void {
@@ -43,8 +42,12 @@ export class ClientTrainingPlanViewComponent implements OnInit{
 
   getTrainingPlan(){
     this.trainingPlanService.getPlanByEmail(this.currentUserEmail).subscribe((response)=>{
-      this.trainingPlan = response;
-      this.selectTrainingDay(this.today.getDay());
+      if(response){
+        this.trainingPlan = response;
+        
+        this.selectTrainingDay(this.today.getDay());
+      }
+      this.loadingPlan = false;
     });
   }
 
@@ -59,10 +62,10 @@ export class ClientTrainingPlanViewComponent implements OnInit{
   }
 
   selectTrainingDay(dayNumber: number){
+    if (dayNumber === 0) dayNumber = 7;
     const day: ITrainingPlanDay | undefined = this.trainingPlan.planDays.find((element:ITrainingPlanDay) => {
       return element.dayNumber === dayNumber
     });
-
     if(day){
       this.selectDayName(dayNumber);
       this.exercises = day.exercises;

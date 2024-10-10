@@ -1,3 +1,9 @@
 <div class="header-container">
     <img class="logo" src="/logos/imagotipo.png" alt="Logo">
-</div>
+    @if (profileInformation) {
+        <div class="info-section" (click)="goToprofile()">
+            <p class="name">{{profileInformation.fullName}}</p>
+            <img class="profile-pic" [src]="profileInformation.pictureUrlString ? profileInformation.pictureUrlString : '/userPic.png'" alt="Foto de perfil">
+        </div>
+    }
+</div> 
