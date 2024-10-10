@@ -1,0 +1,7 @@
+.effect {
+  transition: transform 0.2s;
+}
+
+.effect:hover {
+  transform: translateY(-5px);
+}

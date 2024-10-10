@@ -2,5 +2,10 @@
     margin: auto;
     display: block;
     width: 80%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 3px solid var(--color-dark);
+    min-width: 200px;
     max-width: 350px;
+
 }

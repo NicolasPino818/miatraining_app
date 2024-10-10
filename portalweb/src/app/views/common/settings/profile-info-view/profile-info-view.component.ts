@@ -33,9 +33,8 @@ export class ProfileInfoViewComponent implements OnInit{
   }
 
   getProfileInfo(){
-    this.profileService.getProfileInfo(this.currentUserEmail).subscribe((response)=>{
-      this.profileService.userProfile$.next(response);
-      this.profileInformation = response;
+    this.profileService.userProfile$.subscribe((response)=>{
+      if(response)this.profileInformation = response;
     });
   }
 }
