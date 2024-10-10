@@ -89,7 +89,6 @@ export class LoginViewComponent {
 
           this.storage.storeToken(result.data.access_token);
           this.storage.storeRefreshToken(result.data.refresh_token);
-
           if(token.authorization === 'CLIENT' && token.firstLogin) {
             this.router.navigate(['registro-formulario-inicial']);
             return;
@@ -107,7 +106,6 @@ export class LoginViewComponent {
           this.handleRedirect(token.authorization);
 
         } else { //SI EL LOGIN ES INCORRECTO INGRESA AQUI
-
           this.btnDisabled = false; //AL FINALIZAR EL LOGIN CON ERRORES VOLVEMOS A ACTIVAR EL BOTON
           this.showLoader = false; //AL FINALIZAR EL LOGIN CON ERRORES DESACTIVAMOS EL INDICADOR DE CARGA
           this.responseMsg = result.message; //EL MENSAJE SE MANEJA EN EL AUTHENTICATION SERVICE

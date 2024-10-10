@@ -12,7 +12,7 @@ export const isEnabledGuard: CanActivateFn = (route, state) => {
   const storage = inject(SessionStorageService);
   const jwtService = inject(JwtService); //SERVICIO DE JWT 
   const token = jwtService.getDecodedAccessToken(storage.getToken() as string);
-  if(!token.enabled){
+  if(token.enabled){
     return true;
   }
   router.navigate(['/auth/login']);
