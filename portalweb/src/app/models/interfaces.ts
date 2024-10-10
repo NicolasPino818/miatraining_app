@@ -13,7 +13,9 @@ export interface IDecodedAccessTokenInfo{
   exp: number,
   iat: number,
   name: string,
-  sub: string
+  sub: string,
+  firstLogin: boolean | null,
+  enabled: boolean | null,
 }
 
 export interface IDecodedRefreshTokenInfo{

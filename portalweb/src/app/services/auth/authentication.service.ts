@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import { IAuthenticationRequest, IAuthenticationResponse, IForgotPasswordStepStatus, IResetPassword } from '../../models/interfaces';
-import { apiEndpoints } from '../../models/apiEndpoints';
+import { apiEndpoints, apiV1PathURL } from '../../models/apiEndpoints';
 import { SessionStorageService } from '../storage/session-storage.service';
 import { Router } from '@angular/router';
 
@@ -51,6 +51,10 @@ export class AuthenticationService {
         })
       }
     );
+  }
+
+  setFirstLoginFalse(email: string): Observable<any>{
+    return this.http.post(apiV1PathURL+'auth/first-login/'+email,{});
   }
 
   fpGetVerificationCode(email:string): Observable<any> {

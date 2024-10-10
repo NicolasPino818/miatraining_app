@@ -85,16 +85,25 @@ export class LoginViewComponent {
 
         if (result.success && result.data) { // SI EL LOGIN ES CORRECTO INGRESA AQUI
 
-          const token = this.jwt.getDecodedAccessToken(result.data.access_token);
+          let token = this.jwt.getDecodedAccessToken(result.data.access_token);
 
-          // Handle successful login
           this.storage.storeToken(result.data.access_token);
           this.storage.storeRefreshToken(result.data.refresh_token);
 
-
-          //deben usar esta variable para dirigir al usuario a su respectivo dashboard usando el Router de angular
-          //this.router.navigate(['dashboard','cliente']); por ejemplo si es que el rol es el del cliente
-          //Pueden crear una funcion que maneje la redireccion o pueden usar if, else if o switch
+          if(token.authorization === 'CLIENT' && token.firstLogin) {
+            this.router.navigate(['registro-formulario-inicial']);
+            return;
+          }else if(token.firstLogin){
+            this.authService.setFirstLoginFalse(token.sub).subscribe(()=>{
+              this.authService.refreshToken().subscribe((tokens)=>{
+                this.storage.storeToken(tokens.access_token);
+                this.storage.storeRefreshToken(tokens.refresh_token);
+                token = this.jwt.getDecodedAccessToken(tokens.access_token);
+                this.handleRedirect(token.authorization);
+              });
+            });
+            return;
+          }
           this.handleRedirect(token.authorization);
 
         } else { //SI EL LOGIN ES INCORRECTO INGRESA AQUI

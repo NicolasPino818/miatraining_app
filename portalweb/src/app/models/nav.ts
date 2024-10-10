@@ -48,7 +48,7 @@ export const navLinks = {
             linkName: 'PLANES DE ENTRENAMIENTO',
             icon: 'bx bx-dumbbell',
             iconType: 'BOXICON', 
-            link: userURLs.adminBaseUrl+'/plan-entrenamiento'
+            link: userURLs.adminBaseUrl+'/planes-entrenamiento'
         },
         {
             linkName: 'BIBLIOTECA DE EJERCICIOS',
