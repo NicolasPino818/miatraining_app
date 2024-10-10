@@ -1,0 +1,86 @@
+<app-register-user-form-modal *ngIf="showCreateuserForm" [roles]="roleList" (closeModal)="closeCreateuserForm()"></app-register-user-form-modal>
+
+<div class="h-100 flex flex-column g-20">
+    <div class="flex flex-column g-5 bg-primary b-radius p-20">
+        <h1 class="primary-contrast">Panel de Usuarios</h1>
+        <p class="primary-contrast">
+          En este panel podrás ver y administrar a los usuarios registrados en el sistema.
+        </p>
+    </div>
+
+    <div class="flex flex-column g-5 bg-tertiary b-radius p-20">
+        <h2 class="tertiary-contrast">Filtros</h2>
+        <div class="filters">
+            <form class="filter-form" [formGroup]="filters" (ngSubmit)="filter()">
+                <div class="filter-input-group search">
+                    <label class="tertiary-contrast" for="search">Buscador</label>
+                    <input formControlName="search" type="text" name="search" id="search" placeholder="Nombre y/o Apellido, Correo, ID">
+                </div>
+                <div class="filter-input-group select">
+                    <label class="tertiary-contrast" for="role">Tipo de usuario</label>
+                    <select formControlName="role" name="role" id="role">
+                        <option value="ALL">Todos</option>
+                        <option [value]="role.role" *ngFor="let role of roleList">
+                            {{role.role}}
+                        </option>
+                    </select>
+                </div>
+                <button [disabled]="!requestEnd" [class.disabled]="!requestEnd" class="btn align-self-end compact">Buscar Usuarios</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="flex flex-column flex-1 b-radius bg-light">
+        <div class="flex flex-wrap g-20 justify-content-between bg-primary b-tf-radius b-tr-radius p-10">
+            <h2 class="primary-contrast">Resultados</h2>
+            <button *ngIf="requestEnd" class="btn tertiary compact" (click)="openCreateuserForm()">Añadir usuario</button>
+        </div>
+        @if (requestEnd) {
+            <div class="overflow-x-auto">
+                @if (userList.length > 0) {
+                    <table class="table">
+                        <thead>
+                            <tr class="bg-primary primary-contrast">
+                                <th>ID</th>
+                                <th>Nombre Completo</th>
+                                <th>Email</th>
+                                <th>Habilitado</th>
+                                <th>Fecha de registro</th>
+                                <th>Role</th>
+                                <th>Editar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="dark" *ngFor="let user of userList | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPaginationPage}">
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.fullName }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.enabled ? 'Si' : 'No' }}</td>
+                                <td>{{ user.registrationDate }}</td>
+                                <td>{{ user.role }}</td>
+                                <td [routerLink]="[user.id]"><i class='bx bx-edit'></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination-controls 
+                        previousLabel="Anterior" 
+                        nextLabel="Siguiente" 
+                        [autoHide]="true"
+                        (pageChange)="onPageChange($event)">
+                    </pagination-controls>
+                }@else {
+                    <div class="p-10">
+                        <p class="h4-fsize">
+                            Sin resultados.
+                        </p>
+                    </div>
+                }
+            </div>
+        }@else {
+            <div class="flex flex-1 g-10 p-10 justify-content-center align-items-center">
+                <p>Cargando usuarios.</p>
+                <span class="item-loader"></span>
+            </div>
+        }
+    </div>
+</div>
