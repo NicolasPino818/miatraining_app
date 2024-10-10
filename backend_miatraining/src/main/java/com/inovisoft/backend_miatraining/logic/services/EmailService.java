@@ -1,6 +1,6 @@
-package com.inovisoft.backend_miatraining.mailing.services;
+package com.inovisoft.backend_miatraining.logic.services;
 
-import com.inovisoft.backend_miatraining.mailing.DTO.MailBody;
+import com.inovisoft.backend_miatraining.logic.DTOs.emailDTO.MailBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

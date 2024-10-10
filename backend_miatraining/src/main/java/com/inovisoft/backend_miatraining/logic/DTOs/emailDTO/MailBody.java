@@ -1,4 +1,4 @@
-package com.inovisoft.backend_miatraining.mailing.DTO;
+package com.inovisoft.backend_miatraining.logic.DTOs.emailDTO;
 
 import lombok.Builder;
 
