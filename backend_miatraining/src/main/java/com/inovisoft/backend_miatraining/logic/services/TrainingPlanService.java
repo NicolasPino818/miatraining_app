@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class TrainingPlanService {
@@ -43,9 +44,9 @@ public class TrainingPlanService {
     }
 
     public TrainingPlanResponseDTO getTrainingPlanByEmail(String email) {
-        TrainingPlanModel planModel = trainingPlanRepo.findByUserEmail(email)
-                .orElseThrow(ResourceNotFoundException::new);
-        return trainingPlanResponseDTOMapper.apply(planModel);
+        Optional<TrainingPlanModel> planModel = trainingPlanRepo.findByUserEmail(email);
+        return planModel.map(trainingPlanModel ->
+                trainingPlanResponseDTOMapper.apply(trainingPlanModel)).orElse(null);
     }
 
     // Obtener todos los TrainingPlans

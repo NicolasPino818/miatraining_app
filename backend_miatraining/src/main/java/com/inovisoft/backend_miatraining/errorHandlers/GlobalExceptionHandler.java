@@ -216,6 +216,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleGeneralException(Exception ex, HttpServletRequest request) {
         String code = "server:internal-error";
         String msg = "AN UNEXPECTED ERROR OCCURRED";
+        System.out.println(ex.getMessage());
         ErrorResponse response = new ErrorResponse(request.getRequestURI(),request.getMethod(),msg,code);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
