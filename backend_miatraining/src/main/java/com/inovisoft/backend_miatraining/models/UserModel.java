@@ -52,6 +52,9 @@ public class UserModel implements UserDetails {
     @Column(nullable = false)
     private LocalDate registrationDate;
 
+    @Column(columnDefinition = "LONGTEXT")
+    private String pictureUrlString;
+
     @OneToOne(mappedBy = "user")
     private ForgotPasswordModel forgotPassword;
 
