@@ -6,6 +6,8 @@ import { JwtService } from '../../services/jwt/jwt.service';
 import { SessionStorageService } from '../../services/storage/session-storage.service';
 import { UserProfileService } from '../../services/users/user-profile.service';
 import { isPlatformBrowser } from '@angular/common';
+import { catchError, EMPTY } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +33,14 @@ export class DashboardComponent {
   }
 
   getProfileInfo(){
-    this.profileService.getProfileInfo(this.currentUserEmail).subscribe((response)=>{
+    this.profileService.getProfileInfo(this.currentUserEmail)
+    .pipe(
+      catchError((error:HttpErrorResponse)=>{
+        if (error.status === 0 && error.error.message === 'Failed to fetch') 
+          alert("Estamos experimentando problemas para comunicarnos con el servidor");
+        return EMPTY;
+      })
+    ).subscribe((response)=>{
       this.profileService.userProfile$.next(response);
     });
   }
