@@ -105,48 +105,17 @@
 .justify-self-end{
     justify-self: end;
 }
-
-.b-radius{
-    border-radius: var(--card-border-radius);
-}
-.b-tf-radius{
-    border-top-left-radius: var(--card-border-radius);
-}
-.b-tr-radius{
-    border-top-right-radius: var(--card-border-radius);
-}
-.b-br-radius{
-    border-bottom-right-radius: var(--card-border-radius);
-}
-.b-bl-radius{
-    border-bottom-left-radius: var(--card-border-radius);
-}
-.border-none{
-    border: none;
-}
-.pointer{
-    cursor: pointer;
-}
-.btn-b-radius{
-    border-radius: var(--btn-border-radius);
-}
-.btn-b-tf-radius{
-    border-top-left-radius: var(--btn-border-radius);
-}
-.btn-b-tr-radius{
-    border-top-right-radius: var(--btn-border-radius);
-}
-.btn-b-br-radius{
-    border-bottom-right-radius: var(--btn-border-radius);
-}
-.btn-b-bl-radius{
-    border-bottom-left-radius: var(--btn-border-radius);
-}
-.box-shadow{
-    box-shadow: var(--box-shadow);
-}
 .icon-size-60{
     font-size: 60px;
+}
+.overflow-x-auto{
+    overflow-x: auto;
+}
+.overflow-y-auto{
+    overflow-y: auto;
+}
+.overflow-auto{
+    overflow: auto;
 }
 .pt-40{
     padding-top: 40px;
@@ -171,6 +140,10 @@
 }
 .flex-1{
     flex: 1;
+}
+
+.block{
+    display: block;
 }
 
 .grid{

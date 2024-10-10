@@ -1,17 +1,29 @@
 .bg-primary{
     background-color: var(--color-primary);
 }
+.bg-primary-light{
+    background-color: var(--color-primary-tint);
+}
 .bg-secondary{
     background-color: var(--color-secondary);
 }
 .bg-tertiary{
     background-color: var(--color-tertiary);
 }
-.bg-default{
+.bg-tertiary-light{
+    background-color: var(--color-tertiary-tint);
+}
+.bg-default, .bg-background{
     background-color: var(--color-background);
 }
 .bg-light{
     background-color: var(--color-light);
+}
+.bg-medium{
+    background-color: var(--color-medium);
+}
+.bg-medium-light{
+    background-color: var(--color-medium-tint);
 }
 .primary{
     color: var(--color-primary);
@@ -43,8 +55,8 @@
 .dark{
     color: var(--color-dark);
 }
-.border-bottom-primary{
-    border-bottom: 2px solid var(--color-primary);
+.b-bottom-primary{
+    border-bottom: 3px solid var(--color-primary);
 }
 .is-invalid {
     border-color: var(--color-danger) !important;
