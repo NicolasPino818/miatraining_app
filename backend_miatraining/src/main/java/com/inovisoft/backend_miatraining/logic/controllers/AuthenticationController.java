@@ -6,6 +6,7 @@ import com.inovisoft.backend_miatraining.logic.DTOs.authDTO.TokenRefreshRequestD
 import com.inovisoft.backend_miatraining.logic.services.AuthenticationService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,5 +32,11 @@ public class AuthenticationController {
     @PostMapping("/refresh-token")
     public ResponseEntity<AuthenticationResponseDTO> refreshToken(@Valid @RequestBody TokenRefreshRequestDTO request){
         return ResponseEntity.ok(authenticationService.refreshToken(request));
+    }
+
+    @PostMapping("/first-login/{email}")
+    @ResponseStatus(HttpStatus.OK)
+    public void setFirstLoginFalse(@Valid @PathVariable("email") String email){
+        authenticationService.setFirstLoginFalse(email);
     }
 }

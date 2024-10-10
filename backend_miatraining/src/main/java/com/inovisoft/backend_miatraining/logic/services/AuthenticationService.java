@@ -6,6 +6,7 @@ import com.inovisoft.backend_miatraining.errorHandlers.exceptions.UserNotFoundEx
 import com.inovisoft.backend_miatraining.logic.DTOs.authDTO.AuthenticationRequestDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.authDTO.AuthenticationResponseDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.authDTO.TokenRefreshRequestDTO;
+import com.inovisoft.backend_miatraining.models.UserModel;
 import com.inovisoft.backend_miatraining.repositories.IUserRepo;
 import com.inovisoft.backend_miatraining.security.services.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,8 @@ public class AuthenticationService {
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("authorization",user.getRole().getRoleName());
+        claims.put("firstLogin", user.getFirstLogin());
+        claims.put("enabled", user.getEnabled());
         var jwtToken = jwtService.generateToken(claims,user);
         var jwtRefreshToken = jwtService.generateRefreshToken(user);
 
@@ -71,6 +74,13 @@ public class AuthenticationService {
                 .access_token(jwtToken)
                 .refresh_token(jwtRefreshToken)
                 .build();
+    }
+
+    public void setFirstLoginFalse(String email){
+        UserModel userModel = userRepository.findByEmailIgnoreCase(email)
+                .orElseThrow(UserNotFoundException::new);
+        userModel.setFirstLogin(false);
+        userRepository.save(userModel);
     }
 
     //Verifica que los campos unique en la base de datos se respeten
