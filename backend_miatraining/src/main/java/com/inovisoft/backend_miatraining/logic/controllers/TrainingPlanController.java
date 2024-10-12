@@ -5,6 +5,7 @@ import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.SaveTraining
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.SaveUsersToPlanDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.response.TrainingPlanResponseDTO;
 import com.inovisoft.backend_miatraining.logic.services.TrainingPlanService;
+import com.inovisoft.backend_miatraining.models.ExerciseRoutineModel;
 import com.inovisoft.backend_miatraining.models.TrainingDayModel;
 import com.inovisoft.backend_miatraining.models.TrainingPlanModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class TrainingPlanController {
         return ResponseEntity.ok(trainingPlanService.getTrainingPlanById(id));
     }
 
-    // Obtener un TrainingPlan por ID
+    // Obtener un TrainingPlan por Correo
     @GetMapping("/by-email/{email}")
     public ResponseEntity<TrainingPlanResponseDTO> getTrainingPlanByEmail(@PathVariable("email") String email) {
         return ResponseEntity.ok(trainingPlanService.getTrainingPlanByEmail(email));
@@ -80,4 +81,20 @@ public class TrainingPlanController {
     public void deleteTrainingPlan(@PathVariable("planId") Long planId) {
         trainingPlanService.deleteTrainingPlanById(planId);
     }
+
+    //Actualizar plan de entrenamiento por ID
+    @PutMapping("/routine/{routineID}")
+    public ResponseEntity<Void> updateExerciseRoutine(
+            @PathVariable Long routineID,
+            @RequestBody ExerciseRoutineModel updatedRoutine) {
+
+        // Llamamos al servicio para que realice la actualización
+        trainingPlanService.updateExerciseRoutine(routineID, updatedRoutine);
+
+        // Retornar una respuesta indicando que la actualización fue exitosa
+        return ResponseEntity.ok().build();
+    }
+
+
+
 }
