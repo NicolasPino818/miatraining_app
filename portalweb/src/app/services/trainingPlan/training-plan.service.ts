@@ -9,7 +9,7 @@ import { apiEndpoints } from '../../models/apiEndpoints';
 })
 export class TrainingPlanService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
   }
 
   getPlanByPlanID(id: string | number): Observable<ITrainingPlan>{
@@ -19,5 +19,10 @@ export class TrainingPlanService {
   getPlanByEmail(email: string): Observable<ITrainingPlan>{
     return this.http.get<ITrainingPlan>(apiEndpoints.trainingPlan+"/by-email/"+email);
   }
+
+  updateExerciseRoutine(routineID: number, updatedRoutine: any): Observable<any> {
+    return this.http.put(`${apiEndpoints.trainingPlan}/routine/${routineID}`, updatedRoutine);
+  }
+
 
 }
