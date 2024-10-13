@@ -1,0 +1,136 @@
+.container {
+    gap: 20px;
+}
+
+.card {
+    border-radius: 8px;
+    width: 50%;
+    padding: 20px;
+    margin: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cardCalorias {
+    background-color: #1E90FF;
+    border-radius: 4px;
+    padding: 5px;
+    
+}
+.cardProte {
+    background-color: #ff8f10;
+    border-radius: 4px;
+    padding: 5px;
+}
+.cardCarb {
+    background-color: #1b9c85;
+    border-radius: 4px;
+    padding: 5px;
+}
+.cardGrasa {
+    background-color: #a800b8;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.MetaAbance {
+    display: flex;
+}
+
+.MetaAbance .card{
+    width: 50%;
+}
+
+
+.Comidas {
+    display: flex;
+}
+
+
+.card-comidas{
+    width: 25%;
+    margin: 25px;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+.card-header{
+    background-color: #3b82f6;
+    color: white;
+    
+}
+
+.card-header p {
+    padding: 10px;
+    font-size: 25px;
+}
+
+.food-item{
+    display: flex;
+    width: 100%;
+
+}
+
+
+.Info-Comida p{
+    margin-left: 5px;
+}
+
+.food-calories {
+    text-align: right;
+    align-content: center;
+    width: 30%;
+}
+.food-calories p{
+    margin-right: 5px;
+}
+
+
+.botonAgregar{
+    display: flex;
+    align-content: flex-end;
+    background-color: #fc3c6c;
+    width: 100%;
+}
+.add-foot {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fc3c6c;
+    color: white;
+    padding: 10px;
+
+}
+
+.nutrition-summary{
+    display: flex;
+    margin-top: 50px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.nutrition-summary p{
+    margin-left: 15px;
+    margin-right: 15px;
+
+}
+
+.nutrition-label-cals{
+    color: #3b82f6;
+}
+.nutrition-label-c{
+    color: #22c55e;
+}
+.nutrition-label-p{
+    color: #f97316;
+}
+.nutrition-label-g{
+    color: #a800b8;
+}
