@@ -16,7 +16,7 @@
     background-color: var(--color-primary);
     color: var(--color-primary-contrast);
     font-size: 20px;
-    transition: opacity 0.5s ease;
+    transition: background-color 0.3s;
 }
 .btn.compact{
     width: fit-content;
@@ -37,7 +37,14 @@
     opacity: 0.8;
 }
 .btn:hover{
-    opacity: var(--btn-hover-opacity);
+    opacity: 0.9;
+    background-color: var(--color-primary-tint);
+}
+.btn.secondary:hover{
+    background-color: var(--color-secondary-tint);
+}
+.btn.tertiary:hover{
+    background-color: var(--color-tertiary-tint);
 }
 .box-shadow-hover:hover{
     box-shadow: var(--box-shadow);
@@ -60,6 +67,69 @@
     background-color: rgba(0, 0, 0, 0.4);
     cursor: pointer;
 }
+.user-select-none{
+    user-select: none;
+}
+.text-wrap{
+    text-wrap: wrap;
+}
+.text-wrap-nowrap{
+    text-wrap: nowrap;
+}
+.worp-wrap-break{
+    word-wrap: break-word;
+}
+.text-overflow-ellipsis{
+    text-overflow: ellipsis;
+}
+.text-overflow-initial{
+    text-overflow: initial;
+}
+.text-overflow-clip{
+    text-overflow: clip;
+}
+.b-radius{
+    border-radius: var(--card-border-radius);
+}
+.b-tf-radius{
+    border-top-left-radius: var(--card-border-radius);
+}
+.b-tr-radius{
+    border-top-right-radius: var(--card-border-radius);
+}
+.b-br-radius{
+    border-bottom-right-radius: var(--card-border-radius);
+}
+.b-bl-radius{
+    border-bottom-left-radius: var(--card-border-radius);
+}
+.border-none{
+    border: none;
+}
+.pointer{
+    cursor: pointer;
+}
+.blocked{
+    cursor: not-allowed;
+}
+.btn-b-radius{
+    border-radius: var(--btn-border-radius);
+}
+.btn-b-tf-radius{
+    border-top-left-radius: var(--btn-border-radius);
+}
+.btn-b-tr-radius{
+    border-top-right-radius: var(--btn-border-radius);
+}
+.btn-b-br-radius{
+    border-bottom-right-radius: var(--btn-border-radius);
+}
+.btn-b-bl-radius{
+    border-bottom-left-radius: var(--btn-border-radius);
+}
+.box-shadow{
+    box-shadow: var(--box-shadow);
+}
 .modal-container{
     position: fixed;
     z-index: 999999999;
@@ -67,7 +137,7 @@
     left: 50%;
     transform: translate(-50%,-50%);
     background-color: var(--color-light);
-    padding: 30px 10px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -77,9 +147,12 @@
     box-shadow: var(--box-shadow);
     overflow: auto;
 }
+.modal-close{
+    font-size: 30px;
+    cursor: pointer;
+}
 @media (min-width: 993px){
     .btn:hover{
-        opacity: 0.8;
         box-shadow: var(--box-shadow);
     }
 }
@@ -88,3 +161,61 @@
         width: min(100%, 120px);
     }
 }
+
+/****** Estilos básicos para la paginación ******/
+pagination-controls .ngx-pagination {
+    display: flex;
+    justify-content: flex-start; /* Alinea los elementos al inicio */
+    flex-wrap: wrap; /* Permite que los elementos se ajusten en múltiples líneas si es necesario */
+    width: 100%;
+    margin-top: 20px;
+    gap: 2px;
+    padding: 0; /* Elimina cualquier relleno interno no deseado */
+    box-sizing: border-box; /* Asegura que el ancho incluya relleno y bordes */
+}
+
+pagination-controls .ngx-pagination li {
+    list-style-type: none;
+}
+
+pagination-controls .ngx-pagination a {
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    background-color: #f2f2f2;
+    color: var(--color-primary);
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s;
+}
+
+pagination-controls .ngx-pagination a:hover {
+    background-color: var(--color-primary);
+    color: var(--color-primary-contrast);
+}
+
+pagination-controls .ngx-pagination .current {
+    background-color: var(--color-primary);
+    color: var(--color-primary-contrast);
+    pointer-events: none;
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s;
+}
+
+pagination-controls .ngx-pagination .disabled {
+    color: var(--color-medium);
+    pointer-events: none;
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s;
+}
+
+/****** Fin de los estilos básicos para la paginación ******/

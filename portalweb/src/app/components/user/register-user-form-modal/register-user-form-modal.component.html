@@ -1,0 +1,39 @@
+<div class="backdrop" (click)="closeModalEvent()"></div>
+<div class="modal-container box-shadow">
+    <div class="flex flex-column g-5">
+        <form>
+            <h2 class="text-center h1-fsize">Registrar Usuario</h2>
+            <div class="input-group">
+                <label for="name">Nombre <span>*</span></label>
+                <input type="text" id="name" name="name" placeholder="Primer Nombre">
+            </div>
+
+            <div class="input-group">
+                <label for="lastname">Apellido <span>*</span></label>
+                <input type="text" id="lastname" name="lastname" placeholder="Primer apellido">
+            </div>
+
+            <div class="input-group">
+                <label for="email">Correo electronico <span>*</span></label>
+                <input type="text" id="email" name="email" placeholder="Email">
+            </div>
+
+            <div class="input-group">
+                <label for="role">Tipo de usuario</label>
+                <select name="role" id="role">
+                    <option [value]="role.role" *ngFor="let role of roles">
+                        {{role.role}}
+                    </option>
+                </select>
+            </div>
+
+            <p>Al apretar registrar se le enviará al usuario un correo electrónico con su contraseña.</p>
+
+            <button type="submit" class="btn" [class.disabled]="btnDisabled" [disabled]="btnDisabled">
+                Registrar
+                <span *ngIf="showLoader" class="loader align-self-center"></span>
+            </button>
+        </form>
+        <button class="btn small tertiary" (click)="closeModalEvent()">Cancelar</button>
+    </div>
+</div>

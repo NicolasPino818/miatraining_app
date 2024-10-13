@@ -1,1 +1,76 @@
-<p>profile-info-view works!</p>
+<div class="h-100 flex flex-column g-20">
+    <div class="flex flex-column g-5 bg-primary b-radius p-20">
+      <h1 class="primary-contrast">Información del perfil</h1>
+      <p class="primary-contrast">Puedes realizar modificaciones a la información de tu perfil.</p>
+    </div>
+  
+    <div class="flex flex-column flex-1 b-radius bg-light">
+      <div class="bg-primary b-tf-radius b-tr-radius p-10">
+        <h2 class="primary-contrast">Información de: {{profileInformation? profileInformation.fullName : ''}}</h2>
+      </div>
+      <div class="flex flex-1 flex-wrap g-20 p-10">
+        <div class="flex flex-1 box-shadow-inset p-10 b-radius">
+          @if (profileInformation) {
+            <img class="profile-pic pointer box-shadow-hover" 
+              [src]="profileInformation.pictureUrlString ? profileInformation.pictureUrlString : '/userPic.png'" 
+              alt="Foto de perfil">
+          }
+        </div>
+        <div class="flex flex-1 flex-column w-100 justify-content-center p-10 g-20">
+          @if (profileInformation) {
+            <div class="flex flex-wrap g-20">
+              <span class="flex flex-column flex-1 g-10">
+                <p>Nombre: </p>
+                <p class="bg-background blocked b-bottom-primary p-10 user-select-none text-overflow-ellipsis">
+                  {{profileInformation.name}}
+                </p>
+              </span>
+              <span class="flex flex-column flex-1 g-10">
+                <p>Apellido: </p>
+                <p class="bg-background blocked b-bottom-primary p-10 user-select-none text-overflow-ellipsis">
+                  {{profileInformation.surname}}
+                </p>
+              </span>
+            </div>
+            <span class="flex flex-column g-10">
+              <p>Correo: </p>
+              <p class="bg-background blocked b-bottom-primary p-10 user-select-none worp-wrap-break"> 
+                {{profileInformation.email}}
+              </p>
+            </span>
+            
+            <div class="flex flex-wrap g-20">
+              <span class="flex justify-content-end flex-1 flex-column g-10">
+                <p>Fecha de registro: </p>
+                <p class="bg-background blocked b-bottom-primary p-10 user-select-none text-wrap-nowrap"> 
+                  {{profileInformation.registrationDate}}
+                </p>
+              </span>
+              <span class="flex justify-content-end flex-1 flex-column g-10">
+                <p>Plan: </p>
+                <p class="bg-background blocked b-bottom-primary p-10 user-select-none"> 
+                  Plan básico mensual
+                </p>
+              </span>
+            </div>
+
+            <div class="flex flex-wrap g-20">
+              <span class="flex justify-content-end flex-1 flex-column g-10">
+                <p>Duración: </p>
+                <p class="bg-background blocked b-bottom-primary p-10 user-select-none text-wrap-nowrap"> 
+                  1 mes
+                </p>
+              </span>
+              <span class="flex justify-content-end flex-1 flex-column g-10">
+                <p>Próximo Cobro: </p>
+                <p class="bg-background blocked b-bottom-primary p-10 user-select-none text-wrap-nowrap"> 
+                  2024-11-01
+                </p>
+              </span>
+            </div>
+            <button class="btn tertiary disabled">Guardar</button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>

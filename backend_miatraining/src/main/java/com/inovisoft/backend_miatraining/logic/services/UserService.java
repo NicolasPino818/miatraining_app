@@ -1,11 +1,13 @@
 package com.inovisoft.backend_miatraining.logic.services;
 
 import com.inovisoft.backend_miatraining.errorHandlers.exceptions.UserNotFoundException;
-import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.UserDTO;
-import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.UserPageResponseDTO;
+import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.*;
+import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.mappers.ProfileInfoResponseDTOMapper;
 import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.mappers.UserDTOMapper;
 import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.mappers.UserPageResponseDTOMapper;
+import com.inovisoft.backend_miatraining.models.RoleModel;
 import com.inovisoft.backend_miatraining.models.UserModel;
+import com.inovisoft.backend_miatraining.repositories.IRoleRepo;
 import com.inovisoft.backend_miatraining.repositories.IUserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -21,16 +24,49 @@ public class UserService {
     @Autowired
     IUserRepo userRepo;
     @Autowired
+    IRoleRepo roleRepo;
+    @Autowired
     UserDTOMapper userDTOMapper;
     @Autowired
+    AuthenticationService authenticationService;
+    @Autowired
     UserPageResponseDTOMapper userPageResponseDTOMapper;
+    @Autowired
+    ProfileInfoResponseDTOMapper profileInfoResponseDTOMapper;
+
+    public void toggleEnabled(String email){
+        UserModel userModel = userRepo.findByEmailIgnoreCase(email)
+                .orElseThrow(UserNotFoundException::new);
+        userModel.setEnabled(!userModel.getEnabled());
+        userRepo.save(userModel);
+    }
+
+    public ArrayList<RoleDTO> getRoles(){
+        ArrayList<RoleModel> roleModels = roleRepo.getAllRoles();
+        return  roleModels.stream().map(
+                (role)-> RoleDTO.builder().id(role.getRoleID()).role(role.getRoleName()).build())
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
 
     public UserModel getUserById(Long id){
         return userRepo.findById(id).orElseThrow(UserNotFoundException::new);
     }
+
     public UserDTO getUserDTOById(Long id){
         UserModel userModel = userRepo.findById(id).orElseThrow(UserNotFoundException::new);
         return userDTOMapper.apply(userModel);
+    }
+    public ProfileInfoResponseDTO getProfileInfoByEmail(String email){
+        UserModel userModel = userRepo.findByEmailIgnoreCase(email).orElseThrow(UserNotFoundException::new);
+        return profileInfoResponseDTOMapper.apply(userModel);
+    }
+
+    public void saveProfileInfo(String email, ProfileInfoUpdateDTO updateDTO){
+        authenticationService.findExistingUser(email);
+        UserModel userModel = userRepo.findByEmailIgnoreCase(email).orElseThrow(UserNotFoundException::new);
+        userModel.setEmail(userModel.getEmail());
+        userModel.setPictureUrlString(updateDTO.getPictureUrlString());
+        userRepo.save(userModel);
     }
 
     public UserDTO getUserDTOByEmail(String email){
@@ -47,10 +83,22 @@ public class UserService {
         return dtos;
     }
 
-    public UserPageResponseDTO getUsersByPage(int page) {
-        Pageable pageable = PageRequest.of(page, 20);
-        Page<UserDTO> dtoPage = userRepo.findAll(pageable).map(userDTOMapper);
+    public UserPageResponseDTO getUsersByPage(int pageNumber, int pageSize,String search, String role) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+
+        // Manejar caso en que search o role son nulos o vacíos
+        String searchTerm = (search == null || search.trim().isEmpty()) ? "" : search.trim();
+        String roleFilter = (role == null || role.trim().isEmpty()) ? "" : role.trim();
+
+        // Realizar la búsqueda con los filtros y la paginación
+        Page<UserModel> userPage = userRepo.findUsersByEmailOrNameOrLastNameAndRole(searchTerm, roleFilter, pageable);
+
+        // Usar Page.map() para convertir de UserModel a UserDTO
+        Page<UserDTO> dtoPage = userPage.map(userDTOMapper);
+
+        // Transformar el Page<UserDTO> en la respuesta UserPageResponseDTO
         return userPageResponseDTOMapper.apply(dtoPage);
     }
+
 }
 

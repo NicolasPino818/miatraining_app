@@ -4,3 +4,9 @@ iframe{
     max-width: 560px;
     border-radius: 5px;
 }
+
+@media (max-width: 579px){
+    .reverse-mobile{
+        order: -1;
+    }
+}

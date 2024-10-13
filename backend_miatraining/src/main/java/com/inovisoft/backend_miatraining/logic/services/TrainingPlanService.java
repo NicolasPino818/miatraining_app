@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class TrainingPlanService {
@@ -42,10 +43,11 @@ public class TrainingPlanService {
         return trainingPlanResponseDTOMapper.apply(planModel);
     }
 
+    // Obtener un TrainingPlan por Email
     public TrainingPlanResponseDTO getTrainingPlanByEmail(String email) {
-        TrainingPlanModel planModel = trainingPlanRepo.findByUserEmail(email)
-                .orElseThrow(ResourceNotFoundException::new);
-        return trainingPlanResponseDTOMapper.apply(planModel);
+        Optional<TrainingPlanModel> planModel = trainingPlanRepo.findByUserEmail(email);
+        return planModel.map(trainingPlanModel ->
+                trainingPlanResponseDTOMapper.apply(trainingPlanModel)).orElse(null);
     }
 
     // Obtener todos los TrainingPlans
@@ -57,6 +59,25 @@ public class TrainingPlanService {
         });
         return planResponseDTOS;
     }
+
+    // Editar TrainingPlan por ID
+    public void updateExerciseRoutine(Long routineID, ExerciseRoutineModel updatedRoutine) {
+        // Buscar la rutina de ejercicio por ID
+        ExerciseRoutineModel existingRoutine = exerciseRoutineRepo.findById(routineID)
+                .orElseThrow(ResourceNotFoundException::new);
+
+        // Actualizar los campos necesarios de la rutina
+        existingRoutine.setSeries(updatedRoutine.getSeries());
+        existingRoutine.setRepetitions(updatedRoutine.getRepetitions());
+        existingRoutine.setRestMinutes(updatedRoutine.getRestMinutes());
+
+        // Si es necesario actualizar el ejercicio, también se puede hacer aquí:
+        existingRoutine.setExercise(updatedRoutine.getExercise());
+
+        // Guardar los cambios en la base de datos
+        exerciseRoutineRepo.save(existingRoutine);
+    }
+
 
     // Crear o actualizar un TrainingPlan
     public void saveTrainingPlan(SaveTrainingPlanDTO trainingPlanDTO) {
@@ -71,6 +92,7 @@ public class TrainingPlanService {
         trainingPlanRepo.save(trainingPlanModel);
         generateDays(trainingPlanModel);
     }
+
 
     // Eliminar un TrainingPlan por ID
     public void deleteTrainingPlanById(Long id) {
@@ -151,6 +173,7 @@ public class TrainingPlanService {
 
         exerciseRoutineRepo.save(routineModel);
     }
+
 
     public void deleteRoutine(Long routineID){
         exerciseRoutineRepo.deleteById(routineID);

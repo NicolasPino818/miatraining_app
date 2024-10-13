@@ -5,7 +5,6 @@ import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.*;
 import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.mappers.*;
 import com.inovisoft.backend_miatraining.models.ExerciseCategoryModel;
 import com.inovisoft.backend_miatraining.models.ExerciseModel;
-import com.inovisoft.backend_miatraining.models.TrainingTypeModel;
 import com.inovisoft.backend_miatraining.repositories.IExerciseCategoryRepo;
 import com.inovisoft.backend_miatraining.repositories.IExerciseRepo;
 import com.inovisoft.backend_miatraining.repositories.ITrainingTypeRepo;
@@ -16,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ExerciseService {
@@ -39,7 +37,7 @@ public class ExerciseService {
     ExerciseCategoryPageResponseDTOMapper categoryPageResponseDTOMapper;
 
     public ExercisePageResponseDTO getExercisesByPage(int page) {
-        Pageable pageable = PageRequest.of(page, 20);
+        Pageable pageable = PageRequest.of(page, 100);
         Page<ExerciseDTO> dtoPage = exerciseRepo.findAll(pageable).map(exerciseDTOMapper);
         return pageResponseDTOMapper.apply(dtoPage);
     }
