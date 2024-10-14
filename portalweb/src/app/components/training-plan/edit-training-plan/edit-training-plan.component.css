@@ -1,51 +1,153 @@
-/* Ajuste de la grid para pantallas grandes */
-.exercises-container {
-  display: grid;
-  gap: 10px;
+/* Sección de alumnos */
+.students-section {
+  background-color: var(--color-tertiary); /* Fondo rosado */
+  padding: 15px;
+  padding-bottom: 40px;
+  border-radius: var(--card-border-radius);
+  color: var(--color-light); /* Texto blanco */
+  flex-direction: column;
 }
 
-/* Para pantallas grandes */
-@media (min-width: 90rem) { /* 6 columnas para pantallas grandes (1440px o más) */
+.students-header {
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-light); /* Texto blanco */
+  border-radius: var(--card-border-radius);
+}
+
+.add-btn {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  padding: 5px 10px;
+  border-radius: var(--btn-border-radius);
+  cursor: pointer;
+}
+
+.student-card {
+  background-color: var(--color-light); /* Fondo claro */
+  padding: 15px;
+  border-radius: var(--card-border-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  position: relative;
+  min-width: 200px;
+  max-width: 220px;
+}
+
+.remove-student-btn {
+  color: var(--color-dark);
+  background-color: var(--color-light);
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  border: 2px solid var(--color-dark);
+}
+
+/* Sección de ejercicios */
+.exercises-section {
+  border-radius: var(--card-border-radius);
+  background-color: var(--color-light);
+
+}
+
+.exercises-header {
+  align-items: center;
+  background-color: var(--color-primary);
+  border-top-left-radius: var(--card-border-radius);
+  border-top-right-radius: var(--card-border-radius);
+
+}
+
+.exercises-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+}
+
+.exercise-card {
+  background-color: var(--color-light);
+  border-radius: var(--card-border-radius);
+  position: relative;
+  height: 100%;
+}
+
+.card-header {
+  position: relative;
+}
+
+.remove-exercise-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.icon-trash {
+  color: red; /* Basurero rojo */
+  font-size: 24px;
+}
+
+.exercise-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.exercise-box {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.exercise-btn {
+  background-color: var(--color-tertiary);
+  color: var(--color-light);
+  padding: 10px;
+  border-radius: var(--btn-border-radius);
+  cursor: pointer;
+  text-align: center;
+}
+
+img{
+  width: 150px;
+}
+
+/* Media Queries */
+@media (min-width: 90rem) {
   .exercises-container {
     grid-template-columns: repeat(6, 1fr);
   }
 }
 
-/* Para pantallas medianas */
-@media (min-width: 64rem) { /* 4 columnas para pantallas medianas */
+@media (min-width: 64rem) {
   .exercises-container {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-/* Para pantallas pequeñas */
-@media (min-width: 48rem) { /* 3 columnas para pantallas pequeñas */
+@media (min-width: 48rem) {
   .exercises-container {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
-/* Para pantallas móviles */
-@media (min-width: 47.99rem) { /* 2 columnas para pantallas móviles */
+@media (max-width: 48rem) {
   .exercises-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Para pantallas muy pequeñas */
-@media (max-width: 480px) { /* 1 columna para pantallas muy pequeñas */
+@media (max-width: 480px) {
   .exercises-container {
     grid-template-columns: 1fr;
   }
-
-  /* Para que las tarjetas ocupen todo el ancho en pantallas móviles */
   .exercise-card, .student-card {
     width: 100%;
-  }
-
-  /* Para centrar el botón en pantallas pequeñas */
-  .add-btn {
-    width: 100%;
-    text-align: center;
   }
 }

@@ -1,33 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { ITrainingPlanExercise } from '../../../models/interfaces';
+import { TrainingPlanService } from '../../../services/trainingPlan/training-plan.service';
 
 @Component({
   selector: 'app-edit-training-plan',
   standalone: true,
   imports: [NgFor, NgIf],
   templateUrl: './edit-training-plan.component.html',
-  styleUrl: './edit-training-plan.component.css'
+  styleUrls: ['./edit-training-plan.component.css']
 })
-export class EditTrainingPlanComponent {
-  showExerciseModal:boolean = false;
+export class EditTrainingPlanComponent implements OnInit {
 
-  selectedExercise!: any | null;
+  showExerciseModal: boolean = false;
+  selectedExercise!: ITrainingPlanExercise | null;
+  plan: any; // Aquí almacenamos el plan que viene del backend
 
-  days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+  // Aquí inyectas el servicio dentro del constructor
+  constructor(private trainingPlanService: TrainingPlanService) {}
 
-  exercises: any[] = [
-    { exerciseID: 1, exerciseName: 'Press de Pecho Sentado en máquina' },
-    { exerciseID: 2, exerciseName: 'Press de pecho con cables' },
-    { exerciseID: 3, exerciseName: 'Vuelos con mancuerna inclinado' },
-    { exerciseID: 4, exerciseName: 'Vuelos sentado en máquina' },
-    { exerciseID: 5, exerciseName: 'Elevaciones laterales' },
-    { exerciseID: 6, exerciseName: 'Press de hombro con mancuernas' },
-    { exerciseID: 7, exerciseName: 'Press de pecho inclinado con cables' }
-  ];
+  // Implementa ngOnInit para ejecutar código cuando se carga el componente
+  ngOnInit(): void {
+    this.getExercises(); // Llama a la función que obtiene los ejercicios del backend
+  }
 
+  // Método que obtiene los ejercicios del backend
+  getExercises(): void {
+    const planID = 1; // Aquí puedes cambiar por un ID dinámico
+    this.trainingPlanService.getPlanByPlanID(planID).subscribe(
+      (plan) => {
+        this.plan = plan; // Asignar el plan recibido a la propiedad
+      },
+      (error) => {
+        console.error('Error al obtener el plan de entrenamiento:', error);
+      }
+    );
+  }
+
+  // Método para seleccionar un ejercicio específico
   selectExercise(id: number) {
-    const found: any | undefined = this.exercises.find(exercise => exercise.exerciseID === id);
+    const found: ITrainingPlanExercise | undefined = this.plan?.planDays
+      .flatMap((day: any) => day.routine || [])
+      .find((exercise: ITrainingPlanExercise) => exercise.exerciseID === id); // <-- Definir el tipo del parámetro aquí
+
     if (found) {
       this.selectedExercise = found;
       this.showExerciseModal = true;
@@ -37,5 +52,4 @@ export class EditTrainingPlanComponent {
   closeModal() {
     this.showExerciseModal = false;
   }
-
 }
