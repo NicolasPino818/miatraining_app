@@ -1,1 +1,101 @@
-<p>objectives-form works!</p>
+<div class="h-100v flex flex-column">
+    <div class="flex flex-column g-5 bg-primary p-20">
+        <h1 class="primary-contrast">Objetivos</h1>
+        <p class="primary-contrast">
+        En esta sección definirás los objetivos que quieres lograr, la información proporcionada la 
+        usaremos para diseñar el mejor plan que se adapte a ti.
+        </p>
+    </div>
+    <div class="flex flex-column g-20 flex-1 bg-light p-10">
+        <form>
+            <div class="grid grid-3 mt-25 g-10">
+                <div class="flex flex-column g-10">
+                    <h2 class="text-center h4-fsize">Información Básica</h2>
+                    @if (token) {
+                        <span class="flex flex-column g-10">
+                            <p>Nombre Completo: </p>
+                            <p class="bg-background blocked b-bottom-primary p-10 user-select-none">
+                              {{token.fullName}}
+                            </p>
+                        </span>
+                        <span class="flex flex-column g-10">
+                            <p>Correo Electrónico: </p>
+                            <p class="bg-background blocked b-bottom-primary p-10 user-select-none worp-wrap-break"> 
+                              {{token.sub}}
+                            </p>
+                        </span>
+                    }
+                    <span class="flex g-5 align-items-end">
+                        <span class="flex flex-column flex-1">
+                            <p>Edad: </p>
+                            <input class="bg-background flex-1 w-100 g-10 b-bottom-primary p-10" 
+                            type="number" 
+                            min="1" 
+                            max="150" 
+                            pattern="[0-9]" 
+                            (keydown)="onKeyDowninputNumberNoDecimal($event)" 
+                            name="age" 
+                            id="age" 
+                            placeholder="30">
+                        </span>
+                        <span class="flex flex-column flex-1">
+                            <p>Peso: <small>(kg)</small> </p>
+                            <input class="bg-background flex-1 w-100 g-10 b-bottom-primary p-10" 
+                            type="number" 
+                            min="1" 
+                            pattern="[0-9]" 
+                            (keydown)="onKeyDowninputNumberNoDecimal($event)" 
+                            name="weight" 
+                            id="weight" 
+                            placeholder="60">
+                        </span>
+                        <span class="flex flex-column flex-1">
+                            <p>Altura: <small>(cm)</small></p>
+                            <input class="bg-background flex-1 w-100 g-10 b-bottom-primary p-10" 
+                            type="number" 
+                            min="1" 
+                            pattern="[0-9]" 
+                            (keydown)="onKeyDowninputNumberNoDecimal($event)" 
+                            name="height" 
+                            id="height" 
+                            placeholder="165">
+                        </span>
+                    </span>
+                    <span class="flex g-5 align-items-end">
+                        <p>Sexo: </p>
+                        <div class="radio-card">
+                            <div>
+                                <input type="radio" id="female" name="gender">
+                                <label for="female">Mujer</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="male" name="gender">
+                                <label for="male">Hombre</label>
+                            </div>
+                        </div>
+                    </span>
+                    <span class="flex g-5 align-items-end">
+                        <p>Tipo de entrenamiento: </p>
+                        <div class="radio-card">
+                            <div>
+                                <input type="radio" id="home" name="trainingType">
+                                <label for="home">Casa</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="gym" name="trainingType">
+                                <label for="gym">Gym</label>
+                            </div>
+                        </div>
+                    </span>
+                </div>
+                <div class="flex flex-column g-10">
+                    <h2 class="text-center h4-fsize">Experiencia y objetivo</h2>
+                </div>
+                <div class="flex flex-column g-10">
+                    <h2 class="text-center h4-fsize">Tipo de dieta y fotografías</h2>
+                </div>
+            </div>
+            <button class="btn disabled">Guardar y Continuar</button>
+        </form>
+    </div>
+</div>

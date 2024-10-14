@@ -180,9 +180,6 @@ body{
     color: var(--color-dark);
     background-color: var(--color-background);
 }
-html{
-    overflow: hidden;
-}
 
 form{
     display: flex;

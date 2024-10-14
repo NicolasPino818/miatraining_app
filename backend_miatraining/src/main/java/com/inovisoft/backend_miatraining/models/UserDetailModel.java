@@ -56,6 +56,10 @@ public class UserDetailModel {
     private DietTypeModel dietType;
 
     @ManyToOne
+    @JoinColumn(name = "experienceID", nullable = false)
+    private TrainingExperienceModel trainingExperience;
+
+    @ManyToOne
     @JoinColumn(name = "trainingTypeID", nullable = false)
     private TrainingTypeModel trainingType;
 

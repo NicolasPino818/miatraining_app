@@ -91,7 +91,7 @@
 .b-radius{
     border-radius: var(--card-border-radius);
 }
-.b-tf-radius{
+.b-tf-radius, .b-tl-radius{
     border-top-left-radius: var(--card-border-radius);
 }
 .b-tr-radius{

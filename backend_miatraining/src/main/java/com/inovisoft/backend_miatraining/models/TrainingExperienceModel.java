@@ -6,24 +6,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Entity
-@Table(name = "bodyType")
+@Table(name = "trainingExperience")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BodyTypeModel {
+public class TrainingExperienceModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "bodyTypeID")
-    private Long bodyTypeID;
+    @Column(name = "experienceID")
+    private Long experienceID;
 
     @Column(nullable = false, length = 150)
-    private String bodyTypeName;
+    private String experienceName;
 
     @Column(length = 250)
     private String description;
+
 }

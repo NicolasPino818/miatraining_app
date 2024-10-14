@@ -12,7 +12,7 @@ export interface IDecodedAccessTokenInfo{
   authorization: string,
   exp: number,
   iat: number,
-  name: string,
+  fullName: string,
   sub: string,
   firstLogin: boolean | null,
   enabled: boolean | null,

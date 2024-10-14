@@ -22,8 +22,5 @@ public class DietTypeModel {
     private Long dietTypeID;
 
     @Column(nullable = false, length = 150)
-    private String dietTypeName;
-
-    @Column(length = 200, nullable = false)
-    private String description;
+    private String dietType;
 }

@@ -123,6 +123,12 @@
 .pb-40{
     padding-bottom: 40px;
 }
+.mt-25{
+    margin-top: 25px;
+}
+.mb-25{
+    margin-bottom: 25px;
+}
 .flex{
     display: flex;
 }
@@ -131,6 +137,9 @@
 }
 .flex-column{
     flex-direction: column;
+}
+.flex-row{
+    flex-direction: row;
 }
 .flex-container{
     display: flex;

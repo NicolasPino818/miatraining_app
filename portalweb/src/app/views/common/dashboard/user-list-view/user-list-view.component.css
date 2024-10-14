@@ -62,4 +62,6 @@
     background-color: var(--color-background); /* Alterna color de filas */
 }
 
-
+::ng-deep html{
+    overflow: hidden !important;
+}

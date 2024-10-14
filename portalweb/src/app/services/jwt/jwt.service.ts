@@ -18,7 +18,7 @@ export class JwtService {
           exp: 0,
           iat: 0,
           authorization: "",
-          name: "",
+          fullName: "",
           firstLogin: null,
           enabled: null,
       };

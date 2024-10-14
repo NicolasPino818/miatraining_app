@@ -65,6 +65,7 @@ public class AuthenticationService {
         Map<String, Object> claims = new HashMap<>();
         claims.put("authorization",user.getRole().getRoleName());
         claims.put("firstLogin", user.getFirstLogin());
+        claims.put("fullName", user.getName().toUpperCase()+ " " + user.getSurname().toUpperCase());
         claims.put("enabled", user.getEnabled());
         var jwtToken = jwtService.generateToken(claims,user);
         var jwtRefreshToken = jwtService.generateRefreshToken(user);
