@@ -1,0 +1,67 @@
+.filter-form{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+}
+.filter-input-group{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 5px;
+}
+.filter-input-group input, .filter-input-group select{
+    border: none;
+    padding: 10px;
+    background-color: #fff;
+    color: #000;
+    border-radius: var(--btn-border-radius);
+}
+
+.filter-input-group.select{
+    max-width: 300px;
+    min-width: 150px;
+}
+
+.table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table tr{
+    width: 100%;
+}
+.table tr td, .table tr th{
+    text-align: left;
+    padding: 10px;
+    min-width: 100px;
+}
+.table tr td:first-child, .table tr th:first-child{
+    min-width: fit-content;
+}
+
+.table tr td:last-child, .table tr th:last-child{
+    text-align: center;
+    max-width: 150px;
+}
+.table tr td:last-child{
+    font-size: 30px;
+    color: var(--color-tertiary-contrast);
+    background-color: var(--color-tertiary);
+    border-bottom: 1px solid var(--color-medium);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.table tr td:last-child:hover{
+    background-color: var(--color-tertiary-tint);
+}
+
+.table tr:nth-child(even) {
+    background-color: var(--color-background); /* Alterna color de filas */
+}
+
+::ng-deep html{
+    overflow: hidden !important;
+}

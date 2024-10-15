@@ -1,1 +1,64 @@
-<p>edit-exercise-library-view works!</p>
+<div class="h-100 flex flex-column g-20">
+    <div class="flex flex-column g-5 bg-primary b-radius p-20">
+        <h1 class="primary-contrast">Biblioteca de Ejercicios</h1>
+        <p class="primary-contrast">
+            En este panel podrás ver y administrar los ejercicios registrados en el sistema.
+        </p>
+    </div>
+
+    <div class="flex flex-column g-5 bg-tertiary b-radius p-20">
+        <h2 class="tertiary-contrast">Filtros</h2>
+        <div class="filters">
+            <form class="filter-form" [formGroup]="filters" (ngSubmit)="filter()">
+                <div class="filter-input-group search">
+                    <label class="tertiary-contrast" for="search">Buscador</label>
+                    <input formControlName="search" type="text" name="search" id="search" placeholder="Nombre del ejercicio, ID">
+                </div>
+                <button [disabled]="!requestEnd" [class.disabled]="!requestEnd" class="btn align-self-end compact">Editar Ejercicios</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="flex flex-column flex-1 b-radius bg-light">
+        <div class="flex flex-wrap g-20 justify-content-between bg-primary b-tf-radius b-tr-radius p-10">
+            <h2 class="primary-contrast">Resultados</h2>
+            <button *ngIf="requestEnd" class="btn tertiary compact" (click)="openAddExerciseForm()">Añadir ejercicio</button>
+        </div>
+        
+        <div *ngIf="requestEnd">
+            <div class="overflow-x-auto">
+                <div *ngIf="exerciseList.length > 0; else noResults">
+                    <table class="table">
+                        <thead>
+                            <tr class="bg-primary primary-contrast">
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="dark" *ngFor="let exercise of exerciseList">
+                                <td>{{ exercise.id }}</td>
+                                <td>{{ exercise.name }}</td>
+                                <td>{{ exercise.description }}</td>
+                                <td><button (click)="editExercise(exercise)" class="btn">Editar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <ng-template #noResults>
+                    <div class="p-10">
+                        <p class="h4-fsize">
+                            Sin resultados.
+                        </p>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <div *ngIf="!requestEnd" class="flex flex-1 g-10 p-10 justify-content-center align-items-center">
+            <p>Cargando ejercicios.</p>
+            <span class="item-loader"></span>
+        </div>
+    </div>
+</div>
