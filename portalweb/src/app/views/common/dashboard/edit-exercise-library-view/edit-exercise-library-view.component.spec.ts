@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms'; // Asegúrate de importar esto
 import { EditExerciseLibraryViewComponent } from './edit-exercise-library-view.component';
 
 describe('EditExerciseLibraryViewComponent', () => {
@@ -8,7 +8,8 @@ describe('EditExerciseLibraryViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditExerciseLibraryViewComponent]
+      imports: [FormsModule], // Agrega FormsModule aquí
+      declarations: [EditExerciseLibraryViewComponent] // Declara el componente aquí
     })
     .compileComponents();
 
