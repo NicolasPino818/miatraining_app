@@ -1,4 +1,65 @@
+.page-loader-screen{
+    background: var(--color-background);
+    position: fixed;
+    inset: 0;
+    z-index: 9999999999999999999999999;
+}
+
 button {
     max-width: 500px;
     margin: auto;
+}
+
+.form-column{
+    min-width: min(260px);
+}
+
+.radio-card input[type="radio"]{
+    display: none;
+}
+.radio-card > *{
+    border: 3px solid transparent;
+    border-radius: var(--btn-border-radius);
+    background-color: var(--color-background);
+}
+.radio-card:not(.gender) > *{
+    border: 1px solid var(--color-dark);
+}
+.radio-card * label i{
+    display: grid;
+    place-content: center;
+    font-size: 60px;
+}
+.radio-card * label > *{
+    color: var(--color-dark);
+}
+.radio-card:not(.gender) *:has(input[type="radio"]:checked){
+    background-color: var(--color-primary);
+}
+.radio-card:not(.gender) *:has(input[type="radio"]:checked) *{
+    color: var(--color-primary-contrast);
+}
+.radio-card *:has(input[type="radio"]:checked){
+    border: 3px solid var(--color-tertiary);
+}
+
+.radio-card.gender * label i{
+    color: #fff;
+}
+.radio-card.gender .female{
+    background-color: pink;
+}
+.radio-card.gender .male{
+    background-color: blue;
+}
+.photo-upload-input input[type="file"]{
+    display: none;
+}
+.photo-upload-input img{
+    display: block;
+    margin: auto;
+    max-width: 100px;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--color-dark);
+    
 }

@@ -8,11 +8,12 @@ import { UserProfileService } from '../../services/users/user-profile.service';
 import { isPlatformBrowser } from '@angular/common';
 import { catchError, EMPTY } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterOutlet,HeaderComponent, SideMenuComponent],
+  imports: [RouterOutlet,HeaderComponent, SideMenuComponent, ReactiveFormsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

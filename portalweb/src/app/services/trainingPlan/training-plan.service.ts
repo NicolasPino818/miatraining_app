@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ITrainingPlan } from '../../models/interfaces';
+import { ITrainingPlan, ITrainingPlanExercise } from '../../models/interfaces';
 import { apiEndpoints } from '../../models/apiEndpoints';
 
 @Injectable({
@@ -24,5 +24,15 @@ export class TrainingPlanService {
     return this.http.put(`${apiEndpoints.trainingPlan}/routine/${routineID}`, updatedRoutine);
   }
 
+   // Obtener todos los ejercicios
+   getAllExercises(): Observable<ITrainingPlanExercise[]> {
+    return this.http.get<ITrainingPlanExercise[]>(apiEndpoints.exercise);
+  }
+  
+
+  // Obtener ejercicio por ID
+  getExerciseById(id: number): Observable<ITrainingPlanExercise> {
+    return this.http.get<ITrainingPlanExercise>(`${apiEndpoints.exercise}/${id}`);
+  }
 
 }

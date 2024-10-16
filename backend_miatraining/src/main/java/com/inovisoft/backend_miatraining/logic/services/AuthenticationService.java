@@ -58,7 +58,7 @@ public class AuthenticationService {
     }
 
     //Genera ambos token de acceso y refresco
-    private AuthenticationResponseDTO generateTokens(String email){
+    public AuthenticationResponseDTO generateTokens(String email){
         var user = userRepository.findByEmailIgnoreCase(email)
                 .orElseThrow(UserNotFoundException::new);
 

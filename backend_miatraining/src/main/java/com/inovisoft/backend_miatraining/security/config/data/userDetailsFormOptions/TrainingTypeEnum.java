@@ -4,6 +4,6 @@ import lombok.Getter;
 
 @Getter
 public enum TrainingTypeEnum {
-    HOME,
+    CASA,
     GYM
 }

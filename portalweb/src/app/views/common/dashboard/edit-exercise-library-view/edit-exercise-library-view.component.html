@@ -1,1 +1,58 @@
-<p>edit-exercise-library-view works!</p>
+<div class="guide-section m-bottom-20">
+  <div class="flex flex-column g-5 bg-primary b-radius p-20">
+    <h1 class="primary-contrast">Biblioteca de ejercicios</h1>
+    <p class="primary-contrast">
+      Aquí encontrarás nuestra guía completa de ejercicios para que veas cómo realizar la técnica correctamente. Utiliza los filtros para encontrar el ejercicio que necesites.
+    </p>
+  </div>
+</div>
+
+<!-- Filtros de búsqueda -->
+<div class="flex flex-column g-5 bg-tertiary b-radius p-20">
+  <h2 class="tertiary-contrast">Filtros de búsqueda</h2>
+  <div class="filters">
+    <form class="filter-form">
+      <div class="filter-input-group search">
+        <label class="tertiary-contrast" for="search">Nombre del Ejercicio</label>
+        <input formControlName="search" type="text" name="search" id="search" placeholder="Nombre ejercicio">
+      </div>
+      <div class="filter-input-group select">
+        <label class="tertiary-contrast" for="category">Categoría</label>
+        <select formControlName="category" name="category" id="category">
+          <option value="ALL">Todas</option>
+        </select>
+      </div>
+      <div class="filter-input-group select">
+        <label class="tertiary-contrast" for="modality">Modalidad</label>
+        <select formControlName="modality" name="modality" id="modality">
+          <option value="ALL">Todos</option>
+        </select>
+      </div>
+      <button class="btn align-self-end compact">Buscar</button>
+    </form>
+  </div>
+</div>
+
+<!-- Sección de resultados con los ejercicios -->
+<div class="exercises-section m-top-20 bg-light">
+  <div class="exercises-header flex justify-content-between p-10 w-100">
+    <h2 class="primary-contrast">Resultados</h2>
+    <button class="btn btn-danger" (click)="openAddExerciseForm()">Agregar Ejercicio</button> <!-- Botón rojo -->
+  </div>
+
+  <div class="exercises-container g-20 p-10 w-100">
+    <div *ngFor="let exercise of exerciseList" class="exercise-card p-20 flex align-items-center flex-column justify-content-between">
+      <div class="card-header w-100 flex justify-content-center">
+        <img [src]="exercise.imageLink || '/favicon.png'" alt="Ejercicio" />
+      </div>
+      <h5>{{ exercise.name }}</h5>
+      <button class="exercise-btn m-top-10 w-100" (click)="selectExercise(exercise)">Ver Tutorial</button>
+    </div>
+  </div>
+
+  <div *ngIf="exerciseList.length === 0" class="no-results">
+    <p class="p-10">No se encontraron ejercicios.</p>
+  </div>
+</div>
+
+<app-add-exercise-modal *ngIf="showAddExerciseModal" (exerciseAdded)="onExerciseAdded($event)"></app-add-exercise-modal>

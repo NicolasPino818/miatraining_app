@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum DietTypeEnum {
     NORMAL("Estándar"),
     VEGETARIAN("Vagetariana"),
-    VEGAN("Vagana"),
+    VEGAN("Vegana"),
     PESCETARIAN("Pescetariana");
 
     private final String dietType;

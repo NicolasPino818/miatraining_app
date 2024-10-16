@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { EditExerciseLibraryViewComponent } from './edit-exercise-library-view.component';
 
 describe('EditExerciseLibraryViewComponent', () => {
@@ -8,9 +8,9 @@ describe('EditExerciseLibraryViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditExerciseLibraryViewComponent]
-    })
-    .compileComponents();
+      imports: [ReactiveFormsModule],
+      declarations: [EditExerciseLibraryViewComponent]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EditExerciseLibraryViewComponent);
     component = fixture.componentInstance;
@@ -19,5 +19,12 @@ describe('EditExerciseLibraryViewComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should add exercise', () => {
+    const newExercise = { name: 'Ejercicio 1', description: 'Descripción 1' };
+    component.addExercise(newExercise);
+    expect(component.exerciseList.length).toBe(1);
+    expect(component.exerciseList[0].name).toBe('Ejercicio 1');
   });
 });

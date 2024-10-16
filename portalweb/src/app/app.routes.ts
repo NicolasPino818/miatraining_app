@@ -121,6 +121,7 @@ export const routes: Routes = [
                         title: 'Contacto Coach',
                         component: ContactCoachViewComponent
                     },
+                    
                     {
                         path: '',
                         pathMatch: 'full',
