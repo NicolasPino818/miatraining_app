@@ -1,4 +1,4 @@
-package cl.duoc.data_finders.errorHandler.exceptions;
+package com.inovisoft.backend_miatraining.errorHandlers.exceptions;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
