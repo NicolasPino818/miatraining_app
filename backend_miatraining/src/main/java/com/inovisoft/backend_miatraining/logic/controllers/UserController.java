@@ -1,6 +1,7 @@
 package com.inovisoft.backend_miatraining.logic.controllers;
 
 import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.*;
+import com.inovisoft.backend_miatraining.logic.DTOs.userDetailsDTO.UserDetailsFormDTO;
 import com.inovisoft.backend_miatraining.logic.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,9 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+    @GetMapping("/user-details-options")
+    public ResponseEntity<UserDetailsFormDTO> getUserDetailsOptions(){
+        return ResponseEntity.ok(userService.getUserDetailsOptions());
+    }
 
 }

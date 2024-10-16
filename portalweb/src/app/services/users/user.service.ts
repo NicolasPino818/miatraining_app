@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
-import { IRole, IUserPage } from '../../models/interfaces';
+import { IRole, IUserDetailsFormOptions, IUserPage } from '../../models/interfaces';
 import { apiEndpoints } from '../../models/apiEndpoints';
 
 @Injectable({
@@ -37,6 +37,10 @@ export class UserService {
 
   getRoles(): Observable<IRole[]>{
     return this.http.get<IRole[]>(apiEndpoints.user+'/role');
+  }
+
+  getUserDetailsFormOptions(): Observable<IUserDetailsFormOptions>{
+    return this.http.get<IUserDetailsFormOptions>(apiEndpoints.user+'/user-details-options');
   }
 
 }

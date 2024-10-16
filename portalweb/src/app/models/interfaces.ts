@@ -138,3 +138,51 @@ export interface IUser{
     registrationDate: string,
     role: string,
 }
+
+export interface IUserDetailsFormOptions{
+  bodyType: IbodyType[],
+  objective: Iobjective[],
+  experience: Iexperience[],
+  trainingType: ItrainingType[],
+  diet: Idiet[],
+}
+
+export interface IbodyType{
+  id: number,
+  bodyType: string,
+  description: string,
+}
+
+export interface Iobjective{
+  id: number,
+  objective: string,
+  description: string,
+}
+
+export interface Iexperience{
+  id: number,
+  experience: string,
+  description: string,
+}
+
+export interface ItrainingType{
+  id: number,
+  type: string,
+}
+
+export interface Idiet{
+  id: number,
+  diet: string,
+}
+
+export interface IUserDetailsFormSubmission {
+  bodyTypeID: number,
+  objectiveID: number,
+  experienceID: number,
+  trainingTypeID: number,
+  dietID: number,
+  gender: boolean,
+  age: number,
+  height: number,
+  wight: number,
+}

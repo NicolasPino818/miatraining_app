@@ -1,14 +1,17 @@
 package com.inovisoft.backend_miatraining.logic.services;
 
 import com.inovisoft.backend_miatraining.errorHandlers.exceptions.UserNotFoundException;
+import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.TrainingTypeDTO;
+import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.mappers.TrainingTypeDTOMapper;
 import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.*;
 import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.mappers.ProfileInfoResponseDTOMapper;
 import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.mappers.UserDTOMapper;
 import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.mappers.UserPageResponseDTOMapper;
+import com.inovisoft.backend_miatraining.logic.DTOs.userDetailsDTO.*;
+import com.inovisoft.backend_miatraining.logic.DTOs.userDetailsDTO.mappers.*;
 import com.inovisoft.backend_miatraining.models.RoleModel;
 import com.inovisoft.backend_miatraining.models.UserModel;
-import com.inovisoft.backend_miatraining.repositories.IRoleRepo;
-import com.inovisoft.backend_miatraining.repositories.IUserRepo;
+import com.inovisoft.backend_miatraining.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,6 +37,26 @@ public class UserService {
     UserPageResponseDTOMapper userPageResponseDTOMapper;
     @Autowired
     ProfileInfoResponseDTOMapper profileInfoResponseDTOMapper;
+    @Autowired
+    IDietTypeRepo dietTypeRepo;
+    @Autowired
+    ITrainingTypeRepo trainingTypeRepo;
+    @Autowired
+    ITrainingExperienceRepo trainingExperienceRepo;
+    @Autowired
+    IObjectiveRepo objectiveRepo;
+    @Autowired
+    IBodyTypeRepo bodyTypeRepo;
+    @Autowired
+    BodyTypeDTOMapper bodyTypeDTOMapper;
+    @Autowired
+    DietTypeDTOMapper dietTypeDTOMapper;
+    @Autowired
+    ObjectiveDTOMapper objectiveDTOMapper;
+    @Autowired
+    TrainingTypeDTOMapper trainingTypeDTOMapper;
+    @Autowired
+    TrainingExperienceDTOMapper trainingExperienceDTOMapper;
 
     public void toggleEnabled(String email){
         UserModel userModel = userRepo.findByEmailIgnoreCase(email)
@@ -100,5 +124,23 @@ public class UserService {
         return userPageResponseDTOMapper.apply(dtoPage);
     }
 
+    public UserDetailsFormDTO getUserDetailsOptions() {
+        List<ObjectiveDTO> objectiveDTOS = objectiveRepo.findAll().stream().map(objectiveDTOMapper).toList();
+        List<DietTypeDTO> dietTypeDTOS = dietTypeRepo.findAll().stream().map(dietTypeDTOMapper).toList();
+        List<BodyTypeDTO> bodyTypeDTOS = bodyTypeRepo.findAll().stream().map(bodyTypeDTOMapper).toList();
+        List<TrainingExperienceDTO> trainingExperienceDTOS =
+                trainingExperienceRepo.findAll().stream().map(trainingExperienceDTOMapper).toList();
+        List<TrainingTypeDTO> trainingTypeDTOS =
+                trainingTypeRepo.findAll().stream().map(trainingTypeDTOMapper).toList();
+
+        return UserDetailsFormDTO
+                .builder()
+                .bodyType(bodyTypeDTOS)
+                .diet(dietTypeDTOS)
+                .trainingType(trainingTypeDTOS)
+                .experience(trainingExperienceDTOS)
+                .objective(objectiveDTOS)
+                .build();
+    }
 }
 
