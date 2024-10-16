@@ -44,7 +44,7 @@ button {
 }
 
 .radio-card.gender * label i{
-    color: var(--color-light);
+    color: #fff;
 }
 .radio-card.gender .female{
     background-color: pink;
