@@ -1,50 +1,50 @@
 import { Component } from '@angular/core';
-import { NgIf, NgFor } from '@angular/common';
-import { ReactiveFormsModule, FormsModule, FormGroup, FormControl } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { AddExerciseModalComponent } from '../add-exercise-modal/add-exercise-modal.component';
 
 interface Exercise {
-  id: number; // Agrega un ID
+  id: number;
   name: string;
   description: string;
+  imageLink?: string;
 }
 
 @Component({
   selector: 'app-edit-exercise-library-view',
   standalone: true,
-  imports: [NgIf, NgFor, ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule, AddExerciseModalComponent],
   templateUrl: './edit-exercise-library-view.component.html',
   styleUrls: ['./edit-exercise-library-view.component.css']
 })
 export class EditExerciseLibraryViewComponent {
-  showAddExerciseForm: boolean = false;
-  newExercise: Omit<Exercise, 'id'> = { name: '', description: '' }; // Elimina 'id' del formulario
-  exerciseList: Exercise[] = []; // Cambia el tipo según tu modelo
-  nextId: number = 1; // Para generar IDs únicos
-  filters: FormGroup = new FormGroup({
-    search: new FormControl(''),
-  });
-  requestEnd: boolean = true; // Establece este valor según tu lógica
+  showAddExerciseModal: boolean = false;
+  exerciseList: Exercise[] = [];
+  nextId: number = 1;
+  selectedExercise: Exercise | null = null;
 
-  addExercise() {
-    const exerciseToAdd: Exercise = { id: this.nextId++, ...this.newExercise }; // Genera un ID único
+  addExercise(exercise: Omit<Exercise, 'id'>) {
+    const exerciseToAdd: Exercise = { id: this.nextId++, ...exercise };
     this.exerciseList.push(exerciseToAdd);
-    this.newExercise = { name: '', description: '' }; // Limpiar el formulario
-    this.showAddExerciseForm = false; // Ocultar formulario
+    this.showAddExerciseModal = false;
   }
 
-  filter() {
-    // Implementa la lógica para filtrar ejercicios
+  onExerciseAdded(exercise: Omit<Exercise, 'id'> | null) {
+    if (exercise) {
+      this.addExercise(exercise);
+    }
   }
 
   openAddExerciseForm() {
-    this.showAddExerciseForm = true;
+    this.showAddExerciseModal = true;
   }
 
   closeAddExerciseForm() {
-    this.showAddExerciseForm = false;
+    this.showAddExerciseModal = false;
   }
 
-  editExercise(exercise: Exercise) {
-    // Implementa la lógica para editar un ejercicio
+  selectExercise(exercise: Exercise) {
+    this.selectedExercise = exercise;
+    // Aquí puedes agregar la lógica para mostrar el modal de detalles si lo necesitas
   }
 }
