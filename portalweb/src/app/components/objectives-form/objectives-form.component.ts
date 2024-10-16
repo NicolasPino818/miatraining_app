@@ -5,6 +5,8 @@ import { IDecodedAccessTokenInfo, IUserDetailsFormOptions } from '../../models/i
 import { isPlatformBrowser, NgFor, NgIf } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/users/user.service';
+import { Router } from '@angular/router';
+import { userURLs } from '../../models/nav';
 
 @Component({
   selector: 'app-objectives-form',
@@ -18,9 +20,9 @@ export class ObjectivesFormComponent implements OnInit{
   public token!: IDecodedAccessTokenInfo;
   public userDetailsFormOptions!: IUserDetailsFormOptions;
   public form: FormGroup = new FormGroup({
-    age: new FormControl(null,[Validators.required, Validators.min(1), Validators.max(150), Validators.pattern('[0-9]')]),
-    weight: new FormControl(null,[Validators.required, Validators.min(1), Validators.pattern('[0-9]')]),
-    height: new FormControl(null,[Validators.required, Validators.min(1), Validators.pattern('[0-9]')]),
+    age: new FormControl(null, [Validators.required, Validators.min(1), Validators.max(150), Validators.pattern('^[0-9]+$')]),
+    weight: new FormControl(null, [Validators.required, Validators.min(1), Validators.pattern('^[0-9]+$')]),
+    height: new FormControl(null, [Validators.required, Validators.min(1), Validators.pattern('^[0-9]+$')]),
     gender: new FormControl(null,[Validators.required]),
     diet: new FormControl(null,[Validators.required]),
     trainingType: new FormControl(null,[Validators.required]),
@@ -30,11 +32,19 @@ export class ObjectivesFormComponent implements OnInit{
     frontalPhoto: new FormControl(null,[Validators.required]),
     sidePhoto: new FormControl(null,[Validators.required]),
     backPhoto: new FormControl(null,[Validators.required]),
-  })
+  });
 
+  // Propiedades para previsualización de imágenes
+  public frontalPreviewUrl: string | ArrayBuffer | null = null;
+  public sidePreviewUrl: string | ArrayBuffer | null = null;
+  public backPreviewUrl: string | ArrayBuffer | null = null;
+  private frontalPhotoFile!: File;
+  private sidePhotoFile!: File;
+  private backPhotoFile!: File;
   constructor(private jwtService: JwtService,
     private userService: UserService,
     @Inject(PLATFORM_ID) private platformId: Object,
+    private router: Router,
     private storage: SessionStorageService){
       if(isPlatformBrowser(this.platformId)) {
         this.token = this.jwtService.getDecodedAccessToken(this.storage.getToken() as string);
@@ -58,8 +68,60 @@ export class ObjectivesFormComponent implements OnInit{
       event.preventDefault();
   }
 
-  onSubmit(){
-    console.log(this.form)
+  onFileSelected(event: any, photoType: string) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      
+      // Previsualización del archivo
+      reader.onload = () => {
+        if (photoType === 'frontal') {
+          this.frontalPreviewUrl = reader.result;
+          this.frontalPhotoFile = file; // Almacena el archivo en una variable
+        } else if (photoType === 'side') {
+          this.sidePreviewUrl = reader.result;
+          this.sidePhotoFile = file; // Almacena el archivo en una variable
+        } else if (photoType === 'back') {
+          this.backPreviewUrl = reader.result;
+          this.backPhotoFile = file; // Almacena el archivo en una variable
+        }
+      };
+  
+      // Leer archivo como URL para previsualización
+      reader.readAsDataURL(file);
+    }
+  }
+  
+
+  onSubmit() {
+    if (this.form.valid) {
+      const formData = new FormData();
+      console.log('onSubmit');
+  
+      // Agregar los campos de texto al FormData
+      formData.append('age', this.form.get('age')?.value);
+      formData.append('weight', this.form.get('weight')?.value);
+      formData.append('height', this.form.get('height')?.value);
+      formData.append('gender', this.form.get('gender')?.value);
+      formData.append('dietID', this.form.get('diet')?.value);
+      formData.append('trainingTypeID', this.form.get('trainingType')?.value);
+      formData.append('trainingExperienceID', this.form.get('trainingExperience')?.value);
+      formData.append('objectiveID', this.form.get('objective')?.value);
+      formData.append('bodyTypeID', this.form.get('bodyType')?.value);
+  
+      // Agregar los archivos seleccionados al FormData
+      formData.append('frontalPhoto', this.frontalPhotoFile); // Archivo frontal
+      formData.append('sidePhoto', this.sidePhotoFile); // Archivo lateral
+      formData.append('backPhoto', this.backPhotoFile); // Archivo trasero
+  
+      // Envía el FormData al backend usando el servicio
+      this.userService.saveUserDetails(this.token.sub, formData).subscribe((result) => {
+        this.storage.storeToken(result.access_token);
+        this.storage.storeRefreshToken(result.refresh_token);
+        console.log('Formulario enviado con éxito');
+        this.router.navigate(['/dashboard/', userURLs.clientBaseUrl]);
+      });
+    }
   }
 
 }

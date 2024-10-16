@@ -52,8 +52,7 @@ const isPublicUrl = (req: HttpRequest<any>): boolean => {
 const AddTokenHeader = (req: HttpRequest<any>, token: string): HttpRequest<any> => {
   return req.clone({
     headers: new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      'Authorization': `Bearer ${token}`
     })
   });
 };

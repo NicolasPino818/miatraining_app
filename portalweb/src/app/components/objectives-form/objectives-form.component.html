@@ -62,11 +62,11 @@
                             <p>Sexo: </p>
                             <div class="radio-card flex-wrap justify-content-center flex g-5 gender">
                                 <div class="female flex-1 pointer">
-                                    <input type="radio" id="female" name="gender" value="0" formControlName="gender">
+                                    <input type="radio" id="female" name="gender" value="true" formControlName="gender">
                                     <label class="pointer" for="female"><i class='bx bx-female-sign p-5'></i></label>
                                 </div>
                                 <div class="male flex-1 pointer">
-                                    <input type="radio" id="male" name="gender" value="1" formControlName="gender">
+                                    <input type="radio" id="male" name="gender" value="false" formControlName="gender">
                                     <label class="pointer" for="male"><i class='bx bx-male-sign p-5' ></i></label>
                                 </div>
                             </div>
@@ -170,27 +170,29 @@
                         <span class="flex w-100 flex-wrap g-5 justify-content-evenly">
                             <p class="w-100"><b>Fotografías:</b> </p>
                             <div class="photo-upload-input text-center">
-                                <input type="file" id="frontalPhoto" accept=".jpg,.jpeg,.png" formControlName="frontalPhoto">
-                                <label class="pointer" for="frontalPhoto">
-                                    <img class="btn-b-radius" src="/Front.png" alt="frontal">
-                                </label>
-                                Frontal
+                              <input type="file" id="frontalPhoto" accept=".jpg,.jpeg,.png" (change)="onFileSelected($event, 'frontal')" formControlName="frontalPhoto">
+                              <label class="pointer" for="frontalPhoto">
+                                <img class="btn-b-radius" [src]="frontalPreviewUrl || '/Front.png'" alt="frontal">
+                              </label>
+                              Frontal
                             </div>
+                          
                             <div class="photo-upload-input text-center">
-                                <input type="file" id="sidePhoto" accept=".jpg,.jpeg,.png" formControlName="sidePhoto">
-                                <label class="pointer" for="sidePhoto">
-                                    <img class="btn-b-radius" src="/Side.png" alt="side">
-                                </label>
-                                Lateral
+                              <input type="file" id="sidePhoto" accept=".jpg,.jpeg,.png" (change)="onFileSelected($event, 'side')" formControlName="sidePhoto">
+                              <label class="pointer" for="sidePhoto">
+                                <img class="btn-b-radius" [src]="sidePreviewUrl || '/Side.png'" alt="side">
+                              </label>
+                              Lateral
                             </div>
+                          
                             <div class="photo-upload-input text-center">
-                                <input type="file" id="backPhoto" accept=".jpg,.jpeg,.png" formControlName="backPhoto">
-                                <label class="pointer" for="backPhoto">
-                                    <img class="btn-b-radius" src="/Back.png" alt="back">
-                                </label>
-                                Trasera
+                              <input type="file" id="backPhoto" accept=".jpg,.jpeg,.png" (change)="onFileSelected($event, 'back')" formControlName="backPhoto">
+                              <label class="pointer" for="backPhoto">
+                                <img class="btn-b-radius" [src]="backPreviewUrl || '/Back.png'" alt="back">
+                              </label>
+                              Trasera
                             </div>
-                        </span>
+                          </span>
                     </div>
                 </div>
                 <button class="btn disabled">Guardar y Continuar</button>

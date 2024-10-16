@@ -86,7 +86,6 @@ export class LoginViewComponent {
         if (result.success && result.data) { // SI EL LOGIN ES CORRECTO INGRESA AQUI
 
           let token = this.jwt.getDecodedAccessToken(result.data.access_token);
-
           this.storage.storeToken(result.data.access_token);
           this.storage.storeRefreshToken(result.data.refresh_token);
           if(token.authorization === 'CLIENT' && token.firstLogin) {

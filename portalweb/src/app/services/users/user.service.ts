@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
-import { IRole, IUserDetailsFormOptions, IUserPage } from '../../models/interfaces';
+import { IRole, IUserDetailsFormOptions, IUserDetailsFormSubmission, IUserPage } from '../../models/interfaces';
 import { apiEndpoints } from '../../models/apiEndpoints';
 
 @Injectable({
@@ -43,4 +43,10 @@ export class UserService {
     return this.http.get<IUserDetailsFormOptions>(apiEndpoints.user+'/user-details-options');
   }
 
+  saveUserDetails(email: string, body: FormData): Observable<any> {
+    body.forEach(d=>{
+      console.log(d);
+    })
+    return this.http.post(apiEndpoints.user + '/' + email + '/user-details', body);
+  }
 }

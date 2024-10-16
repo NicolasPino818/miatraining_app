@@ -185,4 +185,7 @@ export interface IUserDetailsFormSubmission {
   age: number,
   height: number,
   wight: number,
+  frontalPhoto: File,
+  sidePhoto: File,
+  backPhoto: File,
 }
