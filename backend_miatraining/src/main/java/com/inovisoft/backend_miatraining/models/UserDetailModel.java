@@ -26,22 +26,22 @@ public class UserDetailModel {
     private Integer age;
 
     @Column(nullable = false)
-    private Float height;
+    private Integer height;
 
     @Column(nullable = false)
-    private Float currentWeight;
+    private Integer currentWeight;
 
-    @Column(nullable = false, length = 1)
-    private char sex;
+    @Column(nullable = false)
+    private Boolean sex;
 
-    @Column(length = 500, nullable = false)
-    private String profilePictureFront;
+    @Column(columnDefinition = "LONGTEXT")
+    private String frontalPhoto;
 
-    @Column(length = 500, nullable = false)
-    private String profilePictureBack;
+    @Column(columnDefinition = "LONGTEXT")
+    private String backPhoto;
 
-    @Column(length = 500, nullable = false)
-    private String profilePictureSide;
+    @Column(columnDefinition = "LONGTEXT")
+    private String sidePhoto;
 
     @ManyToOne
     @JoinColumn(name = "objectiveID", nullable = false)

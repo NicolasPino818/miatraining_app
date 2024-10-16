@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @Builder
@@ -18,8 +19,8 @@ public class UserDetailsFormSubmissionDTO {
     private Boolean gender;
     private Integer age;
     private Integer height;
-    private Integer wight;
-    private String frontalPhotoLink;
-    private String sidePhotoLink;
-    private String backPhotoLink;
+    private Integer weight;
+    private MultipartFile frontalPhoto;
+    private MultipartFile sidePhoto;
+    private MultipartFile backPhoto;
 }

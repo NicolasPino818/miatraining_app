@@ -1,6 +1,9 @@
 package com.inovisoft.backend_miatraining.logic.services;
 
+import com.inovisoft.backend_miatraining.errorHandlers.exceptions.NotAllowedException;
+import com.inovisoft.backend_miatraining.errorHandlers.exceptions.ResourceNotFoundException;
 import com.inovisoft.backend_miatraining.errorHandlers.exceptions.UserNotFoundException;
+import com.inovisoft.backend_miatraining.logic.DTOs.authDTO.AuthenticationResponseDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.TrainingTypeDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.mappers.TrainingTypeDTOMapper;
 import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.*;
@@ -9,15 +12,17 @@ import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.mappers.UserDTOMappe
 import com.inovisoft.backend_miatraining.logic.DTOs.userDTO.mappers.UserPageResponseDTOMapper;
 import com.inovisoft.backend_miatraining.logic.DTOs.userDetailsDTO.*;
 import com.inovisoft.backend_miatraining.logic.DTOs.userDetailsDTO.mappers.*;
-import com.inovisoft.backend_miatraining.models.RoleModel;
-import com.inovisoft.backend_miatraining.models.UserModel;
+import com.inovisoft.backend_miatraining.models.*;
 import com.inovisoft.backend_miatraining.repositories.*;
+import com.inovisoft.backend_miatraining.security.config.data.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,6 +32,8 @@ public class UserService {
 
     @Autowired
     IUserRepo userRepo;
+    @Autowired
+    IUserDetailRepo userDetailRepo;
     @Autowired
     IRoleRepo roleRepo;
     @Autowired
@@ -57,6 +64,8 @@ public class UserService {
     TrainingTypeDTOMapper trainingTypeDTOMapper;
     @Autowired
     TrainingExperienceDTOMapper trainingExperienceDTOMapper;
+    @Autowired
+    GoogleCloudStorageService storageService;
 
     public void toggleEnabled(String email){
         UserModel userModel = userRepo.findByEmailIgnoreCase(email)
@@ -141,6 +150,60 @@ public class UserService {
                 .experience(trainingExperienceDTOS)
                 .objective(objectiveDTOS)
                 .build();
+    }
+
+    public AuthenticationResponseDTO createUserDetails(String email, UserDetailsFormSubmissionDTO dto) throws IOException {
+
+        UserModel userModel = userRepo.findByEmailIgnoreCase(email).orElseThrow(UserNotFoundException::new);
+        if(!userModel.getRole().getRoleName().equals(RoleEnum.CLIENT.name())) throw new NotAllowedException();
+
+        ObjectiveModel objectiveModel =
+                objectiveRepo.findById(dto.getObjectiveID()).orElseThrow(ResourceNotFoundException::new);
+        DietTypeModel dietTypeModel =
+                dietTypeRepo.findById(dto.getDietID()).orElseThrow(ResourceNotFoundException::new);
+        BodyTypeModel bodyTypeModel =
+                bodyTypeRepo.findById(dto.getBodyTypeID()).orElseThrow(ResourceNotFoundException::new);
+        TrainingExperienceModel experienceModel =
+                trainingExperienceRepo.findById(dto.getExperienceID()).orElseThrow(ResourceNotFoundException::new);
+        TrainingTypeModel typeModel =
+                trainingTypeRepo.findById(dto.getTrainingTypeID()).orElseThrow(ResourceNotFoundException::new);
+
+        UserDetailModel userDetailModel = UserDetailModel
+                .builder()
+                .user(userModel)
+                .age(dto.getAge())
+                .currentWeight(dto.getWeight())
+                .height(dto.getHeight())
+                .sex(dto.getGender())
+                .bodyType(bodyTypeModel)
+                .dietType(dietTypeModel)
+                .objective(objectiveModel)
+                .trainingExperience(experienceModel)
+                .trainingType(typeModel)
+                .build();
+        userDetailRepo.save(userDetailModel);
+        System.out.println("Despues de guardar userDetailModel");
+        userModel.setFirstLogin(false);
+        userRepo.save(userModel);
+        System.out.println("Despues de guardar userModel");
+        return saveUserDetailPictures(userDetailModel, dto.getFrontalPhoto(), dto.getSidePhoto(), dto.getBackPhoto(), userModel);
+
+    }
+
+    private AuthenticationResponseDTO saveUserDetailPictures(UserDetailModel userDetailModel,
+                                                             MultipartFile frontal,
+                                                             MultipartFile side,
+                                                             MultipartFile back,
+                                                             UserModel userModel) throws IOException {
+        Long userId = userModel.getUserID();
+        try{
+            userDetailModel.setFrontalPhoto(storageService.uploadUserDetailPicture(frontal, userId));
+            userDetailModel.setSidePhoto(storageService.uploadUserDetailPicture(side, userId));
+            userDetailModel.setBackPhoto(storageService.uploadUserDetailPicture(back, userId));
+            userDetailRepo.save(userDetailModel);
+        }catch (Exception _){
+        }
+        return authenticationService.generateTokens(userModel.getEmail());
     }
 }
 

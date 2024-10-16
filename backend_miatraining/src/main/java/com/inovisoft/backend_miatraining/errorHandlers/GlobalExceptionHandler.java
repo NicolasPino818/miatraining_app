@@ -205,18 +205,41 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<Object> handleMailAuthenticationException(ResourceNotFoundException ex, HttpServletRequest request) {
+    public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException ex, HttpServletRequest request) {
+
+        ErrorResponse response = new ErrorResponse(request.getRequestURI(),request.getMethod(),ex.getMessage(),ex.getCode());
+        return new ResponseEntity<>(response, ex.getStatus());
+    }
+
+    @ExceptionHandler(NotAllowedException.class)
+    public ResponseEntity<Object> handleNotAllowedException(NotAllowedException ex, HttpServletRequest request) {
+
+        ErrorResponse response = new ErrorResponse(request.getRequestURI(),request.getMethod(),ex.getMessage(),ex.getCode());
+        return new ResponseEntity<>(response, ex.getStatus());
+    }
+
+    @ExceptionHandler(FileUploadException.class)
+    public ResponseEntity<Object> handleFileUploadException(FileUploadException ex, HttpServletRequest request) {
 
         ErrorResponse response = new ErrorResponse(request.getRequestURI(),request.getMethod(),ex.getMessage(),ex.getCode());
         return new ResponseEntity<>(response, ex.getStatus());
     }
 
     //DEFAULT EXCEPTION HANDLER
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<Object> handleGeneralException(Exception ex, HttpServletRequest request) {
+//        String code = "server:internal-error";
+//        String msg = "AN UNEXPECTED ERROR OCCURRED";
+//        System.out.println(ex.getMessage());
+//        ErrorResponse response = new ErrorResponse(request.getRequestURI(),request.getMethod(),msg,code);
+//        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleGeneralException(Exception ex, HttpServletRequest request) {
         String code = "server:internal-error";
-        String msg = "AN UNEXPECTED ERROR OCCURRED";
         System.out.println(ex.getMessage());
+        System.out.println(ex.getClass());
+        String msg = "AN UNEXPECTED ERROR OCCURRED";
         ErrorResponse response = new ErrorResponse(request.getRequestURI(),request.getMethod(),msg,code);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
