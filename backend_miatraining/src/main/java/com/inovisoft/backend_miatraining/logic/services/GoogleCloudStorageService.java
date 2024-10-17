@@ -15,6 +15,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
+
 @Service
 public class GoogleCloudStorageService {
     private final String bucketName = "miatraining-bucket";
@@ -52,7 +54,7 @@ public class GoogleCloudStorageService {
         }
 
         // Construir el nombre final del archivo: userId_fileName
-        String newFileName = STR."\{userId}_\{originalFileName}";
+        String newFileName = userId + "_" + originalFileName;
 
         // Definir la ruta dentro del bucket: usuarios/{ID}/detalles-usuario/
         String filePath = String.format("usuarios/%d/detalles-usuario/%s", userId, newFileName);
