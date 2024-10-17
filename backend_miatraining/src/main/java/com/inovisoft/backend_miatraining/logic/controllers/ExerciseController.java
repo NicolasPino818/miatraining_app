@@ -2,7 +2,6 @@ package com.inovisoft.backend_miatraining.logic.controllers;
 
 import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.*;
 import com.inovisoft.backend_miatraining.logic.services.ExerciseService;
-import com.inovisoft.backend_miatraining.models.TrainingTypeModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +18,22 @@ public class ExerciseController {
 
     @GetMapping()
     public ResponseEntity<ExercisePageResponseDTO> getExercises(
-            @RequestParam(name = "page", defaultValue = "0") int page) {
-        return ResponseEntity.ok(exerciseService.getExercisesByPage(page));
+            @RequestParam(name = "pageNumber", defaultValue = "0") int pageNumber,
+            @RequestParam(name = "pageSize", defaultValue = "100") int pageSize,
+            @RequestParam(name = "search", required = false, defaultValue = "")  String search,
+            @RequestParam(name = "category", required = false, defaultValue = "") String category,
+            @RequestParam(name = "trainingType", required = false, defaultValue = "") String trainingType){
+        ExercisePageResponseDTO exercises =
+                exerciseService.getExercisesByPage(pageNumber, pageSize, search, category ,trainingType);
+        return ResponseEntity.ok(exercises);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/filters")
+    public ResponseEntity<ExerciseFiltersDTO> getExerciseFilters(){
+        return ResponseEntity.ok(exerciseService.getExerciseFilters());
+    }
+
+    @GetMapping("/{id}")
     public ResponseEntity<ExerciseDTO> getExercise(@PathVariable("id") Long id){
         return ResponseEntity.ok(exerciseService.getExercise(id));
     }

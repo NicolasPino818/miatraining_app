@@ -36,11 +36,25 @@ public class ExerciseService {
     @Autowired
     ExerciseCategoryPageResponseDTOMapper categoryPageResponseDTOMapper;
 
-    public ExercisePageResponseDTO getExercisesByPage(int page) {
-        Pageable pageable = PageRequest.of(page, 100);
-        Page<ExerciseDTO> dtoPage = exerciseRepo.findAll(pageable).map(exerciseDTOMapper);
+    public ExercisePageResponseDTO getExercisesByPage(int pageNumber,
+                                                      int pageSize,
+                                                      String search,
+                                                      String category,
+                                                      String trainingType) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+
+        String searchTerm = (search == null || search.trim().isEmpty()) ? "" : search.trim();
+        String categoryFilter = (category == null || category.trim().isEmpty()) ? "" : category.trim();
+        String trainingTypeFilter = (trainingType == null || trainingType.trim().isEmpty()) ? "" : trainingType.trim();
+
+        Page<ExerciseModel> exercisePage = exerciseRepo.findExercisesWithFilters(
+                searchTerm, categoryFilter, trainingTypeFilter, pageable);
+
+        Page<ExerciseDTO> dtoPage = exercisePage.map(exerciseDTOMapper);
+
         return pageResponseDTOMapper.apply(dtoPage);
     }
+
 
     public ExerciseDTO getExercise(Long id) {
         ExerciseModel model = exerciseRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
@@ -126,4 +140,15 @@ public class ExerciseService {
     }
 
 
+    public ExerciseFiltersDTO getExerciseFilters() {
+        List<ExerciseCategoryDTO> categoryDTOS =
+                exerciseCategoryRepo.findAll().stream().map(exerciseCategoryDTOMapper).toList();
+        List<TrainingTypeDTO> trainingTypeDTOS =
+                trainingTypeRepo.findAll().stream().map(trainingTypeDTOMapper).toList();
+        return ExerciseFiltersDTO
+                .builder()
+                .categories(categoryDTOS)
+                .trainingTypes(trainingTypeDTOS)
+                .build();
+    }
 }
