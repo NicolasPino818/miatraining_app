@@ -182,10 +182,8 @@ public class UserService {
                 .trainingType(typeModel)
                 .build();
         userDetailRepo.save(userDetailModel);
-        System.out.println("Despues de guardar userDetailModel");
         userModel.setFirstLogin(false);
         userRepo.save(userModel);
-        System.out.println("Despues de guardar userModel");
         return saveUserDetailPictures(userDetailModel, dto.getFrontalPhoto(), dto.getSidePhoto(), dto.getBackPhoto(), userModel);
 
     }
@@ -201,9 +199,24 @@ public class UserService {
             userDetailModel.setSidePhoto(storageService.uploadUserDetailPicture(side, userId));
             userDetailModel.setBackPhoto(storageService.uploadUserDetailPicture(back, userId));
             userDetailRepo.save(userDetailModel);
-        }catch (Exception _){
-        }
+        }catch (Exception _){}
         return authenticationService.generateTokens(userModel.getEmail());
+    }
+
+    public ProfilePictureDTO uploadProfilePicture(String email, MultipartFile picture) throws IOException {
+        UserModel userModel = userRepo.findByEmailIgnoreCase(email).orElseThrow(UserNotFoundException::new);
+        String pictureURL = null;
+        try{
+            pictureURL = storageService.uploadProfilePicture(picture, userModel.getUserID());
+            userModel.setPictureUrlString(pictureURL);
+            userRepo.save(userModel);
+        }catch (Exception _){}
+        return ProfilePictureDTO.builder().pictureURL(pictureURL).build();
+    }
+
+    public ProfilePictureDTO getProfilePicture(String email) {
+        UserModel userModel = userRepo.findByEmailIgnoreCase(email).orElseThrow(UserNotFoundException::new);
+        return ProfilePictureDTO.builder().pictureURL(userModel.getPictureUrlString()).build();
     }
 }
 
