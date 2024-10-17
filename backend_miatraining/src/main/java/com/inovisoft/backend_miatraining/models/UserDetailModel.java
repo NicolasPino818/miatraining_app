@@ -63,7 +63,7 @@ public class UserDetailModel {
     @JoinColumn(name = "trainingTypeID", nullable = false)
     private TrainingTypeModel trainingType;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "userID", nullable = false)
     private UserModel user;
 }

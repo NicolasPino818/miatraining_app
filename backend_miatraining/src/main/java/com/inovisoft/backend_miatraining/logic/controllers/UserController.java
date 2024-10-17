@@ -68,6 +68,17 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserDetailsOptions());
     }
 
+    @PostMapping(value = "/{email}/profile-picture", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ProfilePictureDTO> uploadProfilePicture(@PathVariable("email") String email,
+                                                                  @RequestParam("picture") MultipartFile picture) throws IOException {
+        return ResponseEntity.ok(userService.uploadProfilePicture(email, picture));
+    }
+
+    @GetMapping(value = "/{email}/profile-picture")
+    public ResponseEntity<ProfilePictureDTO> getProfilePicture(@PathVariable("email") String email){
+        return ResponseEntity.ok(userService.getProfilePicture(email));
+    }
+
     @PostMapping(value = "/{email}/user-details", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<AuthenticationResponseDTO> createUserDetails(@PathVariable("email") String email,
                                                                        @RequestParam("age") Integer age,
@@ -98,7 +109,6 @@ public class UserController {
                 .sidePhoto(sidePhoto)
                 .backPhoto(backPhoto)
                 .build();
-        System.out.println("Despues de DTO");
         return ResponseEntity.ok(userService.createUserDetails(email, dto));
     }
 }
