@@ -189,3 +189,24 @@ export interface IUserDetailsFormSubmission {
   sidePhoto: File,
   backPhoto: File,
 }
+
+export interface IExerciseFilters{
+  categories: IExerciseCategory[],
+  trainingTypes: ItrainingType[],
+}
+
+export interface IExercise{
+  id: number,
+  name: string,
+  tutorialSrc: string,
+  imageSrc: string,
+  description: string,
+  trainingType: string,
+  exerciseCategories: IExerciseCategory[],
+}
+
+export interface IExercisePage{
+  exercises: IExercise[],
+  pageNumber:number,
+  pageSize:number,
+}

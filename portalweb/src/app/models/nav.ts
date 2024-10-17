@@ -23,13 +23,13 @@ export const navLinks = {
             icon: 'bx bx-search',
             iconType: 'BOXICON', 
             link: userURLs.clientBaseUrl+'/guia-ejercicios'
-        },
+        },/*
         {
             linkName: 'AVANCES Y PROGRESO',
             icon: 'bx bx-medal',
             iconType: 'BOXICON', 
             link: userURLs.clientBaseUrl+'/avances-progreso'
-        },
+        },*/
         {
             linkName: 'Mi cuenta',
             icon: 'bx bx-user-circle',

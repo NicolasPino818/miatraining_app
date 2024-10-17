@@ -24,17 +24,6 @@ export class UserService {
     });
   }
 
-  getUsersWithFilters(filters: {role: string, search: string}): Observable<IUserPage>{
-
-    let params: HttpParams = new HttpParams();
-    params = params.set("search", filters.search.normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
-    params = params.set("role", filters.role);
-
-    return this.http.get<IUserPage>(apiEndpoints.user, {
-      params: params
-    });
-  }
-
   getRoles(): Observable<IRole[]>{
     return this.http.get<IRole[]>(apiEndpoints.user+'/role');
   }
@@ -44,9 +33,6 @@ export class UserService {
   }
 
   saveUserDetails(email: string, body: FormData): Observable<any> {
-    body.forEach(d=>{
-      console.log(d);
-    })
     return this.http.post(apiEndpoints.user + '/' + email + '/user-details', body);
   }
 }
