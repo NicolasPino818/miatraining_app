@@ -46,9 +46,11 @@
     transition: color 100ms linear;
 }
 .info-section .profile-pic{
+    border-radius: 50%;
     display: block;
     width: 10vw;
     max-width: 40px;
+    aspect-ratio: 1/1;
 }
 .info-section:hover{
     box-shadow: var(--box-shadow);

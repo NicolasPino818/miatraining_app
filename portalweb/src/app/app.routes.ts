@@ -36,7 +36,7 @@ export const routes: Routes = [
     },
     {
         path: 'registro-formulario-inicial',
-        title: 'Formualario Inicial',
+        title: 'Formulario Inicial',
         canActivate: [isUserLogedGuard, isClientGuard, firstLoginGuard, isEnabledGuard],
         component: ObjectivesFormComponent
     },

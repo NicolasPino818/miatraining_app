@@ -96,7 +96,6 @@ export class ObjectivesFormComponent implements OnInit{
   onSubmit() {
     if (this.form.valid) {
       const formData = new FormData();
-      console.log('onSubmit');
   
       // Agregar los campos de texto al FormData
       formData.append('age', this.form.get('age')?.value);
@@ -118,7 +117,6 @@ export class ObjectivesFormComponent implements OnInit{
       this.userService.saveUserDetails(this.token.sub, formData).subscribe((result) => {
         this.storage.storeToken(result.access_token);
         this.storage.storeRefreshToken(result.refresh_token);
-        console.log('Formulario enviado con éxito');
         this.router.navigate(['/dashboard/', userURLs.clientBaseUrl]);
       });
     }
