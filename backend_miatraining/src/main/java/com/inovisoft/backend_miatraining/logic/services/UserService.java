@@ -199,7 +199,9 @@ public class UserService {
             userDetailModel.setSidePhoto(storageService.uploadUserDetailPicture(side, userId));
             userDetailModel.setBackPhoto(storageService.uploadUserDetailPicture(back, userId));
             userDetailRepo.save(userDetailModel);
-        }catch (Exception _){}
+        }catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         return authenticationService.generateTokens(userModel.getEmail());
     }
 
