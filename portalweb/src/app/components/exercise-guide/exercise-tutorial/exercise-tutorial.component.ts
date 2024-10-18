@@ -14,10 +14,10 @@ export class ExerciseTutorialComponent {
   @Input()
   exercise!: IExercise;
   @Output()
-  loadExcersiceInfo: EventEmitter<number> = new EventEmitter<number>();
-  
+  loadExerciseInfo: EventEmitter<number> = new EventEmitter<number>();
+
   constructor(){}
   emitLoadExcersiceInfo(id:number){
-    this.loadExcersiceInfo.emit(id);
+    this.loadExerciseInfo.emit(id);
   }
 }

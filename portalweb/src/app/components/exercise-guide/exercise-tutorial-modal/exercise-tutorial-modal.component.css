@@ -1,0 +1,20 @@
+.modal-container .full-width {
+  width: 100%;
+  grid-column: span 2; /* Hace que ocupe ambas columnas si es parte del grid */
+  margin-top: 20px; /* Espacio entre la imagen y la descripción */
+}
+
+
+iframe{
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  max-width: 560px;
+  border-radius: 5px;
+}
+
+@media (max-width: 579px){
+  .reverse-mobile{
+      order: -1;
+  }
+}
+

@@ -1,1 +1,39 @@
-<p>exercise-tutorial-modal works!</p>
+<div class="backdrop" (click)="closeModalEvent()"></div>
+<div class="modal-container">
+  <div class="flex justify-content-end">
+    <i class='bx bx-x-circle modal-close' (click)="closeModalEvent()"></i>
+  </div>
+
+  <div class="grid grid-2 g-10">
+    <div class="flex flex-column justify-content-end g-5 flex-1">
+      <h2>{{exercise?.name}}</h2>
+      <p *ngIf="exercise?.tutorialSrc">Reproduce el video y aprende la técnica correcta para realizar este ejercicio.</p>
+      <p *ngIf="!exercise?.tutorialSrc">Este ejercicio aún no cuenta con un video tutorial.
+        <br/>
+        Recuerda que puedes encontrar más en nuestra guía de ejercicios.
+      </p>
+    </div>
+
+    <!-- Mostrar el video si existe el tutorial -->
+    <div class="flex flex-column reverse-mobile justify-content-end" *ngIf="exercise?.tutorialSrc">
+      <iframe
+        class="block w-100 btn-b-radius box-shadow"
+        [src]="exercise?.tutorialSrc"
+        frameborder="0"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <!-- Mostrar la imagen si no existe el tutorial -->
+    <div class="flex flex-column reverse-mobile justify-content-end" *ngIf="!exercise?.tutorialSrc">
+      <img class="block w-100 btn-b-radius box-shadow" [src]="exercise?.imageSrc || '/video placeholder.jpg'" alt="Imagen de referencia del ejercicio">
+    </div>
+     <!-- Contenedor de la descripción -->
+  <div class="box-shadow-inset p-10 b-radius full-width">
+    <h3 class="dark">Descripción:</h3>
+    <p class="dark">{{exercise?.description}}</p>
+  </div>
+  </div>
+</div>
+
