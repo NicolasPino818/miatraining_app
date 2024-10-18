@@ -1,64 +1,72 @@
-<div class="guide-section m-bottom-20">
+<div class="h-100 flex flex-column g-10">
   <div class="flex flex-column g-5 bg-primary b-radius p-20">
     <h1 class="primary-contrast">Guía de ejercicios</h1>
     <p class="primary-contrast">
       Aquí encontrarás nuestra guía completa de ejercicios para que veas cómo realizar la técnica correctamente. Utiliza los filtros para encontrar el ejercicio que necesites.
     </p>
   </div>
-</div>
 
-<!-- Filtros de búsqueda -->
-<div class="flex flex-column g-5 bg-tertiary b-radius p-20">
-  <h2 class="tertiary-contrast">Filtros de búsqueda</h2>
-  <div class="filters">
-    <form class="filter-form">
-      <div class="filter-input-group search">
-        <label class="tertiary-contrast" for="search">Nombre del Ejercicio</label>
-        <input formControlName="search" type="text" name="search" id="search" placeholder="Nombre ejercicio">
-      </div>
-      <div class="filter-input-group select">
-        <label class="tertiary-contrast" for="category">Categoría</label>
-        <select formControlName="category" name="category" id="category">
-          <option value="ALL">Todas</option>
-          <!-- Opciones dinámicas de categorías pueden añadirse aquí -->
-        </select>
-      </div>
-      <div class="filter-input-group select">
-        <label class="tertiary-contrast" for="modality">Modalidad</label>
-        <select formControlName="modality" name="modality" id="modality">
-          <option value="ALL">Todos</option>
-          <!-- Opciones dinámicas de modalidades pueden añadirse aquí -->
-        </select>
-      </div>
-      <button class="btn align-self-end compact">Buscar</button>
-    </form>
-  </div>
-</div>
-
-<!-- Sección de resultados con los ejercicios -->
-<div class="exercises-section m-top-20 bg-light">
-  <div class="exercises-header flex justify-content-between p-10 w-100">
-    <h2 class="primary-contrast">Resultados</h2>
-  </div>
-
-  <!-- Si hay ejercicios, iteramos sobre ellos -->
-  <div class="exercises-container g-20 p-10 w-100">
-    <div *ngFor="let exercise of exercises" class="exercise-card p-20 flex align-items-center flex-column justify-content-between">
-      <div class="card-header w-100 flex justify-content-center">
-        <img [src]="exercise.imageLink || '/favicon.png'" alt="Ejercicio" />
-      </div>
-      <!-- Mostrar el nombre del ejercicio -->
-      <h5>{{ exercise.exerciseName }}</h5>
-      <!-- Botón para ver detalles del ejercicio -->
-      <button class="exercise-btn m-top-10 w-100" (click)="selectExercise(exercise)">Ver Tutorial</button>
+  <!-- Filtros de búsqueda -->
+  <div class="flex flex-column g-5 bg-tertiary b-radius p-20">
+    <h2 class="tertiary-contrast">Filtros de búsqueda</h2>
+    <div class="filters">
+      <form class="filter-form" [formGroup]="filtersForm" (ngSubmit)="onSubmit()">
+        <div class="filter-input-group search">
+          <label class="tertiary-contrast" for="search">Nombre del Ejercicio</label>
+          <input formControlName="search" type="text" name="search" id="search" placeholder="Nombre ejercicio">
+        </div>
+        <div class="filter-input-group select">
+          <label class="tertiary-contrast" for="category">Categoría</label>
+          <select formControlName="category" name="category" id="category">
+            <option value="ALL">Todas</option>
+            <option [value]="category.categoryName" *ngFor="let category of filters.categories">
+              {{category.categoryName}}
+            </option>
+          </select>
+        </div>
+        <div class="filter-input-group select">
+          <label class="tertiary-contrast" for="modality">Modalidad</label>
+          <select formControlName="trainingType" name="trainingType" id="trainingType">
+            <option value="ALL">Todos</option>
+            <option [value]="type.type" *ngFor="let type of filters.trainingTypes">
+              {{type.type}}
+            </option>
+          </select>
+        </div>
+        <button [disabled]="!requestEnd" [class.disabled]="!requestEnd" class="btn align-self-end compact">Buscar</button>
+      </form>
     </div>
   </div>
 
-  <!-- Si no hay ejercicios disponibles -->
-  <div *ngIf="exercises.length === 0" class="no-results">
-    <p class="p-10">No se encontraron ejercicios.</p>
+  <!-- Sección de resultados con los ejercicios -->
+  <div class="flex flex-column flex-1 b-radius bg-light">
+    <div class="flex flex-wrap g-20 justify-content-between bg-primary b-tf-radius b-tr-radius p-10">
+      <h2 class="primary-contrast">Resultados</h2>
+    </div>
+
+    @if (requestEnd) {
+      @if(exercises.length > 0){
+        <div class="grid grid-4 g-10 p-10">
+          <app-exercise-tutorial [exercise]="exercise" *ngFor="let exercise of exercises | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPaginationPage}"></app-exercise-tutorial>
+        </div>
+        <pagination-controls 
+          previousLabel="Anterior" 
+          nextLabel="Siguiente" 
+          [autoHide]="true"
+          (pageChange)="onPageChange($event)">
+        </pagination-controls>
+      }@else {
+        <div class="p-10">
+          <p class="h4-fsize">
+              Sin resultados.
+          </p>
+        </div>
+      }
+    }@else {
+      <div class="flex flex-1 g-10 p-10 justify-content-center align-items-center">
+          <p>Cargando ejercicios.</p>
+          <span class="item-loader"></span>
+      </div>
+    }
   </div>
 </div>
-
-<!-- Modal para ver detalles del ejercicio seleccionado -->
-<app-exercise-info-modal *ngIf="selectedExercise" [exercise]="selectedExercise" (closeModal)="closeModal()"></app-exercise-info-modal>

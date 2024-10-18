@@ -3,6 +3,7 @@ package com.inovisoft.backend_miatraining.logic.services;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.WriteChannel;
 import com.google.cloud.storage.*;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,17 +18,18 @@ import java.util.logging.Logger;
 @Service
 public class GoogleCloudStorageService {
     private final String bucketName = "miatraining-bucket";
+    private final String projectId = "miatraining-438819";
     private final Storage storage;
     private static final Logger LOGGER = Logger.getLogger(GoogleCloudStorageService.class.getName());
 
     public GoogleCloudStorageService() throws IOException {
-        GoogleCredentials credentials = GoogleCredentials.fromStream(
-                new FileInputStream("src/main/resources/miatraining-438819-208477c8f9d7.json")
-        ).createScoped("https://www.googleapis.com/auth/cloud-platform");
+        InputStream credentialsStream = new ClassPathResource("miatraining-438819-208477c8f9d7.json").getInputStream();
+        GoogleCredentials credentials = GoogleCredentials.fromStream(credentialsStream)
+                .createScoped("https://www.googleapis.com/auth/cloud-platform");
 
         this.storage = StorageOptions.newBuilder()
                 .setCredentials(credentials)
-                .setProjectId("miatraining-438819") // Reemplazar con tu ID de proyecto
+                .setProjectId(projectId)
                 .build()
                 .getService();
     }
