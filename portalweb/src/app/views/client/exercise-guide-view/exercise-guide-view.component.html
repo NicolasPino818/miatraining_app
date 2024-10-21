@@ -1,4 +1,4 @@
-<div class="h-100 flex flex-column g-10">
+<app-exercise-tutorial-modal *ngIf="showModal" [exercise]="selectedExercise" (closeModal)="closeModal()"></app-exercise-tutorial-modal>
   <div class="flex flex-column g-5 bg-primary b-radius p-20">
     <h1 class="primary-contrast">Guía de ejercicios</h1>
     <p class="primary-contrast">
@@ -47,11 +47,11 @@
     @if (requestEnd) {
       @if(exercises.length > 0){
         <div class="grid grid-4 g-10 p-10">
-          <app-exercise-tutorial [exercise]="exercise" *ngFor="let exercise of exercises | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPaginationPage}"></app-exercise-tutorial>
+          <app-exercise-tutorial [exercise]="exercise" (loadExerciseInfo)="selectExercise($event)" *ngFor="let exercise of exercises | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPaginationPage}"></app-exercise-tutorial>
         </div>
-        <pagination-controls 
-          previousLabel="Anterior" 
-          nextLabel="Siguiente" 
+        <pagination-controls
+          previousLabel="Anterior"
+          nextLabel="Siguiente"
           [autoHide]="true"
           (pageChange)="onPageChange($event)">
         </pagination-controls>
@@ -69,4 +69,6 @@
       </div>
     }
   </div>
-</div>
+
+
+

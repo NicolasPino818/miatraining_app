@@ -8,11 +8,12 @@ import { ExerciseService } from '../../../services/exercise/exercise.service';
 import { catchError, EMPTY } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ExerciseTutorialComponent } from '../../../components/exercise-guide/exercise-tutorial/exercise-tutorial.component';
+import { ExerciseTutorialModalComponent } from '../../../components/exercise-guide/exercise-tutorial-modal/exercise-tutorial-modal.component';
 
 @Component({
   selector: 'app-exercise-guide-view',
   standalone: true,
-  imports: [NgFor, NgIf,NgxPaginationModule, ReactiveFormsModule, ExerciseTutorialComponent],
+  imports: [NgFor, NgIf,NgxPaginationModule, ReactiveFormsModule, ExerciseTutorialComponent, ExerciseTutorialModalComponent],
   templateUrl: './exercise-guide-view.component.html',
   styleUrls: ['./exercise-guide-view.component.css']
 })
@@ -20,6 +21,7 @@ export class ExerciseGuideViewComponent {
 
   exercises: IExercise[] = []; // Arreglo de ejercicios
   selectedExercise: IExercise | null = null; // Para seleccionar un ejercicio y mostrar su detalle
+  showModal: boolean = false;  // Controla la visibilidad del modal
   requestEnd: boolean = false;
   filters: IExerciseFilters ={
     categories: [],
@@ -30,7 +32,7 @@ export class ExerciseGuideViewComponent {
   firstQueryDone: boolean = false;
   currentPaginationPage: number = 1;
   itemsPerPage: number = 10;
-  totalPages!:number; 
+  totalPages!:number;
   filtersForm: FormGroup = new FormGroup({
     search: new FormControl(''),
     category: new FormControl('ALL', [
@@ -84,7 +86,7 @@ export class ExerciseGuideViewComponent {
         // Actualizamos las páginas consultadas
         this.lastQueryPage = exercisePage.pageNumber;
         this.nextQueryPage = exercisePage.pageNumber + 1;
-  
+
         // Actualizar el número total de páginas para la paginación
         this.totalPages = Math.ceil(this.exercises.length / this.itemsPerPage);
       }
@@ -138,4 +140,26 @@ export class ExerciseGuideViewComponent {
       this.requestEnd = true;
     });
   }
+
+
+
+  closeModal() {
+    this.showModal = false;
+    this.selectedExercise = null;
+  }
+
+
+  selectExercise(id: number) {
+    const found: IExercise | undefined = this.exercises.find((element: IExercise) => {
+      return element.id === id;
+    });
+
+    if (found) {
+      this.selectedExercise = found;
+      this.showModal = true; 
+    }
+  }
+
+
+
 }
