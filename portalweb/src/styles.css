@@ -191,15 +191,29 @@ form .input-group{
     flex-direction: column;
     gap: 10px;
 }
-form .input-group input, select{
+form .input-group input, select,textarea{
     padding: 5px;
     border-bottom: 3px solid var(--color-primary);
     width: 100%;
     color: inherit;
 }
-
+form .input-group textarea{
+    border: 3px solid var(--color-primary);
+    resize: vertical;
+}
 form .input-group label span{
     color: var(--color-danger);
+}
+
+form .form-cols-2{
+    display: flex;
+    align-items: end;
+    gap: 5px;
+}
+form .form-cols-2 .col{
+    width: 100%;
+    flex: 1;
+    max-width: 50% !important;
 }
 
 .btn .loader{

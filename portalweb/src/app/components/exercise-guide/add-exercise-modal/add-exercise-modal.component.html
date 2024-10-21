@@ -1,0 +1,52 @@
+<div class="backdrop" (click)="closeModalEvent()"></div>
+<div class="modal-container">
+    <div class="flex justify-content-end">
+        <i class='bx bx-x-circle modal-close' (click)="closeModalEvent()"></i>
+      </div>
+    <form [formGroup]="exerciseForm" (ngSubmit)="onSubmit()">
+        <h2 class="text-center">Formulario de ejercicio</h2>
+
+        <div class="form-cols-2">
+            <div class="col">
+                <div class="input-group">
+                    <label for="exerciseName">Nombre del ejercicio</label>
+                    <input id="exerciseName" formControlName="name" placeholder="Ej: Press de banca, Sentadilla"/>
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group">
+                    <label for="image">Imagen de portada</label>
+                    <input id="image" type="file" accept=".png,.jpeg,.jpg,.gif" formControlName="image"/>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="form-cols-2">
+            <div class="col">
+                <div class="input-group">
+                    <label for="tutorialLink">Link video tutorial</label>
+                    <input id="tutorialLink" placeholder="Ej: link de video en Youtube" formControlName="tutorialLink"/>
+                </div>
+            </div>
+            <div class="col">
+                <div class="input-group">
+                    <label for="traningType">Modalidad</label>
+                    <select id="traningType" formControlName="traningType">
+                        <option value="Casa">Casa</option>
+                        <option value="Gym">Gym</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="input-group">
+            <label for="description">Descripción</label>
+            <textarea id="description" rows="5" formControlName="description" 
+            placeholder="Ingresa un texto explicativo sobre el ejercicio, grupo muscular que entrena y la forma de realizarlo">
+            </textarea>
+        </div>
+        <div class="flex justify-content-between">
+            <button type="submit" class="btn">Agregar Ejercicio</button>
+        </div>        
+    </form>
+</div>

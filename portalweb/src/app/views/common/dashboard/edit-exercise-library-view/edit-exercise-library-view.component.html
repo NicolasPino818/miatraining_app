@@ -7,11 +7,10 @@
   </div>
 </div>
 
-<!-- Filtros de búsqueda -->
 <div class="flex flex-column g-5 bg-tertiary b-radius p-20">
   <h2 class="tertiary-contrast">Filtros de búsqueda</h2>
   <div class="filters">
-    <form class="filter-form">
+    <form class="filter-form" [formGroup]="filtersForm" (ngSubmit)="onSubmit()">
       <div class="filter-input-group search">
         <label class="tertiary-contrast" for="search">Nombre del Ejercicio</label>
         <input formControlName="search" type="text" name="search" id="search" placeholder="Nombre ejercicio">
@@ -20,39 +19,55 @@
         <label class="tertiary-contrast" for="category">Categoría</label>
         <select formControlName="category" name="category" id="category">
           <option value="ALL">Todas</option>
+          <option [value]="category.categoryName" *ngFor="let category of filters.categories">
+            {{category.categoryName}}
+          </option>
         </select>
       </div>
       <div class="filter-input-group select">
         <label class="tertiary-contrast" for="modality">Modalidad</label>
-        <select formControlName="modality" name="modality" id="modality">
+        <select formControlName="trainingType" name="trainingType" id="trainingType">
           <option value="ALL">Todos</option>
+          <option [value]="type.type" *ngFor="let type of filters.trainingTypes">
+            {{type.type}}
+          </option>
         </select>
       </div>
-      <button class="btn align-self-end compact">Buscar</button>
+      <button [disabled]="!requestEnd" [class.disabled]="!requestEnd" class="btn align-self-end compact">Buscar</button>
     </form>
   </div>
 </div>
 
-<!-- Sección de resultados con los ejercicios -->
 <div class="exercises-section m-top-20 bg-light">
-  <div class="exercises-header flex justify-content-between p-10 w-100">
+  <div class="flex flex-wrap g-20 justify-content-between bg-primary b-tf-radius b-tr-radius p-10">
     <h2 class="primary-contrast">Resultados</h2>
-    <button class="btn btn-danger" (click)="openAddExerciseForm()">Agregar Ejercicio</button> <!-- Botón rojo -->
+    <button class="btn tertiary compact" (click)="openAddExerciseForm()">Agregar Ejercicio</button>
   </div>
 
-  <div class="exercises-container g-20 p-10 w-100">
-    <div *ngFor="let exercise of exerciseList" class="exercise-card p-20 flex align-items-center flex-column justify-content-between">
-      <div class="card-header w-100 flex justify-content-center">
-        <img [src]="exercise.imageLink || '/favicon.png'" alt="Ejercicio" />
+  @if (requestEnd) {
+    @if(exercises.length > 0){
+      <div class="grid grid-4 g-10 p-10">
+        <app-exercise-tutorial [exercise]="exercise" (loadExerciseInfo)="selectExercise($event)" *ngFor="let exercise of exercises | paginate: {itemsPerPage: itemsPerPage, currentPage: currentPaginationPage}"></app-exercise-tutorial>
       </div>
-      <h5>{{ exercise.name }}</h5>
-      <button class="exercise-btn m-top-10 w-100" (click)="selectExercise(exercise)">Ver Tutorial</button>
+      <pagination-controls
+        previousLabel="Anterior"
+        nextLabel="Siguiente"
+        [autoHide]="true"
+        (pageChange)="onPageChange($event)">
+      </pagination-controls>
+    }@else {
+      <div class="p-10">
+        <p class="h4-fsize">
+            Sin resultados.
+        </p>
+      </div>
+    }
+  }@else {
+    <div class="flex flex-1 g-10 p-10 justify-content-center align-items-center">
+        <p>Cargando ejercicios.</p>
+        <span class="item-loader"></span>
     </div>
-  </div>
-
-  <div *ngIf="exerciseList.length === 0" class="no-results">
-    <p class="p-10">No se encontraron ejercicios.</p>
-  </div>
+  }
 </div>
 
-<app-add-exercise-modal *ngIf="showAddExerciseModal" (exerciseAdded)="onExerciseAdded($event)"></app-add-exercise-modal>
+<app-add-exercise-modal *ngIf="showAddExerciseModal" (closeModal)="closeAddExerciseForm()"></app-add-exercise-modal>

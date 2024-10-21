@@ -73,7 +73,6 @@ export class ExerciseGuideViewComponent {
         return EMPTY;
       })
     ).subscribe((exercisePage) => {
-      console.log(exercisePage);
       this.firstQueryDone = true;
       if (exercisePage.exercises.length > 0) {
         exercisePage.exercises.forEach(exercise => {

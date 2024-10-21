@@ -8,10 +8,7 @@
     <div class="flex flex-column justify-content-end g-5 flex-1">
       <h2>{{exercise?.name}}</h2>
       <p *ngIf="exercise?.tutorialSrc">Reproduce el video y aprende la técnica correcta para realizar este ejercicio.</p>
-      <p *ngIf="!exercise?.tutorialSrc">Este ejercicio aún no cuenta con un video tutorial.
-        <br/>
-        Recuerda que puedes encontrar más en nuestra guía de ejercicios.
-      </p>
+      <p *ngIf="!exercise?.tutorialSrc">Este ejercicio aún no cuenta con un video tutorial.</p>
     </div>
 
     <!-- Mostrar el video si existe el tutorial -->
