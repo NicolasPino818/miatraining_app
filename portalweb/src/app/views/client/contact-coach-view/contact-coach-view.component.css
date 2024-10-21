@@ -1,0 +1,21 @@
+.card {
+    width: 50%; /* Ancho de la tarjeta */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde de la tarjeta */
+    border-radius: 10px; /* Bordes redondeados */
+    margin-top: 10px; /* Margen superior para separación del botón */
+    transition: all 0.3s ease; /* Transición suave al desplegarse */
+}
+
+.form-container {
+    margin: 10px; /* Espacio entre el título y el formulario */
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column; /* Organiza los elementos del formulario en columna */
+}
+
+.formulario{
+    margin-top: 20px;
+}

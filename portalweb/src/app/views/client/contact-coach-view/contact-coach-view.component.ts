@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-contact-coach-view',
@@ -8,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrl: './contact-coach-view.component.css'
 })
 export class ContactCoachViewComponent {
+
+
+
+
+
+
 
 }
