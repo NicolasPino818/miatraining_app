@@ -43,7 +43,7 @@ export class AddExerciseModalComponent implements OnInit{
         description: new FormControl(null, [Validators.maxLength(500)]),
         image: new FormControl(null, [Validators.required]),
         tutorialSrc: new FormControl(null),
-        traningType: new FormControl('Casa', [Validators.required]),
+        traningType: new FormControl('CASA', [Validators.required]),
       });
     }
   }
