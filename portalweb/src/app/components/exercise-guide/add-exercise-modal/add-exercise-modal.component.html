@@ -16,7 +16,7 @@
             <div class="col">
                 <div class="input-group">
                     <label for="image">Imagen de portada</label>
-                    <input id="image" type="file" accept=".png,.jpeg,.jpg,.gif" formControlName="image"/>
+                    <input id="image" type="file" accept=".png,.jpeg,.jpg,.gif" (change)="onFileSelected($event)" formControlName="image"/>
                 </div>
             </div>
         </div>
@@ -25,16 +25,16 @@
         <div class="form-cols-2">
             <div class="col">
                 <div class="input-group">
-                    <label for="tutorialLink">Link video tutorial</label>
-                    <input id="tutorialLink" placeholder="Ej: link de video en Youtube" formControlName="tutorialLink"/>
+                    <label for="tutorialSrc">Link video tutorial</label>
+                    <input id="tutorialSrc" placeholder="Ej: link de video en Youtube" formControlName="tutorialSrc"/>
                 </div>
             </div>
             <div class="col">
                 <div class="input-group">
                     <label for="traningType">Modalidad</label>
                     <select id="traningType" formControlName="traningType">
-                        <option value="Casa">Casa</option>
-                        <option value="Gym">Gym</option>
+                        <option value="CASA">CASA</option>
+                        <option value="GYM">GYM</option>
                     </select>
                 </div>
             </div>

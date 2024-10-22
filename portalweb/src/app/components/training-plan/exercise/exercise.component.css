@@ -20,6 +20,8 @@
 .exercise-card img {
     width: 100%;
     max-width: 200px;
+    object-fit: contain;
+    aspect-ratio: 1/1;
     border-radius: 8px; /* Bordes redondeados */
     margin-bottom: 10px;
 }

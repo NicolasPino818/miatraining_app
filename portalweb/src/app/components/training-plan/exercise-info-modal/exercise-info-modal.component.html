@@ -13,11 +13,11 @@
       </p>
       <button class="btn tertiary" [routerLink]="['/dashboard/cliente/guia-ejercicios']">Ver más Ejercicios</button>
     </div>
-    @if (exercise?.tutorialLink) {
+    @if (safeTutorialSrc) {
       <div class="flex flex-column reverse-mobile justify-content-end">
         <iframe
           class="block w-100 btn-b-radius box-shadow"
-          src="https://www.youtube.com/embed/u31qwQUeGuM?si=BEALLAjrQ6qgWHlc"
+          [src]="safeTutorialSrc"
           frameborder="0"
           referrerpolicy="strict-origin-when-cross-origin"
           allowfullscreen>

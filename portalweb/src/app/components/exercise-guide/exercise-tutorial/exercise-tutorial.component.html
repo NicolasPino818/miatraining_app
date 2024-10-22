@@ -1,7 +1,8 @@
 <div class="exercise-card">
     <div>
       <img [src]="exercise.imageSrc || '/favicon.png'">
-      <h3>{{ exercise.name }}</h3>
+      <h3 class="normal-fsize">{{ exercise.name }}</h3>
+      <p class="text-center">Tipo: {{exercise.trainingType}}</p>
     </div>
-    <button *ngIf="exercise.id" class="btn tertiary" (click)="emitLoadExcersiceInfo(exercise.id)">Ver Tutorial</button>
+    <button *ngIf="exercise.id" class="btn tertiary small" (click)="emitLoadExcersiceInfo(exercise.id)">Ver Tutorial</button>
 </div>

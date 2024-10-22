@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { apiEndpoints } from '../../models/apiEndpoints';
-import { IExerciseFilters, IExercisePage } from '../../models/interfaces';
+import { IExercise, IExerciseFilters, IExercisePage } from '../../models/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +27,18 @@ export class ExerciseService {
     return this.http.get<IExercisePage>(apiEndpoints.exercise, {
       params: params
     });
+  }
+
+  createExercise(data: FormData): Observable<any>{
+    return this.http.post(apiEndpoints.exercise, data);
+  }
+
+  updateExercise(id:number,data: FormData): Observable<any>{
+    return this.http.put(apiEndpoints.exercise+'/'+id, data);
+  }
+
+  deleteExercise(id:number): Observable<any>{
+    return this.http.delete(apiEndpoints.exercise+'/'+id);
   }
 
 }

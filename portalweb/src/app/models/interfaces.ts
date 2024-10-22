@@ -196,7 +196,7 @@ export interface IExerciseFilters{
 }
 
 export interface IExercise{
-  id: number,
+  id?: number,
   name: string,
   tutorialSrc: string,
   imageSrc: string,

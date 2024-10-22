@@ -1,0 +1,14 @@
+<div class="exercise-card">
+    <span *ngIf="exercise.id" class="delete-exercise-btn" (click)="emitDeleteExercise(exercise.id)">
+      <i class='bx bx-trash danger'></i>
+    </span>
+    <div>
+      <img [src]="exercise.imageSrc || '/favicon.png'">
+      <h3 class="normal-fsize">{{ exercise.name }}</h3>
+      <p class="text-center">Tipo: {{exercise.trainingType}}</p>
+    </div>
+    <div class="flex flex-column g-5 w-100">
+      <button *ngIf="exercise.id" class="btn tertiary small" (click)="emitLoadExcersiceInfo(exercise.id)">Ver Tutorial</button>
+      <button *ngIf="exercise.id" class="btn primary small" (click)="emitEditExcersiceInfo(exercise.id)">Editar Ejercicio</button>
+    </div>
+</div>

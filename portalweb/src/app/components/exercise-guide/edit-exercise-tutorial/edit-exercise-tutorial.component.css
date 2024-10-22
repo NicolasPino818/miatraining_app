@@ -1,5 +1,6 @@
 /* Tarjetas individuales de cada ejercicio */
 .exercise-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,7 +11,7 @@
     text-align: center;
     height: 100%;
     padding: 10px;
-    gap: 10px;
+    gap: 5px;
     transition: transform 0.2s; /* Efecto de transición para las tarjetas */
 }
 
@@ -25,4 +26,12 @@
     aspect-ratio: 1/1;
     border-radius: 8px; /* Bordes redondeados */
     margin-bottom: 10px;
+}
+
+.delete-exercise-btn{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 25px;
+    cursor: pointer;
 }

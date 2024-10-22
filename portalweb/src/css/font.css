@@ -31,7 +31,7 @@ h6, .h6-fsize{
     /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
     font-size: var(--h6-font-size);
 }
-p, a, label, input, select, span, textarea, button{
+p, a, label, input, select, span, textarea, button, .normal-fsize{
     /*VALOR MINIMO | INCREMENTO | VALOR MAXIMO*/
     font-size: var(--normal-font-size);
 }

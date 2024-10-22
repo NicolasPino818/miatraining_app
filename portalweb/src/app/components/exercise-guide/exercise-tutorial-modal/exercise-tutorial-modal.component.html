@@ -12,10 +12,10 @@
     </div>
 
     <!-- Mostrar el video si existe el tutorial -->
-    <div class="flex flex-column reverse-mobile justify-content-end" *ngIf="exercise?.tutorialSrc">
+    <div class="flex flex-column reverse-mobile justify-content-end" *ngIf="safeTutorialSrc">
       <iframe
         class="block w-100 btn-b-radius box-shadow"
-        [src]="exercise?.tutorialSrc"
+        [src]="safeTutorialSrc"
         frameborder="0"
         referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen>
@@ -24,13 +24,13 @@
 
     <!-- Mostrar la imagen si no existe el tutorial -->
     <div class="flex flex-column reverse-mobile justify-content-end" *ngIf="!exercise?.tutorialSrc">
-      <img class="block w-100 btn-b-radius box-shadow" [src]="exercise?.imageSrc || '/video placeholder.jpg'" alt="Imagen de referencia del ejercicio">
+      <img class="block w-100 btn-b-radius box-shadow" src="/video placeholder.jpg" alt="Imagen de referencia del ejercicio">
     </div>
-     <!-- Contenedor de la descripción -->
-  <div class="box-shadow-inset p-10 b-radius full-width">
-    <h3 class="dark">Descripción:</h3>
-    <p class="dark">{{exercise?.description}}</p>
   </div>
+  <div class="flex flex-column g-10">
+    <div class="box-shadow-inset p-10 b-radius" *ngIf="exercise?.description">
+      <h3 class="dark">Descripción:</h3>
+      <p class="dark">{{exercise?.description}}</p>
+    </div>
   </div>
 </div>
-

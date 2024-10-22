@@ -90,13 +90,12 @@ export class ExerciseGuideViewComponent {
         this.totalPages = Math.ceil(this.exercises.length / this.itemsPerPage);
       }
       this.requestEnd = true;
-      console.log(this.exercises);
     });
 
   }
 
   orderByIdAsc(){
-    this.exercises = this.exercises.sort((a, b) => a.id - b.id);
+    this.exercises = this.exercises.sort((a, b) => (a.id ?? 0) - (b.id ?? 0));
   }
 
   onPageChange(page: number): void {
@@ -146,6 +145,7 @@ export class ExerciseGuideViewComponent {
     this.showModal = false;
     this.selectedExercise = null;
   }
+
 
 
   selectExercise(id: number) {

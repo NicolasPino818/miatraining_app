@@ -3,30 +3,32 @@ import { ReactiveFormsModule, FormsModule, FormGroup, FormControl, Validators } 
 import { CommonModule } from '@angular/common';
 import { AddExerciseModalComponent } from '../../../../components/exercise-guide/add-exercise-modal/add-exercise-modal.component';
 import { IExercise, IExerciseFilters } from '../../../../models/interfaces';
-import { ExerciseTutorialComponent } from '../../../../components/exercise-guide/exercise-tutorial/exercise-tutorial.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserProfileService } from '../../../../services/users/user-profile.service';
 import { ExerciseService } from '../../../../services/exercise/exercise.service';
 import { catchError, EMPTY } from 'rxjs';
-
-interface Exercise {
-  id: number;
-  name: string;
-  description: string;
-  imageLink?: string;
-}
+import { ExerciseTutorialModalComponent } from '../../../../components/exercise-guide/exercise-tutorial-modal/exercise-tutorial-modal.component';
+import { EditExerciseTutorialComponent } from '../../../../components/exercise-guide/edit-exercise-tutorial/edit-exercise-tutorial.component';
 
 @Component({
   selector: 'app-edit-exercise-library-view',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, CommonModule, AddExerciseModalComponent, ExerciseTutorialComponent, NgxPaginationModule],
+  imports: [
+    ReactiveFormsModule, 
+    FormsModule, 
+    CommonModule, 
+    AddExerciseModalComponent,
+    EditExerciseTutorialComponent, 
+    NgxPaginationModule,
+    ExerciseTutorialModalComponent,
+  ],
   templateUrl: './edit-exercise-library-view.component.html',
   styleUrls: ['./edit-exercise-library-view.component.css']
 })
 export class EditExerciseLibraryViewComponent {
   showAddExerciseModal: boolean = false;
-  selectedExercise: Exercise | null = null;
+  selectedExercise: IExercise | null = null;
   exercises: IExercise[] = [];
   showModal: boolean = false;
   requestEnd: boolean = false;
@@ -97,13 +99,12 @@ export class EditExerciseLibraryViewComponent {
         this.totalPages = Math.ceil(this.exercises.length / this.itemsPerPage);
       }
       this.requestEnd = true;
-      console.log(this.exercises);
     });
 
   }
 
   orderByIdAsc(){
-    this.exercises = this.exercises.sort((a, b) => a.id - b.id);
+    this.exercises = this.exercises.sort((a, b) => (a.id ?? 0) - (b.id ?? 0));
   }
 
   onPageChange(page: number): void {
@@ -119,14 +120,27 @@ export class EditExerciseLibraryViewComponent {
   }
 
   openAddExerciseForm() {
+    this.selectedExercise = null;
     this.showAddExerciseModal = true;
   }
 
   closeAddExerciseForm() {
+    this.selectedExercise = null;
     this.showAddExerciseModal = false;
   }
 
+  closeTutorialModal(){
+    this.selectedExercise = null;
+    this.showModal = false;
+  }
+
+  submitEnd(){
+    this.exercises = [];
+    this.getExercises(0);
+  }
+
   selectExercise(id: number) {
+    this.selectedExercise = null;
     const found: IExercise | undefined = this.exercises.find((element: IExercise) => {
       return element.id === id;
     });
@@ -134,6 +148,18 @@ export class EditExerciseLibraryViewComponent {
     if (found) {
       this.selectedExercise = found;
       this.showModal = true; 
+    }
+  }
+
+  selectEditExercise(id: number) {
+    this.selectedExercise = null;
+    const found: IExercise | undefined = this.exercises.find((element: IExercise) => {
+      return element.id === id;
+    });
+
+    if (found) {
+      this.selectedExercise = found;
+      this.showAddExerciseModal = true; 
     }
   }
 
@@ -164,5 +190,15 @@ export class EditExerciseLibraryViewComponent {
       this.totalPages = Math.ceil(this.exercises.length / this.itemsPerPage);
       this.requestEnd = true;
     });
+  }
+
+  deleteExercise(id:number){
+    if(confirm("¿Estás seguro de eliminar este ejercicio?, esta acción eliminará todas las rutinas asociadas a este ejercicio")){
+      this.exerciseService.deleteExercise(id).subscribe(()=>{
+        console.log("eliminado")
+        this.exercises = [];
+        this.getExercises(0);
+      });
+    }
   }
 }
