@@ -20,6 +20,7 @@ public class ExerciseDTOMapper implements Function<ExerciseModel, ExerciseDTO> {
                 .description(exerciseModel.getDescription())
                 .tutorialSrc(exerciseModel.getTutorialLink())
                 .imageSrc(exerciseModel.getImageLink())
+                .trainingType(exerciseModel.getTrainingType().getTrainingTypeName())
                 .exerciseCategories(
                         exerciseModel.getCategories()
                         .stream().map(exerciseCategoryDTOMapper)

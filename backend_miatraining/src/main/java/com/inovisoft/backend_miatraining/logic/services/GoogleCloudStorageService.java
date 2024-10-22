@@ -34,6 +34,10 @@ public class GoogleCloudStorageService {
                 .getService();
     }
 
+    public String uploadImage(MultipartFile file, Long itemID, String filePath){
+        return null;
+    }
+
     public String uploadUserDetailPicture(MultipartFile file, Long userId) throws IOException {
 
         // Obtener el nombre original del archivo
@@ -105,6 +109,42 @@ public class GoogleCloudStorageService {
         return getPublicUrl(filePath);
     }
 
+    public String uploadImagenEjercicio(MultipartFile file, Long exerciseID) throws IOException {
+        // Validar que el archivo tenga nombre
+        String originalFileName = file.getOriginalFilename();
+        if (originalFileName == null) {
+            throw new IOException("El archivo no tiene nombre.");
+        }
+
+        // Construir el nombre final del archivo: ID_profilePicture
+        String newFileName = exerciseID + "_vista_previa";
+
+        // Definir la ruta dentro del bucket: usuarios/{ID}/foto/
+        String filePath = String.format("ejercicios/%d/%s", exerciseID, newFileName);
+
+        // Eliminar la imagen anterior si tiene un formato diferente
+        deletePreviousProfilePicture(exerciseID, getFileExtension(originalFileName));
+
+        // Crear la información del blob (objeto en el bucket)
+        BlobInfo blobInfo = BlobInfo.newBuilder(bucketName, filePath).build();
+
+        // Leer y subir el archivo
+        try (InputStream inputStream = file.getInputStream(); WriteChannel writer = storage.writer(blobInfo)) {
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                writer.write(ByteBuffer.wrap(buffer, 0, bytesRead));
+            }
+        }
+
+        // Hacer que el archivo sea público
+        makeFilePublic(blobInfo.getBlobId());
+
+        // Devuelve la URL pública del archivo subido
+        return getPublicUrl(filePath);
+    }
+
     // Método para hacer el archivo público
     private void makeFilePublic(BlobId blobId) {
         storage.createAcl(blobId, Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
@@ -127,6 +167,29 @@ public class GoogleCloudStorageService {
             }
         }
     }
+
+    public void deleteResourceByPath(String url) {
+        String filePath = extractFilePathFromUrl(url);
+        Blob blob = storage.get(BlobId.of(bucketName, filePath));
+        if (blob != null && blob.exists()) {
+            storage.delete(blob.getBlobId());
+        }
+    }
+
+
+    private String extractFilePathFromUrl(String url) {
+        // Encuentra la posición de la base URL de tu bucket y extrae el file path
+        String baseUrl = "https://storage.googleapis.com/"+bucketName+"/";
+
+        if (url.startsWith(baseUrl)) {
+            return url.substring(baseUrl.length());
+        }
+
+        // Si la URL no coincide con el formato esperado, se puede lanzar una excepción o retornar null
+        throw new IllegalArgumentException("URL no tiene el formato esperado");
+    }
+
+
     private String getFileExtension(String fileName) {
         String[] parts = fileName.split("\\.");
         return parts[parts.length - 1]; // La última parte después del punto es la extensión

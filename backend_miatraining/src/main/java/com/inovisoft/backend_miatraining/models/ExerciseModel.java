@@ -33,7 +33,7 @@ public class ExerciseModel {
     @Column(columnDefinition = "MEDIUMTEXT")
     private String imageLink;
 
-    @Column(length = 500, nullable = false)
+    @Column(length = 500)
     private String description;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

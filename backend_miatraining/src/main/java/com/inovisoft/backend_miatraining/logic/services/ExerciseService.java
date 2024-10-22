@@ -7,6 +7,7 @@ import com.inovisoft.backend_miatraining.models.ExerciseCategoryModel;
 import com.inovisoft.backend_miatraining.models.ExerciseModel;
 import com.inovisoft.backend_miatraining.repositories.IExerciseCategoryRepo;
 import com.inovisoft.backend_miatraining.repositories.IExerciseRepo;
+import com.inovisoft.backend_miatraining.repositories.IExerciseRoutineRepo;
 import com.inovisoft.backend_miatraining.repositories.ITrainingTypeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -35,6 +37,10 @@ public class ExerciseService {
     ExercisePageResponseDTOMapper pageResponseDTOMapper;
     @Autowired
     ExerciseCategoryPageResponseDTOMapper categoryPageResponseDTOMapper;
+    @Autowired
+    GoogleCloudStorageService googleCloudStorageService;
+    @Autowired
+    IExerciseRoutineRepo exerciseRoutineRepo;
 
     public ExercisePageResponseDTO getExercisesByPage(int pageNumber,
                                                       int pageSize,
@@ -61,12 +67,11 @@ public class ExerciseService {
         return exerciseDTOMapper.apply(model);
     }
 
-    public void saveExercise(ExerciseDTO exerciseDTO){
+    public void saveExercise(ExerciseSubmitDTO exerciseDTO) throws IOException {
         ExerciseModel model = ExerciseModel
                 .builder()
                 .exerciseID(null)
                 .exerciseName(exerciseDTO.getName())
-                .imageLink(exerciseDTO.getImageSrc())
                 .tutorialLink(exerciseDTO.getTutorialSrc())
                 .trainingType(trainingTypeRepo.findByTrainingTypeName(
                         exerciseDTO.getTrainingType())
@@ -81,13 +86,22 @@ public class ExerciseService {
                             .categoryName(dto.getCategoryName())
                             .build()).toList());
         }
-        exerciseRepo.save(model);
+        model = exerciseRepo.save(model);
+        try{
+            model.setImageLink(googleCloudStorageService.uploadImagenEjercicio(exerciseDTO.getImageFile(), model.getExerciseID()));
+            exerciseRepo.save(model);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void updateExercise(Long id, ExerciseDTO exerciseDTO){
+    public void updateExercise(Long id, ExerciseSubmitDTO exerciseDTO) throws IOException {
         ExerciseModel model = exerciseRepo.findById(id).orElseThrow(ResourceNotFoundException::new);
         model.setExerciseName(exerciseDTO.getName());
-        model.setImageLink(exerciseDTO.getImageSrc());
+
+        if(exerciseDTO.getImageFile() != null)
+            model.setImageLink(googleCloudStorageService.uploadImagenEjercicio(exerciseDTO.getImageFile(),id));
+
         model.setTutorialLink(exerciseDTO.getTutorialSrc());
         model.setTrainingType(trainingTypeRepo.findByTrainingTypeName(
                                 exerciseDTO.getTrainingType())
@@ -105,6 +119,9 @@ public class ExerciseService {
     }
 
     public void deleteExercise(Long exerciseID) {
+        exerciseRoutineRepo.deleteByExerciseId(exerciseID);
+        ExerciseModel model = exerciseRepo.findById(exerciseID).orElseThrow(ResourceNotFoundException::new);
+        if(model.getImageLink() != null) googleCloudStorageService.deleteResourceByPath(model.getImageLink());
         exerciseRepo.deleteById(exerciseID);
     }
 

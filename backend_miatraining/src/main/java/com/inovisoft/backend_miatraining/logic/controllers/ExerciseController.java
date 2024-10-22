@@ -1,13 +1,19 @@
 package com.inovisoft.backend_miatraining.logic.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inovisoft.backend_miatraining.logic.DTOs.exerciseDTO.*;
 import com.inovisoft.backend_miatraining.logic.services.ExerciseService;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/api/v1/exercise")
@@ -19,7 +25,7 @@ public class ExerciseController {
     @GetMapping()
     public ResponseEntity<ExercisePageResponseDTO> getExercises(
             @RequestParam(name = "pageNumber", defaultValue = "0") int pageNumber,
-            @RequestParam(name = "pageSize", defaultValue = "100") int pageSize,
+            @RequestParam(name = "pageSize", defaultValue = "50") int pageSize,
             @RequestParam(name = "search", required = false, defaultValue = "")  String search,
             @RequestParam(name = "category", required = false, defaultValue = "") String category,
             @RequestParam(name = "trainingType", required = false, defaultValue = "") String trainingType){
@@ -38,16 +44,63 @@ public class ExerciseController {
         return ResponseEntity.ok(exerciseService.getExercise(id));
     }
 
-    @PostMapping()
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveExercise(@RequestBody ExerciseDTO exerciseDTO){
+    public void saveExercise(@RequestParam("name") String name,
+                             @RequestParam(value = "tutorialSrc", required = false) String tutorialSrc,
+                             @RequestParam("imageFile") MultipartFile imageFile,
+                             @RequestParam(value = "description", required = false) String description,
+                             @RequestParam("trainingType") String trainingType,
+                             @RequestParam(value = "exerciseCategories", required = false) String exerciseCategoriesJson) throws IOException {
+
+        List<ExerciseCategoryDTO> exerciseCategories = null;
+        if(exerciseCategoriesJson != null){
+            ObjectMapper objectMapper = new ObjectMapper();
+            exerciseCategories = objectMapper.readValue(exerciseCategoriesJson, new TypeReference<List<ExerciseCategoryDTO>>() {});
+        }
+        if(exerciseCategories != null && exerciseCategories.isEmpty()) exerciseCategories = null;
+
+        ExerciseSubmitDTO exerciseDTO = ExerciseSubmitDTO
+                .builder()
+                .name(name)
+                .imageFile(imageFile)
+                .description(description)
+                .trainingType(trainingType)
+                .tutorialSrc(tutorialSrc)
+                .exerciseCategories(exerciseCategories)
+                .build();
         exerciseService.saveExercise(exerciseDTO);
     }
 
     @PutMapping("/{exerciseID}")
     @ResponseStatus(HttpStatus.OK)
-    public void updateExercise(@PathVariable("exerciseID") Long exerciseID, @RequestBody ExerciseDTO exerciseDTO){
-        exerciseService.updateExercise(exerciseID,exerciseDTO);
+    public void updateExercise(@PathVariable("exerciseID") Long exerciseID,
+                               @RequestParam("name") String name,
+                               @RequestParam(value = "tutorialSrc", required = false) String tutorialSrc,
+                               @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
+                               @RequestParam(value = "description", required = false) String description,
+                               @RequestParam("trainingType") String trainingType,
+                               @RequestParam(value = "exerciseCategories", required = false) String exerciseCategoriesJson) throws IOException{
+
+        List<ExerciseCategoryDTO> exerciseCategories = null;
+        if(exerciseCategoriesJson != null){
+            ObjectMapper objectMapper = new ObjectMapper();
+            exerciseCategories = objectMapper.readValue(exerciseCategoriesJson, new TypeReference<List<ExerciseCategoryDTO>>() {});
+        }
+        if(exerciseCategories != null && exerciseCategories.isEmpty()) exerciseCategories = null;
+
+        ExerciseSubmitDTO exerciseDTO = ExerciseSubmitDTO
+                .builder()
+                .name(name)
+                .description(description)
+                .trainingType(trainingType)
+                .tutorialSrc(tutorialSrc)
+                .exerciseCategories(exerciseCategories)
+                .build();
+
+        if(imageFile != null) exerciseDTO.setImageFile(imageFile);
+
+        exerciseService.updateExercise(exerciseID, exerciseDTO);
     }
 
     @DeleteMapping("/{exerciseID}")

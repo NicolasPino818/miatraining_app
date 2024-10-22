@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -11,11 +12,11 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ExerciseDTO {
+public class ExerciseSubmitDTO {
     private Long id;
     private String name;
     private String tutorialSrc;
-    private String imageSrc;
+    private MultipartFile imageFile;
     private String description;
     private String trainingType;
     private List<ExerciseCategoryDTO> exerciseCategories;
