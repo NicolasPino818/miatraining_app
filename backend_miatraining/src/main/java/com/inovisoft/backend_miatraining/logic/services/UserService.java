@@ -214,7 +214,7 @@ UserService {
             pictureURL = storageService.uploadProfilePicture(picture, userModel.getUserID());
             userModel.setPictureUrlString(pictureURL);
             userRepo.save(userModel);
-        }catch (Exception _){}
+        }catch (Exception e){}
         return ProfilePictureDTO.builder().pictureURL(pictureURL).build();
     }
 
