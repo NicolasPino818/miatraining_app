@@ -28,7 +28,7 @@ public class ExerciseRoutineModel {
     private Integer repetitions;
 
     @Column(nullable = false)
-    private Integer restMinutes;
+    private Integer restSeconds;
 
     @ManyToOne
     @JoinColumn(name = "dayID", nullable = false)

@@ -4,7 +4,9 @@ import com.inovisoft.backend_miatraining.errorHandlers.exceptions.ResourceNotFou
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.SaveExerciseToDayRoutineDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.SaveTrainingPlanDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.SaveUsersToPlanDTO;
+import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.TrainingPlanUserDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.mappers.TrainingPlanResponseDTOMapper;
+import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.mappers.TrainingPlanUserDTOMapper;
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.response.TrainingPlanResponseDTO;
 import com.inovisoft.backend_miatraining.models.*;
 import com.inovisoft.backend_miatraining.repositories.*;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,6 +38,8 @@ public class TrainingPlanService {
     UserService userService;
     @Autowired
     TrainingPlanResponseDTOMapper trainingPlanResponseDTOMapper;
+    @Autowired
+    TrainingPlanUserDTOMapper trainingPlanUserDTOMapper;
 
     // Obtener un TrainingPlan por ID
     public TrainingPlanResponseDTO getTrainingPlanById(Long id) {
@@ -69,7 +74,7 @@ public class TrainingPlanService {
         // Actualizar los campos necesarios de la rutina
         existingRoutine.setSeries(updatedRoutine.getSeries());
         existingRoutine.setRepetitions(updatedRoutine.getRepetitions());
-        existingRoutine.setRestMinutes(updatedRoutine.getRestMinutes());
+        existingRoutine.setRestSeconds(updatedRoutine.getRestSeconds());
 
         // Si es necesario actualizar el ejercicio, también se puede hacer aquí:
         existingRoutine.setExercise(updatedRoutine.getExercise());
@@ -168,7 +173,7 @@ public class TrainingPlanService {
                         .trainingDay(dayModel)
                         .repetitions(exerciseRoutine.getRepetitions())
                         .series(exerciseRoutine.getSeries())
-                        .restMinutes(exerciseRoutine.getRestMinutes())
+                        .restSeconds(exerciseRoutine.getRestMinutes())
                         .build();
 
         exerciseRoutineRepo.save(routineModel);
@@ -179,4 +184,8 @@ public class TrainingPlanService {
         exerciseRoutineRepo.deleteById(routineID);
     }
 
+    public List<TrainingPlanUserDTO> getUsersByPlanID(Long planID) {
+        ArrayList<UserModel> userPlanModels = userPlanRepo.findAllUsersByPlanId(planID);
+        return userPlanModels.stream().map(trainingPlanUserDTOMapper).toList();
+    }
 }

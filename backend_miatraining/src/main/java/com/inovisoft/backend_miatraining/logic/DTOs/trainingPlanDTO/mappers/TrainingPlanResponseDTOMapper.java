@@ -16,6 +16,8 @@ public class TrainingPlanResponseDTOMapper implements Function<TrainingPlanModel
     PlanCreatorDTOMapper planCreatorDTOMapper;
     @Autowired
     TrainingDayDTOMapper trainingDayDTOMapper;
+    @Autowired
+    TrainingPlanUserDTOMapper trainingPlanUserDTOMapper;
 
     @Override
     public TrainingPlanResponseDTO apply(TrainingPlanModel trainingPlanModel) {
@@ -26,6 +28,9 @@ public class TrainingPlanResponseDTOMapper implements Function<TrainingPlanModel
                 .planCreator(planCreatorDTOMapper.apply(trainingPlanModel.getUser()))
                 .planDays(trainingPlanModel.getDays()
                         .stream().map(trainingDayDTOMapper).collect(Collectors.toSet()))
+                .planUsers(trainingPlanModel.getUserPlan()
+                        .stream().map(userPlanModel ->
+                                trainingPlanUserDTOMapper.apply(userPlanModel.getUser())).toList())
                 .build();
     }
 }

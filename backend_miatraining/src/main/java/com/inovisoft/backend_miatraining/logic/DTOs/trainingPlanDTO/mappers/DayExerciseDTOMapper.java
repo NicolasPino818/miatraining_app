@@ -20,7 +20,7 @@ public class DayExerciseDTOMapper implements Function<ExerciseRoutineModel, DayE
                 .routineID(exerciseRoutineModel.getRoutineID())
                 .series(exerciseRoutineModel.getSeries())
                 .reps(exerciseRoutineModel.getRepetitions())
-                .restMinutes(exerciseRoutineModel.getRestMinutes())
+                .restSeconds(exerciseRoutineModel.getRestSeconds())
                 .exerciseID(exerciseRoutineModel.getExercise().getExerciseID())
                 .exerciseName(exerciseRoutineModel.getExercise().getExerciseName())
                 .imageLink(exerciseRoutineModel.getExercise().getImageLink())

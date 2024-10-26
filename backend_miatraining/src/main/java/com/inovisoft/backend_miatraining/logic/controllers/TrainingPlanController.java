@@ -3,6 +3,7 @@ package com.inovisoft.backend_miatraining.logic.controllers;
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.SaveExerciseToDayRoutineDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.SaveTrainingPlanDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.SaveUsersToPlanDTO;
+import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.TrainingPlanUserDTO;
 import com.inovisoft.backend_miatraining.logic.DTOs.trainingPlanDTO.response.TrainingPlanResponseDTO;
 import com.inovisoft.backend_miatraining.logic.services.TrainingPlanService;
 import com.inovisoft.backend_miatraining.models.ExerciseRoutineModel;
@@ -59,6 +60,12 @@ public class TrainingPlanController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteRoutine(@PathVariable("routineID") Long routineID) {
         trainingPlanService.deleteRoutine(routineID);
+    }
+
+    @GetMapping("/{planID}/users")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<TrainingPlanUserDTO>> getUsersByPlanID(@PathVariable("planID") Long planID){
+        return ResponseEntity.ok(trainingPlanService.getUsersByPlanID(planID));
     }
 
     @PostMapping("/{planID}/users")

@@ -17,7 +17,7 @@ public class DayExerciseDTO {
     private Long exerciseID;
     private Integer series;
     private Integer reps;
-    private Integer restMinutes;
+    private Integer restSeconds;
     private String exerciseName;
     private String tutorialLink;
     private String imageLink;
