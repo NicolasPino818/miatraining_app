@@ -1,1 +1,73 @@
-<app-edit-training-plan><app-edit-training-plan>
+<div class="h-100 flex flex-column g-10" *ngIf="!trainingPlan && loadingPlan">
+    <div class="flex flex-column flex-1 g-10 p-10 justify-content-center align-items-center">
+        <p class="text-center">Cargando plan de entrenamiento.</p>
+        <span class="item-loader"></span>
+    </div>
+</div>
+<div class="h-100 flex flex-column g-10" *ngIf="trainingPlan && !loadingPlan">
+    <div class="flex flex-column g-5 bg-primary b-radius p-20">
+      <h1 class="primary-contrast">Editar Plan de entrenamiento</h1>
+    </div>
+  
+    <div class="flex flex-column g-10 bg-tertiary b-radius p-20">
+      <div class="flex flex-wrap g-20 justify-content-between">
+        <h2 class="primary-contrast">Alumnos asignados</h2>
+        <button class="btn light compact">Añadir Alumno</button>
+      </div>
+  
+      <div class="grid grid-6 justify-content-center g-10 max-height-250">
+        <div class="flex flex-column pr-40 g-5 bg-light p-10 b-radius relative" *ngFor="let user of trainingPlan.planUsers">
+          <p class="bold">{{user.fullName}}</p>
+          <p class="">{{user.email}}</p>
+          <span class="absolute y-center right-5">
+            <i class='bx bx-x-circle btn-icon'></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  
+  <div class="flex flex-column g-10 b-radius bg-light box-shadow" *ngFor="let day of trainingPlan.planDays">
+    <div class="flex flex-wrap align-items-center g-20 justify-content-between bg-primary b-tf-radius b-tr-radius p-10">
+      <h2 class="primary-contrast">Ejercicios {{selectDayName(day.dayNumber)}}</h2>
+      <button class="btn light compact">Añadir ejercicio</button>
+    </div>
+  
+    <div *ngIf="day.exercises.length > 0">
+        <div class="grid grid-3 g-10 p-10">
+            <div *ngFor="let exercise of day.exercises" 
+            class="exercise-card g-5 relative">
+                <span class="absolute top-10 right-10"><i class='bx bx-trash btn-icon danger'></i></span>
+                <img class="block" [src]="exercise.imageLink ? exercise.imageLink : '/favicon.png'" alt="Ejercicio" />
+                <h5>{{exercise.exerciseName}}</h5>
+                <div class="exercise-details flex-wrap w-100">
+                    <div class="exercise-detail flex flex-column justify-content-between flex-1 bg-primary p-10 b-radius g-5">
+                        <div class="text-center bold primary-contrast">Series</div>
+                        <div class="flex flex-1 justify-content-center align-items-center bg-light dark btn-b-radius text-center p-5">
+                            {{exercise.series}} Series
+                        </div>
+                    </div>
+                    <div class="exercise-detail flex flex-column justify-content-between flex-1 bg-primary p-10 b-radius g-5">
+                        <div class="text-center bold primary-contrast">Reps</div>
+                        <div class="flex flex-1 justify-content-center align-items-center bg-light dark btn-b-radius text-center p-5">
+                            {{exercise.reps}} Reps
+                        </div>
+                    </div>
+                    <div class="exercise-detail flex flex-column justify-content-between flex-1 bg-primary p-10 b-radius g-5">
+                        <div class="text-center bold primary-contrast">Descanso</div>
+                        <div class="flex flex-1 justify-content-center align-items-center bg-light dark btn-b-radius text-center p-5">
+                            {{exercise.restSeconds}} Segundos
+                        </div>
+                    </div>
+                </div>
+                <button class="btn tertiary small">Modificar Entrenamiento</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="day.exercises.length == 0">
+        <p class="p-20">
+            No hay ejercicios registrados para realizar este día.
+        </p>
+    </div>
+</div>
+
+  

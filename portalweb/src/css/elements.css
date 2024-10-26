@@ -32,6 +32,10 @@
     background-color: var(--color-tertiary);
     color: var(--color-tertiary-contrast);
 }
+.btn.light{
+    background-color: var(--color-light);
+    color: var(--color-light-contrast);
+}
 .btn.disabled{
     cursor: not-allowed;
     opacity: 0.8;
@@ -45,6 +49,9 @@
 }
 .btn.tertiary:hover{
     background-color: var(--color-tertiary-tint);
+}
+.btn.light:hover{
+    background-color: var(--color-light-tint);
 }
 .box-shadow-hover:hover{
     box-shadow: var(--box-shadow);
@@ -146,6 +153,10 @@
     max-height: 90dvh;
     box-shadow: var(--box-shadow);
     overflow: auto;
+}
+.btn-icon{
+    font-size: 30px;
+    cursor: pointer;
 }
 .modal-close{
     font-size: 30px;

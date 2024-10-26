@@ -40,7 +40,17 @@ export interface ITrainingPlan{
   planID: number,
   planCreator: any,
   creationDate: string,
-  planDays: any
+  planDays: ITrainingPlanDay[],
+  planUsers: ITrainingPlanUser[],
+}
+
+export interface ITrainingPlanUser{
+  id: number,
+  fullName: string,
+  name: string,
+  surname: string,
+  profilePictureLink: string,
+  email: string,
 }
 
 export interface ITrainingPlanDay{
@@ -54,7 +64,7 @@ export interface ITrainingPlanExercise{
   exerciseID: number,
   series: number,
   reps: number,
-  restMinutes: number,
+  restSeconds: number,
   exerciseName: string,
   tutorialLink: string,
   imageLink: string,

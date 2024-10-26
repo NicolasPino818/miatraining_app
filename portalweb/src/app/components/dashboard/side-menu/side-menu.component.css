@@ -5,6 +5,7 @@
     min-height: 100%;
     max-height: 100%;
     width: 200px;
+    --box-shadow: 3px 0px 2px 0px rgba(0, 0, 0, 0.2);
     box-shadow: var(--box-shadow); /* Sombra definida en el root */
     background-color: var(--color-light); /* Color de fondo del menú */
     padding: 10px 0;
